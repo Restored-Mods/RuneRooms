@@ -1,5 +1,9 @@
 RuneRooms = RegisterMod("Rune Rooms", 1)
 
+local myFolder = "rune_rooms_loi"
+local LOCAL_TSIL = require(myFolder .. ".TSIL")
+LOCAL_TSIL.Init(myFolder)
+
 include("rune_rooms_scripts.enums")
 include("rune_rooms_scripts.constants")
 include("rune_rooms_scripts.helpers")
