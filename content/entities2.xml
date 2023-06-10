@@ -8,5 +8,16 @@
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
 
+    <entity anm2path="grid_giant_rune_crystal.anm2" baseHP="1" boss="0" champion="0" collisionDamage="0"
+    collisionMass="200" collisionRadius="40" friction="1" id="960" name="Giant Rune Crystal"
+    numGridCollisionPoints="12" shutdoors="false" shadowSize="0" stageHP="0" variant="651">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+
+    <entity anm2path="runePad.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0"
+    collisionMass="1" collisionRadius="0" friction="1" id="960" name="Rune Pad"
+    numGridCollisionPoints="0" shadowSize="0" stageHP="0" variant="652">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
 
 </entities>
