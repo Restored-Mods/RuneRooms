@@ -1,6 +1,6 @@
 local PerthroEssence = {}
 
-local PerthroItem = RuneRooms.Enums.ITEMS.PERTHRO_ESSENCE
+local PerthroItem = RuneRooms.Enums.Item.PERTHRO_ESSENCE
 
 ---@param player EntityPlayer
 function PerthroEssence:OnDamageCache(player)

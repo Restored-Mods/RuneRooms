@@ -19,7 +19,7 @@ local GRID_TYPES_SPRITE_REPLACE = {
     [GridEntityType.GRID_ROCK_SS] = true,
 }
 
-local CRYSTAL_PILLARS_ANM2 = "gfx/backdrop/crystal_pillars.anm2"
+local CRYSTAL_PILLARS_ANM2 = "gfx/backdrop/crystal_pillar.anm2"
 local CRYSTAL_PILLARS_ORIENTATION_PER_GRID_INDEX = {
     [0] = {flipX = false, flipY = false},
     [14] = {flipX = true, flipY = false},
@@ -108,12 +108,13 @@ end
 ---@param rng RNG
 local function SpawnCrystalPillars(rng)
     local room = Game():GetRoom()
+    local runeEffect = RuneRooms:GetRuneEffectForFloor()
 
     TSIL.Utils.Tables.ForEach(CRYSTAL_PILLARS_ORIENTATION_PER_GRID_INDEX, function (gridIndex, orientation)
         --I know that they're integers, you know that they're integers, but the lua server doesn't
         if type(gridIndex) == "string" then return end
 
-        SpawnGenericWallDetail(
+        local pillar = SpawnGenericWallDetail(
             room:GetGridPosition(gridIndex),
             CRYSTAL_PILLARS_ANM2,
             "Idle",
@@ -121,6 +122,7 @@ local function SpawnCrystalPillars(rng)
             orientation.flipY,
             rng
         )
+        pillar:GetSprite():PlayOverlay(RuneRooms.Constants.RUNE_NAMES[runeEffect])
     end)
 end
 

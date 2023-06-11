@@ -1,6 +1,6 @@
 local FehuEssence = {}
 
-local FehuItem = RuneRooms.Enums.ITEMS.FEHU_ESSENCE
+local FehuItem = RuneRooms.Enums.Item.FEHU_ESSENCE
 
 ---@param player EntityPlayer
 function FehuEssence:OnLuckCache(player)

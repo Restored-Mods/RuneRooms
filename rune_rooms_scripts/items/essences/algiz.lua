@@ -1,6 +1,6 @@
 local AlgizEssence = {}
 
-local AlgizItem = RuneRooms.Enums.ITEMS.ALGIZ_ESSENCE
+local AlgizItem = RuneRooms.Enums.Item.ALGIZ_ESSENCE
 
 ---@param player EntityPlayer
 ---@param firstTime boolean

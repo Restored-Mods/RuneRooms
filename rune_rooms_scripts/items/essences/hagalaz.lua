@@ -1,6 +1,6 @@
 local HagalazEssence = {}
 
-local HagalazItem = RuneRooms.Enums.ITEMS.HAGALAZ_ESSENCE
+local HagalazItem = RuneRooms.Enums.Item.HAGALAZ_ESSENCE
 
 ---@param player EntityPlayer
 function HagalazEssence:OnRangeCache(player)

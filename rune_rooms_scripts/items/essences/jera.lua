@@ -1,6 +1,6 @@
 local JeraEssence = {}
 
-local JeraItem = RuneRooms.Enums.ITEMS.JERA_ESSENCE
+local JeraItem = RuneRooms.Enums.Item.JERA_ESSENCE
 
 ---@param player EntityPlayer
 function JeraEssence:OnSpeedCache(player)

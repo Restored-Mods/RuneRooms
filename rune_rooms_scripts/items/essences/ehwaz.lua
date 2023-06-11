@@ -1,6 +1,6 @@
 local EhwazEssence = {}
 
-local EhwazItem = RuneRooms.Enums.ITEMS.EHWAZ_ESSENCE
+local EhwazItem = RuneRooms.Enums.Item.EHWAZ_ESSENCE
 
 ---@param player EntityPlayer
 function EhwazEssence:OnShotSpeedCache(player)

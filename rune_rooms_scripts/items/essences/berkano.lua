@@ -1,6 +1,6 @@
 local BerkanoEssence = {}
 
-local BerkanoItem = RuneRooms.Enums.ITEMS.BERKANO_ESSENCE
+local BerkanoItem = RuneRooms.Enums.Item.BERKANO_ESSENCE
 
 ---@param player EntityPlayer
 function BerkanoEssence:OnFireDelayCache(player)

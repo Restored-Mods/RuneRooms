@@ -1,6 +1,6 @@
 local KenazEssence = {}
 
-local KenazItem = RuneRooms.Enums.ITEMS.KENAZ_ESSENCE
+local KenazItem = RuneRooms.Enums.Item.KENAZ_ESSENCE
 
 ---@param player EntityPlayer
 ---@param firstTime boolean

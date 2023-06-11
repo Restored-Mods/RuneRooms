@@ -1,6 +1,6 @@
 RuneRooms.Enums = {}
 
-RuneRooms.Enums.ITEMS = {
+RuneRooms.Enums.Item = {
     HAGALAZ_ESSENCE = Isaac.GetItemIdByName("Essence of Hagalaz"),
     JERA_ESSENCE = Isaac.GetItemIdByName("Essence of Jera"),
     EHWAZ_ESSENCE = Isaac.GetItemIdByName("Essence of Ehwaz"),
@@ -17,7 +17,9 @@ RuneRooms.Enums.ITEMS = {
     SOWILO_ESSENCE = Isaac.GetItemIdByName("Essence of Sowilo"),
 }
 
-RuneRooms.Enums.RUNE_EFFECT = {
+
+---@enum RuneEffect
+RuneRooms.Enums.RuneEffect = {
     HAGALAZ = 1<<0,
     JERA = 1<<1,
     EHWAZ = 1<<2,
@@ -32,4 +34,15 @@ RuneRooms.Enums.RUNE_EFFECT = {
     OTHALA = 1<<11,
     INGWAZ = 1<<12,
     SOWILO = 1<<13,
+}
+
+
+RuneRooms.Enums.GenericPropVariant = {
+    GIANT_RUNE_CRYSTAL = Isaac.GetEntityVariantByName("Giant Rune Crystal")
+}
+
+
+RuneRooms.Enums.SaveKey = {
+    GIANT_CRYSTAL_DATA = "GIANT_CRYSTAL_DATA",
+    INITIALIZED_GIANT_CRYSTALS = "INITIALIZED_GIANT_CRYSTALS"
 }
