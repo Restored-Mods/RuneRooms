@@ -1,3 +1,4 @@
-require("rune_rooms_scripts.room.backdrop")
-require("rune_rooms_scripts.room.doors")
-require("rune_rooms_scripts.room.runePool")
+include("rune_rooms_scripts.room.backdrop")
+include("rune_rooms_scripts.room.doors")
+include("rune_rooms_scripts.room.levelgen")
+include("rune_rooms_scripts.room.runePool")
