@@ -13,6 +13,39 @@ include("rune_rooms_scripts.items.main")
 include("rune_rooms_scripts.room.main")
 include("rune_rooms_scripts.rune_effects.main")
 
+print("Rune Rooms loaded. Use \"rune help\" to get information about commands.")
+
+
+RuneRooms:AddCallback(ModCallbacks.MC_EXECUTE_CMD, function (_, cmd, params)
+    if cmd == "rune" then
+        local tokens = TSIL.Utils.String.Split(params, " ")
+        tokens = TSIL.Utils.Tables.Map(tokens, function (_, token)
+            return string.lower(token)
+        end)
+
+        local found = Isaac.RunCallbackWithParam(
+            RuneRooms.Enums.CustomCallbacks.ON_CUSTOM_CMD,
+            tokens[1],
+            table.unpack(tokens)
+        )
+
+        if not found then
+            print("Command " .. tokens[1] .. " not found.")
+            print("Type \"rune help\" to get information about commands.")
+        end
+    end
+end)
+
+
+RuneRooms:AddCallback(RuneRooms.Enums.CustomCallbacks.ON_CUSTOM_CMD, function ()
+    print("rune help - Shows this message.")
+    print("rune good [rune_effect] - Activates the good effect of a rune for the current level.")
+    print("rune bad [rune_effect] - Activates the good effect of a rune for the current level.")
+
+    return true
+end, "help")
+
+
 --local mod = RegisterMod("Rune Rooms", 1);
 
 -- local json = require("json")

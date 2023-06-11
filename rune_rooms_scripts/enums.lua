@@ -44,5 +44,24 @@ RuneRooms.Enums.GenericPropVariant = {
 
 RuneRooms.Enums.SaveKey = {
     GIANT_CRYSTAL_DATA = "GIANT_CRYSTAL_DATA",
-    INITIALIZED_GIANT_CRYSTALS = "INITIALIZED_GIANT_CRYSTALS"
+    INITIALIZED_GIANT_CRYSTALS = "INITIALIZED_GIANT_CRYSTALS",
+    ACTIVE_POSITIVE_EFFECTS = "ACTIVE_POSITIVE_EFFECTS",
+    ACTIVE_NEGATIVE_EFFECTS = "ACTIVE_NEGATIVE_EFFECTS"
+}
+
+
+RuneRooms.Enums.CustomCallbacks = {
+    --Called whenever a command that starts with "rune" is run in the console.
+    --
+    --Return true so the handler knows a command has been found and doesn't print the error message.
+	--
+	--Params:
+	--
+	-- * command - string
+    -- * ... params - string
+	--
+	--Optional args:
+	--
+	-- * command - string
+    ON_CUSTOM_CMD = {}
 }
