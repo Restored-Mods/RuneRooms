@@ -36,7 +36,6 @@ local function GetGiantCrystalData(giantCrystal)
         RuneRooms.Enums.SaveKey.GIANT_CRYSTAL_DATA
     )
     local crystalIndex = GetGiantCrystalIndex(giantCrystal)
-    print(crystalIndex)
 
     if not crystalsData[crystalIndex] then
         crystalsData[crystalIndex] = {

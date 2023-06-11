@@ -46,7 +46,8 @@ RuneRooms.Enums.SaveKey = {
     GIANT_CRYSTAL_DATA = "GIANT_CRYSTAL_DATA",
     INITIALIZED_GIANT_CRYSTALS = "INITIALIZED_GIANT_CRYSTALS",
     ACTIVE_POSITIVE_EFFECTS = "ACTIVE_POSITIVE_EFFECTS",
-    ACTIVE_NEGATIVE_EFFECTS = "ACTIVE_NEGATIVE_EFFECTS"
+    ACTIVE_NEGATIVE_EFFECTS = "ACTIVE_NEGATIVE_EFFECTS",
+    HIDDEN_ITEM_MANAGER_DATA = "HIDDEN_ITEM_MANAGER_DATA"
 }
 
 
@@ -63,5 +64,27 @@ RuneRooms.Enums.CustomCallbacks = {
 	--Optional args:
 	--
 	-- * command - string
-    ON_CUSTOM_CMD = {}
+    ON_CUSTOM_CMD = {},
+
+    --Called whenever a positive rune effect is added.
+	--
+	--Params:
+	--
+	-- * runeEffect - RuneEffect
+	--
+	--Optional args:
+	--
+	-- * runeEffect - RuneEffect
+    POST_GAIN_POSITIVE_RUNE_EFFECT = {},
+
+    --Called whenever a negative rune effect is added.
+	--
+	--Params:
+	--
+	-- * runeEffect - RuneEffect
+	--
+	--Optional args:
+	--
+	-- * runeEffect - RuneEffect
+    POST_GAIN_NEGATIVE_RUNE_EFFECT = {},
 }

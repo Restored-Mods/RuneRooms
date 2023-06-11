@@ -55,6 +55,8 @@ end
 ---Helper function to check if a rune's positive effect is active
 ---@param runeEffect any
 function RuneRooms:ActivatePositiveEffect(runeEffect)
+    local hadEffectPreviously = RuneRooms:IsPositiveEffectActive(runeEffect)
+
     local positiveEffects = TSIL.SaveManager.GetPersistentVariable(
         RuneRooms,
         RuneRooms.Enums.SaveKey.ACTIVE_POSITIVE_EFFECTS
@@ -65,26 +67,44 @@ function RuneRooms:ActivatePositiveEffect(runeEffect)
         RuneRooms.Enums.SaveKey.ACTIVE_POSITIVE_EFFECTS,
         TSIL.Utils.Flags.AddFlags(positiveEffects, runeEffect)
     )
+
+    if not hadEffectPreviously then
+        Isaac.RunCallbackWithParam(
+            RuneRooms.Enums.CustomCallbacks.POST_GAIN_POSITIVE_RUNE_EFFECT,
+            runeEffect,
+            runeEffect
+        )
+    end
 end
 
 
 ---Helper function to check if a rune's positive effect is active
 ---@param runeEffect any
 function RuneRooms:ActivateNegativeEffect(runeEffect)
+    local hadEffectPreviously = RuneRooms:IsNegativeEffectActive(runeEffect)
+
     local negativeEffects = TSIL.SaveManager.GetPersistentVariable(
         RuneRooms,
         RuneRooms.Enums.SaveKey.ACTIVE_NEGATIVE_EFFECTS
     )
-    
+
     TSIL.SaveManager.SetPersistentVariable(
         RuneRooms,
         RuneRooms.Enums.SaveKey.ACTIVE_NEGATIVE_EFFECTS,
         TSIL.Utils.Flags.AddFlags(negativeEffects, runeEffect)
     )
+
+    if not hadEffectPreviously then
+        Isaac.RunCallbackWithParam(
+            RuneRooms.Enums.CustomCallbacks.POST_GAIN_NEGATIVE_RUNE_EFFECT,
+            runeEffect,
+            runeEffect
+        )
+    end
 end
 
 
-function RuneEffects:OnActivateGoodCallback(_, runeName)
+function RuneEffects:OnActivateGoodCommand(_, runeName)
     if not runeName then
         print("You need to provide a run name as argument #1.")
         return true
@@ -109,12 +129,12 @@ function RuneEffects:OnActivateGoodCallback(_, runeName)
 end
 RuneRooms:AddCallback(
     RuneRooms.Enums.CustomCallbacks.ON_CUSTOM_CMD,
-    RuneEffects.OnActivateGoodCallback,
+    RuneEffects.OnActivateGoodCommand,
     "good"
 )
 
 
-function RuneEffects:OnActivateBadCallback(_, runeName)
+function RuneEffects:OnActivateBadCommand(_, runeName)
     if not runeName then
         print("You need to provide a run name as argument #1.")
         return true
@@ -139,6 +159,6 @@ function RuneEffects:OnActivateBadCallback(_, runeName)
 end
 RuneRooms:AddCallback(
     RuneRooms.Enums.CustomCallbacks.ON_CUSTOM_CMD,
-    RuneEffects.OnActivateBadCallback,
+    RuneEffects.OnActivateBadCommand,
     "bad"
 )
