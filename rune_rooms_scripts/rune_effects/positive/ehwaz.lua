@@ -117,6 +117,10 @@ function EhwazPositive:OnNewLevel()
 
     Game():StartRoomTransition(currentRoomIdx, Direction.NO_DIRECTION, RoomTransitionAnim.FADE)
 end
+RuneRooms:AddCallback(
+    ModCallbacks.MC_POST_NEW_LEVEL,
+    EhwazPositive.OnNewLevel
+)
 
 
 function EhwazPositive:OnEhwazPositiveActivation()
