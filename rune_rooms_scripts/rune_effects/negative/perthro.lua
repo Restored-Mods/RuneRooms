@@ -1,0 +1,38 @@
+local PerthroNegative = {}
+
+
+function PerthroNegative:PreEntitySpawn(type, variant, _, _, _, _, seed)
+    if not RuneRooms:IsNegativeEffectActive(RuneRooms.Enums.RuneEffect.PERTHRO) then return end
+
+    if type ~= EntityType.ENTITY_PICKUP then return end
+    if variant ~= PickupVariant.PICKUP_COLLECTIBLE then return end
+
+    return {
+        type,
+        PickupVariant.PICKUP_TRINKET,
+        TrinketType.TRINKET_NULL,
+        seed
+    }
+end
+RuneRooms:AddCallback(
+    ModCallbacks.MC_PRE_ENTITY_SPAWN,
+    PerthroNegative.PreEntitySpawn
+)
+
+
+---@param pickup EntityPickup
+function PerthroNegative:OnCollectibleInit(pickup)
+    if not RuneRooms:IsNegativeEffectActive(RuneRooms.Enums.RuneEffect.PERTHRO) then return end
+
+    pickup:Morph(
+        pickup.Type,
+        PickupVariant.PICKUP_TRINKET,
+        TrinketType.TRINKET_NULL,
+        true
+    )
+end
+RuneRooms:AddCallback(
+    ModCallbacks.MC_POST_PICKUP_INIT,
+    PerthroNegative.OnCollectibleInit,
+    PickupVariant.PICKUP_COLLECTIBLE
+)

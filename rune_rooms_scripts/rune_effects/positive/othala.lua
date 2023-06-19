@@ -38,7 +38,7 @@ function OthalaPositive:OnOthalaPositiveActivation()
     AddRandomItemToPlayers()
 end
 RuneRooms:AddCallback(
-    RuneRooms.Enums.CustomCallbacks.POST_GAIN_POSITIVE_RUNE_EFFECT,
+    RuneRooms.Enums.CustomCallback.POST_GAIN_POSITIVE_RUNE_EFFECT,
     OthalaPositive.OnOthalaPositiveActivation,
     RuneRooms.Enums.RuneEffect.OTHALA
 )

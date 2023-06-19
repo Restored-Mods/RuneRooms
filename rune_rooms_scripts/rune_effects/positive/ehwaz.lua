@@ -152,7 +152,7 @@ function EhwazPositive:OnEhwazPositiveActivation()
     end
 end
 RuneRooms:AddCallback(
-    RuneRooms.Enums.CustomCallbacks.POST_GAIN_POSITIVE_RUNE_EFFECT,
+    RuneRooms.Enums.CustomCallback.POST_GAIN_POSITIVE_RUNE_EFFECT,
     EhwazPositive.OnEhwazPositiveActivation,
     RuneRooms.Enums.RuneEffect.EHWAZ
 )
@@ -176,7 +176,7 @@ function EhwazPositive:OnChangeModeCommand(_, newMode)
     return true
 end
 RuneRooms:AddCallback(
-    RuneRooms.Enums.CustomCallbacks.ON_CUSTOM_CMD,
+    RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD,
     EhwazPositive.OnChangeModeCommand,
     "ehwazmode"
 )

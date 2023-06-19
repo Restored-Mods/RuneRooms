@@ -61,11 +61,12 @@ RuneRooms.Enums.SaveKey = {
     HIDDEN_ITEM_MANAGER_DATA        = "HIDDEN_ITEM_MANAGER_DATA",
     POSITIVE_FEHU_RNG_PER_PLAYER    = "POSITIVE_FEHU_RNG_PER_PLAYER",
     NEGATIVE_FEHU_RNG_PER_PLAYER    = "NEGATIVE_FEHU_RNG_PER_PLAYER",
-    REPLACED_DOUBLE_CLOSED_CHESTS   = "REPLACED_DOUBLE_CLOSED_CHESTS"
+    REPLACED_DOUBLE_CLOSED_CHESTS   = "REPLACED_DOUBLE_CLOSED_CHESTS",
+    ROOMS_USED_ISAACS_SOUL          = "ROOMS_USED_ISAACS_SOUL"
 }
 
 
-RuneRooms.Enums.CustomCallbacks = {
+RuneRooms.Enums.CustomCallback = {
     --Called whenever a command that starts with "rune" is run in the console.
     --
     --Return true so the handler knows a command has been found and doesn't print the error message.

@@ -36,7 +36,7 @@ function HagalazNegative:OnHagalazNegativeActivation()
     ReplaceGridEntities()
 end
 RuneRooms:AddCallback(
-    RuneRooms.Enums.CustomCallbacks.POST_GAIN_NEGATIVE_RUNE_EFFECT,
+    RuneRooms.Enums.CustomCallback.POST_GAIN_NEGATIVE_RUNE_EFFECT,
     HagalazNegative.OnHagalazNegativeActivation,
     RuneRooms.Enums.RuneEffect.HAGALAZ
 )

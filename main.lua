@@ -30,7 +30,7 @@ RuneRooms:AddCallback(ModCallbacks.MC_EXECUTE_CMD, function (_, cmd, params)
         end)
 
         local found = Isaac.RunCallbackWithParam(
-            RuneRooms.Enums.CustomCallbacks.ON_CUSTOM_CMD,
+            RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD,
             tokens[1],
             table.unpack(tokens)
         )
@@ -43,7 +43,7 @@ RuneRooms:AddCallback(ModCallbacks.MC_EXECUTE_CMD, function (_, cmd, params)
 end)
 
 
-RuneRooms:AddCallback(RuneRooms.Enums.CustomCallbacks.ON_CUSTOM_CMD, function ()
+RuneRooms:AddCallback(RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD, function ()
     print("rune help - Shows this message.")
     print("rune good [rune_effect] - Activates the good effect of a rune for the current level.")
     print("rune bad [rune_effect] - Activates the good effect of a rune for the current level.")

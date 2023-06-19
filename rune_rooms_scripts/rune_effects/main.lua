@@ -70,7 +70,7 @@ function RuneRooms:ActivatePositiveEffect(runeEffect)
 
     if not hadEffectPreviously then
         Isaac.RunCallbackWithParam(
-            RuneRooms.Enums.CustomCallbacks.POST_GAIN_POSITIVE_RUNE_EFFECT,
+            RuneRooms.Enums.CustomCallback.POST_GAIN_POSITIVE_RUNE_EFFECT,
             runeEffect,
             runeEffect
         )
@@ -96,7 +96,7 @@ function RuneRooms:ActivateNegativeEffect(runeEffect)
 
     if not hadEffectPreviously then
         Isaac.RunCallbackWithParam(
-            RuneRooms.Enums.CustomCallbacks.POST_GAIN_NEGATIVE_RUNE_EFFECT,
+            RuneRooms.Enums.CustomCallback.POST_GAIN_NEGATIVE_RUNE_EFFECT,
             runeEffect,
             runeEffect
         )
@@ -128,7 +128,7 @@ function RuneEffects:OnActivateGoodCommand(_, runeName)
     return true
 end
 RuneRooms:AddCallback(
-    RuneRooms.Enums.CustomCallbacks.ON_CUSTOM_CMD,
+    RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD,
     RuneEffects.OnActivateGoodCommand,
     "good"
 )
@@ -158,7 +158,7 @@ function RuneEffects:OnActivateBadCommand(_, runeName)
     return true
 end
 RuneRooms:AddCallback(
-    RuneRooms.Enums.CustomCallbacks.ON_CUSTOM_CMD,
+    RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD,
     RuneEffects.OnActivateBadCommand,
     "bad"
 )
