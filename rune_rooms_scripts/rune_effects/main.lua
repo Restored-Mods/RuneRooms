@@ -31,7 +31,7 @@ end
 
 
 ---Helper function to check if a rune's positive effect is active
----@param runeEffect any
+---@param runeEffect RuneEffect
 function RuneRooms:IsPositiveEffectActive(runeEffect)
     local positiveEffects = TSIL.SaveManager.GetPersistentVariable(
         RuneRooms,
@@ -42,7 +42,7 @@ end
 
 
 ---Helper function to check if a rune's negative effect is active
----@param runeEffect any
+---@param runeEffect RuneEffect
 function RuneRooms:IsNegativeEffectActive(runeEffect)
     local negativeEffects = TSIL.SaveManager.GetPersistentVariable(
         RuneRooms,
@@ -53,7 +53,7 @@ end
 
 
 ---Helper function to check if a rune's positive effect is active
----@param runeEffect any
+---@param runeEffect RuneEffect
 function RuneRooms:ActivatePositiveEffect(runeEffect)
     local hadEffectPreviously = RuneRooms:IsPositiveEffectActive(runeEffect)
 
@@ -79,7 +79,7 @@ end
 
 
 ---Helper function to check if a rune's positive effect is active
----@param runeEffect any
+---@param runeEffect RuneEffect
 function RuneRooms:ActivateNegativeEffect(runeEffect)
     local hadEffectPreviously = RuneRooms:IsNegativeEffectActive(runeEffect)
 
@@ -106,7 +106,7 @@ end
 
 function RuneEffects:OnActivateGoodCommand(_, runeName)
     if not runeName then
-        print("You need to provide a run name as argument #1.")
+        print("You need to provide a rune name as argument #1.")
         return true
     end
 
@@ -136,7 +136,7 @@ RuneRooms:AddCallback(
 
 function RuneEffects:OnActivateBadCommand(_, runeName)
     if not runeName then
-        print("You need to provide a run name as argument #1.")
+        print("You need to provide a rune name as argument #1.")
         return true
     end
 

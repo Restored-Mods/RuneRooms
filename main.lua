@@ -15,6 +15,7 @@ include("rune_rooms_scripts.grid.main")
 include("rune_rooms_scripts.items.main")
 include("rune_rooms_scripts.room.main")
 include("rune_rooms_scripts.rune_effects.main")
+include("rune_rooms_scripts.tear_effects.main")
 
 print("Rune Rooms loaded. Use \"rune help\" to get information about commands.")
 
