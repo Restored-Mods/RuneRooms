@@ -37,6 +37,12 @@ RuneRooms.Enums.RuneEffect = {
 }
 
 
+RuneRooms.Enums.PickupVariant = {
+    DOUBLE_LOCKED_CHEST = Isaac.GetEntityVariantByName("Double Locked Chest"),
+    DOUBLE_BOMB_CHEST = Isaac.GetEntityVariantByName("Double Bomb Chest"),
+}
+
+
 RuneRooms.Enums.GenericPropVariant = {
     GIANT_RUNE_CRYSTAL = Isaac.GetEntityVariantByName("Giant Rune Crystal")
 }
@@ -49,7 +55,8 @@ RuneRooms.Enums.SaveKey = {
     ACTIVE_NEGATIVE_EFFECTS = "ACTIVE_NEGATIVE_EFFECTS",
     HIDDEN_ITEM_MANAGER_DATA = "HIDDEN_ITEM_MANAGER_DATA",
     POSITIVE_FEHU_RNG_PER_PLAYER = "POSITIVE_FEHU_RNG_PER_PLAYER",
-    NEGATIVE_FEHU_RNG_PER_PLAYER = "NEGATIVE_FEHU_RNG_PER_PLAYER"
+    NEGATIVE_FEHU_RNG_PER_PLAYER = "NEGATIVE_FEHU_RNG_PER_PLAYER",
+    REPLACED_DOUBLE_CLOSED_CHESTS = "REPLACED_DOUBLE_CLOSED_CHESTS"
 }
 
 
