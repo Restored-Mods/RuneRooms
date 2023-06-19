@@ -20,3 +20,10 @@ RuneRooms.Constants.RUNE_NAMES = {
 RuneRooms.Constants.RUNE_ROOMS_IDS = {
     3670
 }
+
+RuneRooms.Constants.TRINKET_PER_ACHIEVEMENT = {
+    [RuneRooms.Enums.Achievement.CONFESSIONAL]     = Isaac.GetTrinketIdByName("##CONFESSIONAL_ACHIEVEMENT_TRACKER"),
+    [RuneRooms.Enums.Achievement.CRANE_GAME]       = Isaac.GetTrinketIdByName("##CRANE_GAME_ACHIEVEMENT_TRACKER"),
+    [RuneRooms.Enums.Achievement.HELL_GAME]        = Isaac.GetTrinketIdByName("##HELL_GAME_ACHIEVEMENT_TRACKER"),
+    [RuneRooms.Enums.Achievement.ROTTEN_BEGGAR]    = Isaac.GetTrinketIdByName("##ROTTEN_BEGGAR_ACHIEVEMENT_TRACKER")
+}

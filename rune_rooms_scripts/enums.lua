@@ -64,6 +64,7 @@ RuneRooms.Enums.SaveKey = {
     REPLACED_DOUBLE_CLOSED_CHESTS   = "REPLACED_DOUBLE_CLOSED_CHESTS",
     ROOMS_USED_ISAACS_SOUL          = "ROOMS_USED_ISAACS_SOUL",
     LOWEST_HEALTH_ENEMY             = "LOWEST_HEALTH_ENEMY",
+    ROOMS_SPAWNED_SLOT              = "ROOMS_SPAWNED_SLOT",
 }
 
 
@@ -103,4 +104,13 @@ RuneRooms.Enums.CustomCallback = {
 	--
 	-- * runeEffect - RuneEffect
     POST_GAIN_NEGATIVE_RUNE_EFFECT = {},
+}
+
+
+---@enum Achievement
+RuneRooms.Enums.Achievement = {
+    CONFESSIONAL    = 1,
+    CRANE_GAME      = 2,
+    HELL_GAME       = 3,
+    ROTTEN_BEGGAR   = 4,
 }
