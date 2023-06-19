@@ -13,23 +13,6 @@ local REPLACEABLE_GRID_TYPES = {
     GridEntityType.GRID_ROCK_SPIKED,
     GridEntityType.GRID_ROCK_SS,
 }
-local REPLACEABLE_GRID_XML_TYPES = {
-    [TSIL.Enums.GridEntityXMLType.PILLAR] = true,
-    [TSIL.Enums.GridEntityXMLType.POOP] = true,
-    [TSIL.Enums.GridEntityXMLType.POOP_BLACK] = true,
-    [TSIL.Enums.GridEntityXMLType.POOP_CHARMING] = true,
-    [TSIL.Enums.GridEntityXMLType.POOP_CORN] = true,
-    [TSIL.Enums.GridEntityXMLType.POOP_GOLDEN] = true,
-    [TSIL.Enums.GridEntityXMLType.POOP_RAINBOW] = true,
-    [TSIL.Enums.GridEntityXMLType.POOP_RED] = true,
-    [TSIL.Enums.GridEntityXMLType.POOP_WHITE] = true,
-    [TSIL.Enums.GridEntityXMLType.ROCK] = true,
-    [TSIL.Enums.GridEntityXMLType.BLOCK] = true,
-    [TSIL.Enums.GridEntityXMLType.ROCK_TINTED] = true,
-    [TSIL.Enums.GridEntityXMLType.ROCK_ALT] = true,
-    [TSIL.Enums.GridEntityXMLType.ROCK_BOMB] = true,
-    [TSIL.Enums.GridEntityXMLType.ROCK_SPIKED] = true,
-}
 
 
 local function ReplaceGridEntities()
@@ -38,7 +21,7 @@ local function ReplaceGridEntities()
     TSIL.Utils.Tables.ForEach(gridEntities, function (_, gridEntity)
         local rng = TSIL.RNG.NewRNG(gridEntity.Desc.SpawnSeed)
 
-        if rng:RandomFloat() >= 0.3 then return end
+        if rng:RandomFloat() >= TRAPDOOR_REPLACE_CHANCE then return end
 
         TSIL.GridEntities.SpawnGridEntity(
             GridEntityType.GRID_TRAPDOOR,
