@@ -1,45 +1,50 @@
 RuneRooms.Enums = {}
 
 RuneRooms.Enums.Item = {
-    HAGALAZ_ESSENCE = Isaac.GetItemIdByName("Essence of Hagalaz"),
-    JERA_ESSENCE = Isaac.GetItemIdByName("Essence of Jera"),
-    EHWAZ_ESSENCE = Isaac.GetItemIdByName("Essence of Ehwaz"),
-    DAGAZ_ESSENCE = Isaac.GetItemIdByName("Essence of Dagaz"),
-    ANSUZ_ESSENCE = Isaac.GetItemIdByName("Essence of Ansuz"),
-    PERTHRO_ESSENCE = Isaac.GetItemIdByName("Essence of Perthro"),
+    ALGIZ_ESSENCE   = Isaac.GetItemIdByName("Essence of Algiz"),
+    ANSUZ_ESSENCE   = Isaac.GetItemIdByName("Essence of Ansuz"),
     BERKANO_ESSENCE = Isaac.GetItemIdByName("Essence of Berkano"),
-    ALGIZ_ESSENCE = Isaac.GetItemIdByName("Essence of Algiz"),
-    GEBO_ESSENCE = Isaac.GetItemIdByName("Essence of Gebo"),
-    KENAZ_ESSENCE = Isaac.GetItemIdByName("Essence of Kenaz"),
-    FEHU_ESSENCE = Isaac.GetItemIdByName("Essence of Fehu"),
-    OTHALA_ESSENCE = Isaac.GetItemIdByName("Essence of Othala"),
-    INGWAZ_ESSENCE = Isaac.GetItemIdByName("Essence of Ingwaz"),
-    SOWILO_ESSENCE = Isaac.GetItemIdByName("Essence of Sowilo"),
+    DAGAZ_ESSENCE   = Isaac.GetItemIdByName("Essence of Dagaz"),
+    EHWAZ_ESSENCE   = Isaac.GetItemIdByName("Essence of Ehwaz"),
+    FEHU_ESSENCE    = Isaac.GetItemIdByName("Essence of Fehu"),
+    GEBO_ESSENCE    = Isaac.GetItemIdByName("Essence of Gebo"),
+    HAGALAZ_ESSENCE = Isaac.GetItemIdByName("Essence of Hagalaz"),
+    INGWAZ_ESSENCE  = Isaac.GetItemIdByName("Essence of Ingwaz"),
+    JERA_ESSENCE    = Isaac.GetItemIdByName("Essence of Jera"),
+    KENAZ_ESSENCE   = Isaac.GetItemIdByName("Essence of Kenaz"),
+    OTHALA_ESSENCE  = Isaac.GetItemIdByName("Essence of Othala"),
+    PERTHRO_ESSENCE = Isaac.GetItemIdByName("Essence of Perthro"),
+    SOWILO_ESSENCE  = Isaac.GetItemIdByName("Essence of Sowilo"),
 }
 
 
 ---@enum RuneEffect
 RuneRooms.Enums.RuneEffect = {
-    HAGALAZ = 1<<0,
-    JERA = 1<<1,
-    EHWAZ = 1<<2,
-    DAGAZ = 1<<3,
-    ANSUZ = 1<<4,
-    PERTHRO = 1<<5,
-    BERKANO = 1<<6,
-    ALGIZ = 1<<7,
-    GEBO = 1<<8,
-    KENAZ = 1<<9,
-    FEHU = 1<<10,
-    OTHALA = 1<<11,
-    INGWAZ = 1<<12,
-    SOWILO = 1<<13,
+    ALGIZ   = 1<<0,
+    ANSUZ   = 1<<1,
+    BERKANO = 1<<2,
+    DAGAZ   = 1<<3,
+    EHWAZ   = 1<<4,
+    FEHU    = 1<<5,
+    GEBO    = 1<<6,
+    HAGALAZ = 1<<7,
+    INGWAZ  = 1<<8,
+    JERA    = 1<<9,
+    KENAZ   = 1<<10,
+    OTHALA  = 1<<11,
+    PERTHRO = 1<<12,
+    SOWILO  = 1<<13,
 }
 
 
 RuneRooms.Enums.PickupVariant = {
     DOUBLE_LOCKED_CHEST = Isaac.GetEntityVariantByName("Double Locked Chest"),
-    DOUBLE_BOMB_CHEST = Isaac.GetEntityVariantByName("Double Bomb Chest"),
+    DOUBLE_BOMB_CHEST   = Isaac.GetEntityVariantByName("Double Bomb Chest"),
+}
+
+
+RuneRooms.Enums.EffectVariant = {
+    SMOKE_CLOUD = Isaac.GetEntityVariantByName("Rune Rooms Smoke Screen")
 }
 
 
@@ -49,14 +54,14 @@ RuneRooms.Enums.GenericPropVariant = {
 
 
 RuneRooms.Enums.SaveKey = {
-    GIANT_CRYSTAL_DATA = "GIANT_CRYSTAL_DATA",
-    INITIALIZED_GIANT_CRYSTALS = "INITIALIZED_GIANT_CRYSTALS",
-    ACTIVE_POSITIVE_EFFECTS = "ACTIVE_POSITIVE_EFFECTS",
-    ACTIVE_NEGATIVE_EFFECTS = "ACTIVE_NEGATIVE_EFFECTS",
-    HIDDEN_ITEM_MANAGER_DATA = "HIDDEN_ITEM_MANAGER_DATA",
-    POSITIVE_FEHU_RNG_PER_PLAYER = "POSITIVE_FEHU_RNG_PER_PLAYER",
-    NEGATIVE_FEHU_RNG_PER_PLAYER = "NEGATIVE_FEHU_RNG_PER_PLAYER",
-    REPLACED_DOUBLE_CLOSED_CHESTS = "REPLACED_DOUBLE_CLOSED_CHESTS"
+    GIANT_CRYSTAL_DATA              = "GIANT_CRYSTAL_DATA",
+    INITIALIZED_GIANT_CRYSTALS      = "INITIALIZED_GIANT_CRYSTALS",
+    ACTIVE_POSITIVE_EFFECTS         = "ACTIVE_POSITIVE_EFFECTS",
+    ACTIVE_NEGATIVE_EFFECTS         = "ACTIVE_NEGATIVE_EFFECTS",
+    HIDDEN_ITEM_MANAGER_DATA        = "HIDDEN_ITEM_MANAGER_DATA",
+    POSITIVE_FEHU_RNG_PER_PLAYER    = "POSITIVE_FEHU_RNG_PER_PLAYER",
+    NEGATIVE_FEHU_RNG_PER_PLAYER    = "NEGATIVE_FEHU_RNG_PER_PLAYER",
+    REPLACED_DOUBLE_CLOSED_CHESTS   = "REPLACED_DOUBLE_CLOSED_CHESTS"
 }
 
 

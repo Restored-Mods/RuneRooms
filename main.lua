@@ -11,6 +11,7 @@ include("rune_rooms_scripts.helpers")
 RuneRooms.Libs = {}
 include("rune_rooms_scripts.lib.hidden_item_manager")
 
+include("rune_rooms_scripts.effects.main")
 include("rune_rooms_scripts.grid.main")
 include("rune_rooms_scripts.items.main")
 include("rune_rooms_scripts.pickups.main")
