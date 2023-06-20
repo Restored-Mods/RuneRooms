@@ -49,13 +49,16 @@ RuneRooms.Enums.EffectVariant = {
 
 
 RuneRooms.Enums.GenericPropVariant = {
-    GIANT_RUNE_CRYSTAL = Isaac.GetEntityVariantByName("Giant Rune Crystal")
+    GIANT_RUNE_CRYSTAL  = Isaac.GetEntityVariantByName("Giant Rune Crystal"),
+    RUNE_PAD            = Isaac.GetEntityVariantByName("Rune Pad"),
 }
 
 
 RuneRooms.Enums.SaveKey = {
     GIANT_CRYSTAL_DATA              = "GIANT_CRYSTAL_DATA",
     INITIALIZED_GIANT_CRYSTALS      = "INITIALIZED_GIANT_CRYSTALS",
+    RUNE_PAD_DATA                   = "RUNE_PAD_DATA",
+    INITIALIZED_RUNE_PADS           = "INITIALIZED_RUNE_PADS",
     ACTIVE_POSITIVE_EFFECTS         = "ACTIVE_POSITIVE_EFFECTS",
     ACTIVE_NEGATIVE_EFFECTS         = "ACTIVE_NEGATIVE_EFFECTS",
     HIDDEN_ITEM_MANAGER_DATA        = "HIDDEN_ITEM_MANAGER_DATA",

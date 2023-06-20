@@ -24,6 +24,8 @@ function SowiloNegative:OnRoomClear()
     local roomDesc = TSIL.Rooms.GetRoomDescriptor()
     local roomData = roomDesc.Data
 
+    if roomData.Type ~= RoomType.ROOM_DEFAULT then return end
+
     local rng = TSIL.RNG.NewRNG(roomDesc.SpawnSeed)
     local spawns = roomData.Spawns
     for i = 0, spawns.Size-1, 1 do

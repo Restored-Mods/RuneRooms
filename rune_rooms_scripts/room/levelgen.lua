@@ -61,7 +61,7 @@ function LevelGen:OnNewLevel()
 
     ReplaceRoom(vaultRoomIndex, newData)
 
-    RuneRooms.Helpers:RunInNRenderFrames(RuneRooms.ReplaceRuneDoorSprites, 2)
+    RuneRooms.Helpers:RunInNRenderFrames(RuneRooms.ReplaceRuneDoorSprites, 20)
 end
 RuneRooms:AddCallback(
     TSIL.Enums.CustomCallback.POST_NEW_LEVEL_REORDERED,

@@ -75,3 +75,18 @@ function RuneRooms.Helpers:GetRoomRNG(gridIndex)
 
     return TSIL.RNG.NewRNG(stageRNG:Next())
 end
+
+
+---Returns an unique index for custom "grid entities". This assumes that no two
+---"grid entities" can occupy the same grid index.
+---@param entity Entity
+---@return string
+function RuneRooms.Helpers:GetCustomGridIndex(entity)
+    local room = Game():GetRoom()
+    local gridIndex = room:GetGridIndex(entity.Position)
+
+    local roomDesc = TSIL.Rooms.GetRoomDescriptor()
+    local roomListIndex = roomDesc.ListIndex
+
+    return roomListIndex .. "-" .. gridIndex
+end

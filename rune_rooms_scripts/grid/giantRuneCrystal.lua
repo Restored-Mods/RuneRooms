@@ -18,28 +18,17 @@ TSIL.SaveManager.AddPersistentVariable(
 
 
 ---@param giantCrystal Entity
-local function GetGiantCrystalIndex(giantCrystal)
-    local room = Game():GetRoom()
-    local gridIndex = room:GetGridIndex(giantCrystal.Position)
-
-    local roomDesc = TSIL.Rooms.GetRoomDescriptor()
-    local roomListIndex = roomDesc.ListIndex
-
-    return roomListIndex .. "-" .. gridIndex
-end
-
-
----@param giantCrystal Entity
 local function GetGiantCrystalData(giantCrystal)
     local crystalsData = TSIL.SaveManager.GetPersistentVariable(
         RuneRooms,
         RuneRooms.Enums.SaveKey.GIANT_CRYSTAL_DATA
     )
-    local crystalIndex = GetGiantCrystalIndex(giantCrystal)
+    local crystalIndex = RuneRooms.Helpers:GetCustomGridIndex(giantCrystal)
 
     if not crystalsData[crystalIndex] then
         crystalsData[crystalIndex] = {
-            state = 1
+            breakState = 1,
+            activated = false
         }
     end
 
@@ -62,22 +51,39 @@ end
 
 
 ---@param giantCrystal Entity
-function RuneRooms.DealDamageToGiantCrystal(giantCrystal)
+function RuneRooms:DealDamageToGiantCrystal(giantCrystal)
     local data = GetGiantCrystalData(giantCrystal)
-    if data.state == 5 then return end
-    data.state = data.state + 1
+    if data.activated then return end
+    if data.breakState == 5 then return end
+    data.breakState = data.breakState + 1
 
     local sprite = giantCrystal:GetSprite()
 
-    if data.state ~= 5 then
+    if data.breakState ~= 5 then
         local frame = sprite:GetFrame()
-        sprite:Play("State" .. data.state .. "Symbol", true)
+        sprite:Play("State" .. data.breakState .. "Symbol", true)
         sprite:SetFrame(frame)
+
+        local runeEffect = RuneRooms:GetRuneEffectForFloor()
+        RuneRooms:ActivateNegativeEffect(runeEffect)
     else
         sprite:Play("State5", true)
         giantCrystal.SortingLayer = SortingLayer.SORTING_BACKGROUND
         giantCrystal.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
     end
+end
+
+
+---@param giantCrystal Entity
+function RuneRooms:ActivateGiantCrystal(giantCrystal)
+    local data = GetGiantCrystalData(giantCrystal)
+
+    if data.breakState == 5 then return end
+    if data.activated then return end
+
+    data.activated = true
+    local sprite = giantCrystal:GetSprite()
+    sprite:Play("ActivateStart", true)
 end
 
 
@@ -92,8 +98,11 @@ local function OnGiantCrystalInit(giantCrystal)
     local runeSpriteSheet = RUNE_SYMBOL_SPRITESHEET .. RuneRooms.Constants.RUNE_NAMES[runeEffect] .. ".png"
     sprite:ReplaceSpritesheet(2, runeSpriteSheet)
     sprite:LoadGraphics()
-    if data.state < 5 then
-        sprite:Play("State" .. data.state .. "Symbol", true)
+
+    if data.activated then
+        sprite:Play("ActivateLoop", true)
+    elseif data.breakState < 5 then
+        sprite:Play("State" .. data.breakState .. "Symbol", true)
     else
         sprite:Play("State5", true)
         giantCrystal.SortingLayer = SortingLayer.SORTING_BACKGROUND
@@ -104,7 +113,14 @@ end
 
 ---@param giantCrystal Entity
 local function OnGiantCrystalUpdate(giantCrystal)
+    local sprite = giantCrystal:GetSprite()
 
+    if sprite:IsFinished("ActivateStart") then
+        sprite:Play("ActivateLoop", true)
+
+        local runeEffect = RuneRooms:GetRuneEffectForFloor()
+        RuneRooms:ActivatePositiveEffect(runeEffect)
+    end
 end
 
 
@@ -154,11 +170,11 @@ function GiantRuneCrystal:OnBombExplode(bomb)
         if entity.Variant ~= RuneRooms.Enums.GenericPropVariant.GIANT_RUNE_CRYSTAL then return false end
 
         local data = GetGiantCrystalData(entity)
-        return data.state ~= 5
+        return data.breakState ~= 5
     end)
 
     TSIL.Utils.Tables.ForEach(destroyableGiantCrystals, function (_, giantCrystal)
-        RuneRooms.DealDamageToGiantCrystal(giantCrystal)
+        RuneRooms:DealDamageToGiantCrystal(giantCrystal)
     end)
 end
 RuneRooms:AddCallback(

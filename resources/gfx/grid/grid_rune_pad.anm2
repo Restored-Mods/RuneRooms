@@ -1,5 +1,5 @@
 <AnimatedActor>
-	<Info CreatedBy="trtv" CreatedOn="11/06/2023 19:19:54" Version="4" Fps="30"/>
+	<Info CreatedBy="trtv" CreatedOn="20/06/2023 11:15:00" Version="6" Fps="30"/>
 	<Content>
 		<Spritesheets>
 			<Spritesheet Path="grid_rune_pad_halagaz.png" Id="0"/>

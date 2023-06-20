@@ -1,3 +1,4 @@
 <data>
-	<entity Name="Giant Rune Crystal" ID="960" Variant="651" Subtype="0" Group="Grid" Image="Giant Rune Crystal.png" Kind="Rune Rooms" />
+	<entity Name="Giant Rune Crystal" 	Image="Giant Rune Crystal.png"	ID="960" Variant="651" Subtype="0" Kind="Rune Rooms" Group="Grid" />
+	<entity Name="Rune Pad" 			Image="Rune Pad.png"			ID="960" Variant="652" Subtype="0" Kind="Rune Rooms" Group="Grid" />
 </data>
