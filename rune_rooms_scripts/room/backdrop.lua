@@ -3,7 +3,7 @@ local Backdrop = {}
 local FLOOR_ANM2 = "gfx/backdrop/rune_floor.anm2"
 local WALLS_ANM2 = "gfx/backdrop/rune_walls.anm2"
 
-local PIT_SPRITE = "gfx/grid/grid_pit_rune_ff.png"
+local PIT_SPRITE = "gfx/grid/grid_pit_mausoleum.png"
 local PIT_SPRITE_FF = "gfx/grid/grid_pit_rune_ff.png"
 local GRIDS_SPRITE = "gfx/grid/rocks_rune.png"
 local GRIDS_SPRITE_FF = "gfx/grid/rocks_rune_ff.png"
@@ -31,14 +31,14 @@ local WALL_DETAILS_ANM2 = "gfx/backdrop/wall_details.anm2"
 local WALL_DETAILS2_ANM2 = "gfx/backdrop/wall_details_2.anm2"
 local NUM_HORIZONTAL_DETAIL_ANIMS = 7
 local NUM_VERTICAL_DETAIL_ANIMS = 4
-local HORIZONTAL_DETAIL_GRID_INDEXES = {1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13}
-local VERTICAL_DETAIL_GRID_INDEXES = {15, 30, 45, 75, 90, 105}
+local HORIZONTAL_DETAIL_GRID_INDEXES = {2, 3, 4, 5, 6, 8, 9, 10, 11, 12}
+local VERTICAL_DETAIL_GRID_INDEXES = {30, 45, 75, 90}
 
 local CRYSTAL_OVERLAY_ANM2 = "gfx/backdrop/crystal_overlay.anm2"
 local NUM_HORIZONTAL_OVERLAY_ANIMS = 3
 local NUM_VERTICAL_OVERLAY_ANIMS = 2
-local HORIZONTAL_OVERLAY_GRID_INDEXES = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
-local VERTICAL_OVERLAY_GRID_INDEXES = {15, 30, 45, 60, 75, 90, 105}
+local HORIZONTAL_OVERLAY_GRID_INDEXES = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+local VERTICAL_OVERLAY_GRID_INDEXES = {30, 45, 60, 75, 90}
 
 local CRYSTAL_SHINE_ANM2 = "gfx/backdrop/crystal_shine.anm2"
 
@@ -424,6 +424,8 @@ function Backdrop:OnGridEntityInit(gridEntity)
 
     if gridEntity:GetType() == GridEntityType.GRID_PIT then
         ReplacePitSprite(gridEntity:ToPit())
+    elseif gridEntity:GetType() == GridEntityType.GRID_DECORATION then
+        TSIL.GridEntities.RemoveGridEntity(gridEntity, false)
     else
         TryReplaceGridEntitySprite(gridEntity)
     end

@@ -1,0 +1,5 @@
+<sounds root="sfx/">
+    <sound name="Rune Crystal Explosion">
+        <sample weight="1" path="rune_crystal_explosion.wav"/>
+    </sound>
+</sounds>

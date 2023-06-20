@@ -111,6 +111,11 @@ RuneRooms.Enums.CustomCallback = {
 }
 
 
+RuneRooms.Enums.SoundEffect = {
+    RUNE_CRYSTAL_EXPLOSION = Isaac.GetSoundIdByName("Rune Crystal Explosion")
+}
+
+
 ---@enum Achievement
 RuneRooms.Enums.Achievement = {
     CONFESSIONAL    = 1,

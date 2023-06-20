@@ -2,6 +2,25 @@ local GiantRuneCrystal = {}
 
 local RUNE_SYMBOL_SPRITESHEET = "gfx/grid/rune_symbol_"
 
+local RUNE_PARTICLES = {
+    MinNum = 10,
+    MaxNum = 20,
+    MinPosOffset = 0,
+    MaxPosOffset = 10,
+    MinSpeed = 5,
+    MaxSpeed = 7,
+    Color = Color(1, 1, 1, 0.7, 0.1, 0, 0.2)
+}
+local CRYSTAL_EXPLOSION_DARKEN = {
+    Intensity = 0.8,
+    Duration = 8 * 30,
+}
+local CRYSTAL_EXPLOSION_SHOCKWAVE = {
+    Amplitude = 0.04,
+    Speed = 0.013,
+    Duration = 4 * 30
+}
+
 
 TSIL.SaveManager.AddPersistentVariable(
     RuneRooms,
@@ -50,6 +69,35 @@ local function IsGiantCrystalInitialized(giantCrystal)
 end
 
 
+---@param position Vector
+---@param multiplier number
+local function SpawnRuneParticles(position, multiplier)
+    local rng = TSIL.RNG.NewRNG()
+
+    local numParticles = TSIL.Random.GetRandomInt(RUNE_PARTICLES.MinNum, RUNE_PARTICLES.MinNum, rng)
+    numParticles = math.floor(numParticles * multiplier)
+
+    for _ = 1, numParticles, 1 do
+        local angle = rng:RandomInt(360)
+
+        local offsetDistance = TSIL.Random.GetRandomFloat(RUNE_PARTICLES.MinPosOffset, RUNE_PARTICLES.MaxPosOffset, rng)
+        local posOffset = Vector.FromAngle(angle):Resized(offsetDistance)
+        local spawningPos = position + posOffset
+
+        local speed = TSIL.Random.GetRandomFloat(RUNE_PARTICLES.MinSpeed, RUNE_PARTICLES.MaxSpeed, rng)
+        local spawningVel = Vector.FromAngle(angle):Resized(speed)
+
+        local particle = TSIL.EntitySpecific.SpawnEffect(
+            EffectVariant.TOOTH_PARTICLE,
+            0,
+            spawningPos,
+            spawningVel
+        )
+        particle.Color = RUNE_PARTICLES.Color
+    end
+end
+
+
 ---@param giantCrystal Entity
 function RuneRooms:DealDamageToGiantCrystal(giantCrystal)
     local data = GetGiantCrystalData(giantCrystal)
@@ -64,12 +112,30 @@ function RuneRooms:DealDamageToGiantCrystal(giantCrystal)
         sprite:Play("State" .. data.breakState .. "Symbol", true)
         sprite:SetFrame(frame)
 
-        local runeEffect = RuneRooms:GetRuneEffectForFloor()
-        RuneRooms:ActivateNegativeEffect(runeEffect)
+        SFXManager():Play(RuneRooms.Enums.SoundEffect.RUNE_CRYSTAL_EXPLOSION)
+
+        SpawnRuneParticles(giantCrystal.Position, 1)
     else
         sprite:Play("State5", true)
         giantCrystal.SortingLayer = SortingLayer.SORTING_BACKGROUND
         giantCrystal.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
+
+        SFXManager():Play(SoundEffect.SOUND_MIRROR_BREAK)
+        Game():Darken(
+            CRYSTAL_EXPLOSION_DARKEN.Intensity,
+            CRYSTAL_EXPLOSION_DARKEN.Duration
+        )
+        Game():MakeShockwave(
+            giantCrystal.Position,
+            CRYSTAL_EXPLOSION_SHOCKWAVE.Amplitude,
+            CRYSTAL_EXPLOSION_SHOCKWAVE.Speed,
+            CRYSTAL_EXPLOSION_SHOCKWAVE.Duration
+        )
+
+        SpawnRuneParticles(giantCrystal.Position, 4)
+
+        local runeEffect = RuneRooms:GetRuneEffectForFloor()
+        RuneRooms:ActivateNegativeEffect(runeEffect)
     end
 end
 
