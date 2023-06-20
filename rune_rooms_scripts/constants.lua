@@ -27,3 +27,7 @@ RuneRooms.Constants.TRINKET_PER_ACHIEVEMENT = {
     [RuneRooms.Enums.Achievement.HELL_GAME]        = Isaac.GetTrinketIdByName("##HELL_GAME_ACHIEVEMENT_TRACKER"),
     [RuneRooms.Enums.Achievement.ROTTEN_BEGGAR]    = Isaac.GetTrinketIdByName("##ROTTEN_BEGGAR_ACHIEVEMENT_TRACKER")
 }
+
+RuneRooms.Constants.MINIMAPI_VERSION = "RuneRooms"
+
+RuneRooms.Constants.RUNE_ROOM_ICON = "RuneRoomIcon"
