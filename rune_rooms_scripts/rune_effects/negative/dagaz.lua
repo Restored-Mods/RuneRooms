@@ -6,7 +6,7 @@ local EXTRA_CHAMPION_CHANCE = 0.4
 function DagazNegative:OnNPCInit(npc)
     if not RuneRooms:IsNegativeEffectActive(RuneRooms.Enums.RuneEffect.DAGAZ) then return end
 
-    if not npc:IsChampion() then
+    if not npc:IsChampion() and npc:IsActiveEnemy() then
         local rng = TSIL.RNG.NewRNG(npc.InitSeed)
 
         if rng:RandomFloat() >= EXTRA_CHAMPION_CHANCE then return end
