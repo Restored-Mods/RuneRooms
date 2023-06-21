@@ -1,3 +1,4 @@
+---@diagnostic disable: need-check-nil, param-type-mismatch
 -- Hidden Item Manager, by Connor (aka Ghostbroster)
 -- Version 2.0
 -- 

@@ -136,6 +136,13 @@ function RuneRooms:DealDamageToGiantCrystal(giantCrystal)
 
         local runeEffect = RuneRooms:GetRuneEffectForFloor()
         RuneRooms:ActivateNegativeEffect(runeEffect)
+
+        local essence = RuneRooms.Constants.ESSENCE_ITEM_PER_RUNE[runeEffect]
+        TSIL.EntitySpecific.SpawnPickup(
+            PickupVariant.PICKUP_COLLECTIBLE,
+            essence,
+            giantCrystal.Position
+        )
     end
 end
 

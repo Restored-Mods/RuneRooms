@@ -17,6 +17,23 @@ RuneRooms.Constants.RUNE_NAMES = {
     [RuneRooms.Enums.RuneEffect.SOWILO]     = "sowilo"
 }
 
+RuneRooms.Constants.ESSENCE_ITEM_PER_RUNE = {
+    [RuneRooms.Enums.RuneEffect.ALGIZ]      = RuneRooms.Enums.Item.ALGIZ_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.ANSUZ]      = RuneRooms.Enums.Item.ANSUZ_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.BERKANO]    = RuneRooms.Enums.Item.BERKANO_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.DAGAZ]      = RuneRooms.Enums.Item.DAGAZ_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.EHWAZ]      = RuneRooms.Enums.Item.EHWAZ_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.FEHU]       = RuneRooms.Enums.Item.FEHU_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.GEBO]       = RuneRooms.Enums.Item.GEBO_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.HAGALAZ]    = RuneRooms.Enums.Item.HAGALAZ_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.INGWAZ]     = RuneRooms.Enums.Item.INGWAZ_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.JERA]       = RuneRooms.Enums.Item.JERA_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.KENAZ]      = RuneRooms.Enums.Item.KENAZ_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.OTHALA]     = RuneRooms.Enums.Item.OTHALA_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.PERTHRO]    = RuneRooms.Enums.Item.PERTHRO_ESSENCE,
+    [RuneRooms.Enums.RuneEffect.SOWILO]     = RuneRooms.Enums.Item.SOWILO_ESSENCE,
+}
+
 RuneRooms.Constants.RUNE_ROOMS_IDS = {
     3670
 }
