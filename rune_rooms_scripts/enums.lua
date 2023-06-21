@@ -108,6 +108,18 @@ RuneRooms.Enums.CustomCallback = {
 	--
 	-- * runeEffect - RuneEffect
     POST_GAIN_NEGATIVE_RUNE_EFFECT = {},
+
+    --Called whenever a chest changes to the opened subtype.
+    --Won't be called if a chest spawns an item.
+    --
+    --Params:
+    --
+    -- * chest - EntityPickup
+    --
+    --Optional args:
+    --
+    -- * pickupVariant - PickupVariant
+    POST_CHEST_OPENED = {},
 }
 
 

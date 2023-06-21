@@ -13,6 +13,7 @@ include("rune_rooms_scripts.lib.achievement_checker")
 include("rune_rooms_scripts.lib.hidden_item_manager")
 include("rune_rooms_scripts.lib.minimap_api")
 
+include("rune_rooms_scripts.custom_callbacks.main")
 include("rune_rooms_scripts.effects.main")
 include("rune_rooms_scripts.grid.main")
 include("rune_rooms_scripts.items.main")

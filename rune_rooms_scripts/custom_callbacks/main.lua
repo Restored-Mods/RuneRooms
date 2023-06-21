@@ -1,0 +1,1 @@
+include("rune_rooms_scripts.custom_callbacks.chest_open")

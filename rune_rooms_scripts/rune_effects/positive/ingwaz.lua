@@ -122,7 +122,28 @@ end
 
 
 ---@param chest EntityPickup
-local function OnChestOpened(chest)
+local function OnChestUpdate(chest)
+    if chest.Variant == PickupVariant.PICKUP_ETERNALCHEST then return end
+
+    TryClose(chest)
+end
+
+
+---@param pickup EntityPickup
+function EhwazPositive:OnPickupUpdate(pickup)
+    if not TSIL.Pickups.IsChest(pickup) then return end
+
+    OnChestUpdate(pickup)
+end
+RuneRooms:AddCallback(
+    ModCallbacks.MC_POST_PICKUP_UPDATE,
+    EhwazPositive.OnPickupUpdate
+)
+
+
+---@param chest EntityPickup
+function EhwazPositive:OnChestOpened(chest)
+    if chest.Variant == PickupVariant.PICKUP_ETERNALCHEST then return end
     if not RuneRooms:IsPositiveEffectActive(RuneRooms.Enums.RuneEffect.INGWAZ) then return end
 
     local rng = chest:GetDropRNG()
@@ -136,50 +157,7 @@ local function OnChestOpened(chest)
         TO_CLOSE_DURATION
     )
 end
-
-
-local function CheckIfOpened(chest)
-    local subtype = chest.SubType
-    local previousSubtype = TSIL.Entities.GetEntityData(
-        RuneRooms,
-        chest,
-        "PreviousSubtype"
-    )
-
-    if not previousSubtype then
-        previousSubtype = subtype
-    end
-
-    if subtype == ChestSubType.CHEST_OPENED and previousSubtype ~= ChestSubType.CHEST_OPENED then
-        OnChestOpened(chest)
-    end
-
-    TSIL.Entities.SetEntityData(
-        RuneRooms,
-        chest,
-        "PreviousSubtype",
-        subtype
-    )
-end
-
-
----@param chest EntityPickup
-local function OnChestUpdate(chest)
-    if chest.Variant == PickupVariant.PICKUP_ETERNALCHEST then return end
-
-    TryClose(chest)
-
-    CheckIfOpened(chest)
-end
-
-
----@param pickup EntityPickup
-function EhwazPositive:OnPickupUpdate(pickup)
-    if not TSIL.Pickups.IsChest(pickup) then return end
-
-    OnChestUpdate(pickup)
-end
 RuneRooms:AddCallback(
-    ModCallbacks.MC_POST_PICKUP_UPDATE,
-    EhwazPositive.OnPickupUpdate
+    RuneRooms.Enums.CustomCallback.POST_CHEST_OPENED,
+    EhwazPositive.OnChestOpened
 )
