@@ -9,12 +9,6 @@ TSIL.SaveManager.AddPersistentVariable(
     {},
     TSIL.Enums.VariablePersistenceMode.RESET_LEVEL
 )
-TSIL.SaveManager.AddPersistentVariable(
-    RuneRooms,
-    RuneRooms.Enums.SaveKey.INITIALIZED_RUNE_PADS,
-    {},
-    TSIL.Enums.VariablePersistenceMode.RESET_ROOM
-)
 
 
 ---@param runePad Entity
@@ -32,20 +26,6 @@ local function GetRunePadData(runePad)
     end
 
     return padsData[padIndex]
-end
-
-
----@param giantCrystal Entity
-local function IsRunePadInitialized(giantCrystal)
-    local ptrHash = GetPtrHash(giantCrystal)
-    local initializedGiantCrystals = TSIL.SaveManager.GetPersistentVariable(
-        RuneRooms,
-        RuneRooms.Enums.SaveKey.INITIALIZED_RUNE_PADS
-    )
-    local isInitialized = initializedGiantCrystals[ptrHash] ~= nil
-    initializedGiantCrystals[ptrHash] = true
-
-    return isInitialized
 end
 
 
@@ -75,9 +55,7 @@ end
 
 
 ---@param runePad Entity
-local function OnRunePadInit(runePad)
-    if IsRunePadInitialized(runePad) then return end
-
+function RunePad:OnRunePadInit(runePad)
     runePad.DepthOffset = -80
     runePad.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
 
@@ -96,10 +74,15 @@ local function OnRunePadInit(runePad)
     end
     sprite:Play(anim, true)
 end
+RuneRooms:AddCallback(
+    RuneRooms.Enums.CustomCallback.POST_GENERIC_PROP_INIT,
+    RunePad.OnRunePadInit,
+    RuneRooms.Enums.GenericPropVariant.RUNE_PAD
+)
 
 
 ---@param runePad Entity
-local function OnRunePadUpdate(runePad)
+function RunePad:OnRunePadUpdate(runePad)
     local data = GetRunePadData(runePad)
     local sprite = runePad:GetSprite()
 
@@ -124,39 +107,8 @@ local function OnRunePadUpdate(runePad)
         end
     end
 end
-
-
-function RunePad:OnNewRoom()
-    local runePads = Isaac.FindByType(
-        EntityType.ENTITY_GENERIC_PROP,
-        RuneRooms.Enums.GenericPropVariant.RUNE_PAD
-    )
-
-    TSIL.Utils.Tables.ForEach(runePads, function (_, runePad)
-        OnRunePadInit(runePad)
-    end)
-end
 RuneRooms:AddCallback(
-    TSIL.Enums.CustomCallback.POST_NEW_ROOM_REORDERED,
-    RunePad.OnNewRoom
-)
-
-
-function RunePad:OnUpdate()
-    local runePads = Isaac.FindByType(
-        EntityType.ENTITY_GENERIC_PROP,
-        RuneRooms.Enums.GenericPropVariant.RUNE_PAD
-    )
-
-    TSIL.Utils.Tables.ForEach(runePads, function (_, runePad)
-        if runePad.FrameCount == 1 then
-            OnRunePadInit(runePad)
-        end
-
-        OnRunePadUpdate(runePad)
-    end)
-end
-RuneRooms:AddCallback(
-    ModCallbacks.MC_POST_UPDATE,
-    RunePad.OnUpdate
+    RuneRooms.Enums.CustomCallback.POST_GENERIC_PROP_UPDATE,
+    RunePad.OnRunePadUpdate,
+    RuneRooms.Enums.GenericPropVariant.RUNE_PAD
 )

@@ -57,12 +57,13 @@ RuneRooms.Enums.GenericPropVariant = {
 RuneRooms.Enums.SaveKey = {
     HIDDEN_ITEM_MANAGER_DATA        = "HIDDEN_ITEM_MANAGER_DATA",
     MINIMAPI_DATA                   = "MINIMAPI_DATA",
+
     GIANT_CRYSTAL_DATA              = "GIANT_CRYSTAL_DATA",
-    INITIALIZED_GIANT_CRYSTALS      = "INITIALIZED_GIANT_CRYSTALS",
     RUNE_PAD_DATA                   = "RUNE_PAD_DATA",
-    INITIALIZED_RUNE_PADS           = "INITIALIZED_RUNE_PADS",
+
     ACTIVE_POSITIVE_EFFECTS         = "ACTIVE_POSITIVE_EFFECTS",
     ACTIVE_NEGATIVE_EFFECTS         = "ACTIVE_NEGATIVE_EFFECTS",
+
     POSITIVE_FEHU_RNG_PER_PLAYER    = "POSITIVE_FEHU_RNG_PER_PLAYER",
     NEGATIVE_FEHU_RNG_PER_PLAYER    = "NEGATIVE_FEHU_RNG_PER_PLAYER",
     REPLACED_DOUBLE_CLOSED_CHESTS   = "REPLACED_DOUBLE_CLOSED_CHESTS",
@@ -120,6 +121,29 @@ RuneRooms.Enums.CustomCallback = {
     --
     -- * pickupVariant - PickupVariant
     POST_CHEST_OPENED = {},
+
+    --Called either from the `MC_NEW_ROOM` callback or the `MC_POST_UPDATE` callback,
+    --the first frame a generic prop is available.
+    --
+    --Params:
+    --
+    -- * genericProp - Entity
+    --
+    --Optional args:
+    --
+    -- * genericPropVariant - GenericPropVariant
+    POST_GENERIC_PROP_INIT = {},
+
+    --Called from the `MC_POST_UPDATE` callback for each generic prop in the room.
+    --
+    --Params:
+    --
+    -- * genericProp - Entity
+    --
+    --Optional args:
+    --
+    -- * genericPropVariant - GenericPropVariant
+    POST_GENERIC_PROP_UPDATE = {},
 }
 
 

@@ -28,12 +28,6 @@ TSIL.SaveManager.AddPersistentVariable(
     {},
     TSIL.Enums.VariablePersistenceMode.RESET_LEVEL
 )
-TSIL.SaveManager.AddPersistentVariable(
-    RuneRooms,
-    RuneRooms.Enums.SaveKey.INITIALIZED_GIANT_CRYSTALS,
-    {},
-    TSIL.Enums.VariablePersistenceMode.RESET_ROOM
-)
 
 
 ---@param giantCrystal Entity
@@ -52,20 +46,6 @@ local function GetGiantCrystalData(giantCrystal)
     end
 
     return crystalsData[crystalIndex]
-end
-
-
----@param giantCrystal Entity
-local function IsGiantCrystalInitialized(giantCrystal)
-    local ptrHash = GetPtrHash(giantCrystal)
-    local initializedGiantCrystals = TSIL.SaveManager.GetPersistentVariable(
-        RuneRooms,
-        RuneRooms.Enums.SaveKey.INITIALIZED_GIANT_CRYSTALS
-    )
-    local isInitialized = initializedGiantCrystals[ptrHash] ~= nil
-    initializedGiantCrystals[ptrHash] = true
-
-    return isInitialized
 end
 
 
@@ -161,9 +141,7 @@ end
 
 
 ---@param giantCrystal Entity
-local function OnGiantCrystalInit(giantCrystal)
-    if IsGiantCrystalInitialized(giantCrystal) then return end
-
+function GiantRuneCrystal:OnGiantCrystalInit(giantCrystal)
     local data = GetGiantCrystalData(giantCrystal)
     local runeEffect = RuneRooms:GetRuneEffectForFloor()
 
@@ -182,10 +160,15 @@ local function OnGiantCrystalInit(giantCrystal)
         giantCrystal.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
     end
 end
+RuneRooms:AddCallback(
+    RuneRooms.Enums.CustomCallback.POST_GENERIC_PROP_INIT,
+    GiantRuneCrystal.OnGiantCrystalInit,
+    RuneRooms.Enums.GenericPropVariant.GIANT_RUNE_CRYSTAL
+)
 
 
 ---@param giantCrystal Entity
-local function OnGiantCrystalUpdate(giantCrystal)
+function GiantRuneCrystal:OnGiantCrystalUpdate(giantCrystal)
     local sprite = giantCrystal:GetSprite()
 
     if sprite:IsFinished("ActivateStart") then
@@ -195,41 +178,10 @@ local function OnGiantCrystalUpdate(giantCrystal)
         RuneRooms:ActivatePositiveEffect(runeEffect)
     end
 end
-
-
-function GiantRuneCrystal:OnNewRoom()
-    local giantRuneCrystals = Isaac.FindByType(
-        EntityType.ENTITY_GENERIC_PROP,
-        RuneRooms.Enums.GenericPropVariant.GIANT_RUNE_CRYSTAL
-    )
-
-    TSIL.Utils.Tables.ForEach(giantRuneCrystals, function (_, giantCrystal)
-        OnGiantCrystalInit(giantCrystal)
-    end)
-end
 RuneRooms:AddCallback(
-    TSIL.Enums.CustomCallback.POST_NEW_ROOM_REORDERED,
-    GiantRuneCrystal.OnNewRoom
-)
-
-
-function GiantRuneCrystal:OnUpdate()
-    local giantRuneCrystals = Isaac.FindByType(
-        EntityType.ENTITY_GENERIC_PROP,
-        RuneRooms.Enums.GenericPropVariant.GIANT_RUNE_CRYSTAL
-    )
-
-    TSIL.Utils.Tables.ForEach(giantRuneCrystals, function (_, giantCrystal)
-        if giantCrystal.FrameCount == 1 then
-            OnGiantCrystalInit(giantCrystal)
-        end
-
-        OnGiantCrystalUpdate(giantCrystal)
-    end)
-end
-RuneRooms:AddCallback(
-    ModCallbacks.MC_POST_UPDATE,
-    GiantRuneCrystal.OnUpdate
+    RuneRooms.Enums.CustomCallback.POST_GENERIC_PROP_UPDATE,
+    GiantRuneCrystal.OnGiantCrystalUpdate,
+    RuneRooms.Enums.GenericPropVariant.GIANT_RUNE_CRYSTAL
 )
 
 
