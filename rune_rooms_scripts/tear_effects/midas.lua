@@ -35,7 +35,6 @@ end
 function MidasTears:OnTearInitLate(tear)
     if not RuneRooms:IsMidasTear(tear) then return end
 
-    print(RuneRooms:IsMidasTear(tear))
     tear:GetSprite().Color = GOLDEN_COLOR
 end
 RuneRooms:AddCallback(
