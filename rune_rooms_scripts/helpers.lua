@@ -90,3 +90,15 @@ function RuneRooms.Helpers:GetCustomGridIndex(entity)
 
     return roomListIndex .. "-" .. gridIndex
 end
+
+
+---Helper function to add tear stats in a user friendly way.
+---@param fireDelay number
+---@param value number
+---@return number
+function RuneRooms.Helpers:AddTears(fireDelay, value)
+    local currentTears = 30 / (fireDelay + 1)
+    local newTears = currentTears + value
+    
+    return math.max((30 / newTears) - 1, -0.99)
+end
