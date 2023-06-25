@@ -1,6 +1,8 @@
 local FehuEssence = {}
 
-local MIDAS_TEAR_CHANCE = 0.25
+local MIDAS_TEAR_CHANCE = 0.2
+local MIDAS_TEAR_CHANCE_PER_LUCK = 0.05
+local MAX_MIDAS_TEAR_CHANCE = 0.5
 local PENNY_REPLACE_CHANCE = 0.25
 ---@type {chance: number, value: CoinSubType}[]
 local POSSIBLE_COINS = {
@@ -30,7 +32,9 @@ function FehuEssence:OnTearInit(tear)
     if not player:HasCollectible(FehuItem) then return end
 
     local rng = player:GetCollectibleRNG(FehuItem)
-    if rng:RandomFloat() >= MIDAS_TEAR_CHANCE then return end
+    local chance = MIDAS_TEAR_CHANCE + player.Luck * MIDAS_TEAR_CHANCE_PER_LUCK
+    chance = math.max(MAX_MIDAS_TEAR_CHANCE, chance)
+    if rng:RandomFloat() >= chance then return end
 
     RuneRooms:MakeTearMidas(tear)
 end

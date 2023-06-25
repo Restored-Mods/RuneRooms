@@ -13,7 +13,6 @@ TSIL.SaveManager.AddPersistentVariable(
 ---@param player EntityPlayer
 function BerkanoEssence:OnFireDelayCache(player)
     local numItems = player:GetCollectibleNum(BerkanoItem)
-    --TODO: Add the tears correctly
     player.MaxFireDelay = RuneRooms.Helpers:AddTears(player.MaxFireDelay, numItems * 0.3)
 end
 RuneRooms:AddCallback(
