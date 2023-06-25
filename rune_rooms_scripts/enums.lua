@@ -75,6 +75,7 @@ RuneRooms.Enums.SaveKey = {
 }
 
 
+---@enum RuneRoomsCustomCallback
 RuneRooms.Enums.CustomCallback = {
     --Called whenever a command that starts with "rune" is run in the console.
     --
@@ -161,3 +162,6 @@ RuneRooms.Enums.Achievement = {
     HELL_GAME       = 3,
     ROTTEN_BEGGAR   = 4,
 }
+
+
+RuneRooms.Enums.ItemPool = {}

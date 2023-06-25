@@ -16,6 +16,7 @@ include("rune_rooms_scripts.lib.minimap_api")
 include("rune_rooms_scripts.custom_callbacks.main")
 include("rune_rooms_scripts.effects.main")
 include("rune_rooms_scripts.grid.main")
+include("rune_rooms_scripts.item_pools.main")
 include("rune_rooms_scripts.items.main")
 include("rune_rooms_scripts.pickups.main")
 include("rune_rooms_scripts.room.main")
@@ -55,6 +56,7 @@ RuneRooms:AddCallback(RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD, function ()
     return true
 end, "help")
 
+return
 
 --local mod = RegisterMod("Rune Rooms", 1);
 
