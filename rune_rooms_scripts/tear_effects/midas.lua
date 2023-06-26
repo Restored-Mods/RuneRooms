@@ -7,35 +7,29 @@ local MidasTears = {}
 local MIDAS_FREEZE_DURATION = 30 * 4 -- 4 seconds at 30fps
 local GOLDEN_COLOR = Color(0.9, 0.8, 0, 1, 0.8, 0.7, 0)
 
----Helper function to give a tear the midas effect
+
 ---@param tear EntityTear
-function RuneRooms:MakeTearMidas(tear)
-    TSIL.Entities.SetEntityData(
-        RuneRooms,
-        tear,
-        "IsMidasTear",
-        true
-    )
+local function MakeTearGolden(tear)
+    tear:GetSprite().Color = GOLDEN_COLOR
 end
 
 
----Helper function to check if a tear has the midas effect.
 ---@param tear EntityTear
----@return boolean
-function RuneRooms:IsMidasTear(tear)
-    return TSIL.Entities.GetEntityData(
-        RuneRooms,
-        tear,
-        "IsMidasTear"
-    ) == true
+function MidasTears:OnMidasEffectAdded(tear)
+    MakeTearGolden(tear)
 end
+RuneRooms:AddCallback(
+    RuneRooms.Enums.CustomCallback.POST_CUSTOM_TEAR_FLAG_ADDED,
+    MidasTears.OnMidasEffectAdded,
+    RuneRooms.Enums.TearFlag.MIDAS
+)
 
 
 ---@param tear EntityTear
 function MidasTears:OnTearInitLate(tear)
-    if not RuneRooms:IsMidasTear(tear) then return end
+    if not RuneRooms:HasCustomTearFlag(tear, RuneRooms.Enums.TearFlag.MIDAS) then return end
 
-    tear:GetSprite().Color = GOLDEN_COLOR
+    MakeTearGolden(tear)
 end
 RuneRooms:AddCallback(
     TSIL.Enums.CustomCallback.POST_TEAR_INIT_LATE,
@@ -53,7 +47,7 @@ function MidasTears:OnEntityDamage(tookDamage, _, _, source)
     if source.Type ~= EntityType.ENTITY_TEAR then return end
 
     local tear = source.Entity:ToTear()
-    if not RuneRooms:IsMidasTear(tear) then return end
+    if not RuneRooms:HasCustomTearFlag(tear, RuneRooms.Enums.TearFlag.MIDAS) then return end
 
     tookDamage:AddMidasFreeze(source, MIDAS_FREEZE_DURATION)
 end

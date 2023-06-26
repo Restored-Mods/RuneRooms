@@ -53,6 +53,18 @@ local SLOT_ATTACK = {
     MaxSpeed = 17,
     FallingAccel = 0.3
 }
+local BLOOD_DONATION_ATTACK = {
+    Interval = 4,
+    IntervalOffset = 2,
+    Damage = 2,
+    MinSpeed = 3,
+    MaxSpeed = 6,
+    MinFallingSpeed = -20,
+    MaxFallingSpeed = -15,
+    FallingAccel = 1.5,
+    MinScale = 0.8,
+    MaxScale = 1.2
+}
 local GeboItem = RuneRooms.Enums.Item.GEBO_ESSENCE
 
 TSIL.SaveManager.AddPersistentVariable(
@@ -228,7 +240,6 @@ local function CanSlotAttack(slot, attackInterval, maxIntervalOffset)
     local initRNG = TSIL.RNG.NewRNG(slot.InitSeed)
     local frameOffset = initRNG:RandomInt(attackInterval)
     local intervalOffset = initRNG:RandomInt(maxIntervalOffset)
-    print((slot.FrameCount + frameOffset), (attackInterval + intervalOffset))
     if (slot.FrameCount + frameOffset) % (attackInterval + intervalOffset) ~= 0 then
         return false
     end
@@ -325,4 +336,43 @@ RuneRooms:AddCallback(
     TSIL.Enums.CustomCallback.POST_SLOT_UPDATE,
     GeboEssence.OnSlotMachineUpdate,
     TSIL.Enums.SlotVariant.SLOT_MACHINE
+)
+
+
+---@param slot Entity
+function GeboEssence:OnBloodDonationMachineUpdate(slot)
+    if not CanSlotAttack(slot, BLOOD_DONATION_ATTACK.Interval, BLOOD_DONATION_ATTACK.IntervalOffset) then return end
+
+    local rng = slot:GetDropRNG()
+
+    local angle = rng:RandomInt(360)
+    local speed = TSIL.Random.GetRandomFloat(BLOOD_DONATION_ATTACK.MinSpeed, BLOOD_DONATION_ATTACK.MaxSpeed, rng)
+    local spawningVel = Vector.FromAngle(angle):Resized(speed)
+
+    local tear = TSIL.EntitySpecific.SpawnTear(
+        TearVariant.BLOOD,
+        0,
+        slot.Position,
+        spawningVel,
+        slot
+    )
+
+    tear.CollisionDamage = BLOOD_DONATION_ATTACK.Damage
+    tear.FallingSpeed = TSIL.Random.GetRandomFloat(
+        BLOOD_DONATION_ATTACK.MinFallingSpeed,
+        BLOOD_DONATION_ATTACK.MaxFallingSpeed,
+        rng
+    )
+    tear.FallingAcceleration = BLOOD_DONATION_ATTACK.FallingAccel
+    tear.Scale = TSIL.Random.GetRandomFloat(
+        BLOOD_DONATION_ATTACK.MinScale,
+        BLOOD_DONATION_ATTACK.MaxScale,
+        rng
+    )
+    RuneRooms:AddCustomTearFlag(tear, RuneRooms.Enums.TearFlag.BLOOD_CREEP)
+end
+RuneRooms:AddCallback(
+    TSIL.Enums.CustomCallback.POST_SLOT_UPDATE,
+    GeboEssence.OnBloodDonationMachineUpdate,
+    TSIL.Enums.SlotVariant.BLOOD_DONATION_MACHINE
 )

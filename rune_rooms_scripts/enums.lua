@@ -150,6 +150,30 @@ RuneRooms.Enums.CustomCallback = {
     --
     -- * genericPropVariant - GenericPropVariant
     POST_GENERIC_PROP_UPDATE = {},
+
+    --Called whenever a custom tear flag is added to a tear.
+    --
+    --Params:
+    --
+    -- * tear - EntityTear
+    -- * tearFlag - CustomTearFlag
+    --
+    --Optional args:
+    --
+    -- * tearFlag - CustomTearFlag
+    POST_CUSTOM_TEAR_FLAG_ADDED = {},
+
+    --Called whenever a custom tear flag is removed from a tear.
+    --
+    --Params:
+    --
+    -- * tear - EntityTear
+    -- * tearFlag - CustomTearFlag
+    --
+    --Optional args:
+    --
+    -- * tearFlag - CustomTearFlag
+    POST_CUSTOM_TEAR_FLAG_REMOVED = {}
 }
 
 
@@ -168,3 +192,13 @@ RuneRooms.Enums.Achievement = {
 
 
 RuneRooms.Enums.ItemPool = {}
+
+
+---@enum CustomTearFlag
+RuneRooms.Enums.TearFlag = {
+    --Turns hit enemies into gold (midas effect)
+    MIDAS = 1 << 0,
+
+    --Leaves blood creep on impact
+    BLOOD_CREEP = 1 << 1,
+}

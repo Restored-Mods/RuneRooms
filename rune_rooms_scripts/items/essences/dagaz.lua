@@ -57,7 +57,7 @@ RuneRooms:AddPriorityCallback(
 
 
 ---@param player EntityPlayer
-function RuneRooms:OnPeffectUpdate(player)
+function DagazEssence:OnPeffectUpdate(player)
     if not player:HasCollectible(DagazItem) then return end
 
     local closeEnemies = Isaac.FindInRadius(player.Position, BURNING_RADIUS, EntityPartition.ENEMY)
@@ -75,12 +75,12 @@ function RuneRooms:OnPeffectUpdate(player)
 end
 RuneRooms:AddCallback(
     ModCallbacks.MC_POST_PEFFECT_UPDATE,
-    RuneRooms.OnPeffectUpdate
+    DagazEssence.OnPeffectUpdate
 )
 
 
 ---@param npc EntityNPC
-function RuneRooms:OnNPCUpdate(npc)
+function DagazEssence:OnNPCUpdate(npc)
     local isBurningFromDagazEffect = TSIL.Entities.GetEntityData(
         RuneRooms,
         npc,
@@ -98,12 +98,12 @@ function RuneRooms:OnNPCUpdate(npc)
 end
 RuneRooms:AddCallback(
     ModCallbacks.MC_NPC_UPDATE,
-    RuneRooms.OnNPCUpdate
+    DagazEssence.OnNPCUpdate
 )
 
 
 ---@param npc EntityNPC
-function RuneRooms:OnNPCDeath(npc)
+function DagazEssence:OnNPCDeath(npc)
     local isBurningFromDagazEffect = TSIL.Entities.GetEntityData(
         RuneRooms,
         npc,
@@ -122,5 +122,5 @@ function RuneRooms:OnNPCDeath(npc)
 end
 RuneRooms:AddCallback(
     ModCallbacks.MC_POST_NPC_DEATH,
-    RuneRooms.OnNPCDeath
+    DagazEssence.OnNPCDeath
 )

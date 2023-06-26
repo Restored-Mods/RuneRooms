@@ -46,7 +46,7 @@ function FehuPositive:OnTearInit(tear)
     local rng = GetPositiveFehuRNG(player)
     if rng:RandomFloat() >= MIDAS_TEAR_CHANCE then return end
 
-    RuneRooms:MakeTearMidas(tear)
+    RuneRooms:AddCustomTearFlag(tear, RuneRooms.Enums.TearFlag.MIDAS)
 end
 RuneRooms:AddCallback(
     ModCallbacks.MC_POST_TEAR_INIT,

@@ -36,7 +36,7 @@ function FehuEssence:OnTearInit(tear)
     chance = math.max(MAX_MIDAS_TEAR_CHANCE, chance)
     if rng:RandomFloat() >= chance then return end
 
-    RuneRooms:MakeTearMidas(tear)
+    RuneRooms:AddCustomTearFlag(tear, RuneRooms.Enums.TearFlag.MIDAS)
 end
 RuneRooms:AddCallback(
     ModCallbacks.MC_POST_TEAR_INIT,
