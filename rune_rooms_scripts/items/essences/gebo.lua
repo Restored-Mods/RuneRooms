@@ -1,5 +1,7 @@
 local GeboEssence = {}
 
+--TODO: Attacks for the other slots
+
 local MAX_FREE_USES = 5
 local COIN_SLOTS = {
     [TSIL.Enums.SlotVariant.SLOT_MACHINE] = true,
@@ -33,6 +35,7 @@ local BEGGARS = {
 }
 local BEGGAR_ATTACK = {
     Interval = 35,
+    IntervalOffset = 6,
     Chance = 0.7,
     Damage = 4,
     Scale = 0.75,
@@ -41,6 +44,14 @@ local BEGGAR_ATTACK = {
     MinFallingSpeed = -10,
     MaxFallingSpeed = -5,
     FallingAccel = 1.1
+}
+local SLOT_ATTACK = {
+    Interval = 20,
+    IntervalOffset = 5,
+    Damage = 2,
+    MinSpeed = 14,
+    MaxSpeed = 17,
+    FallingAccel = 0.3
 }
 local GeboItem = RuneRooms.Enums.Item.GEBO_ESSENCE
 
@@ -200,7 +211,11 @@ RuneRooms:AddCallback(
 )
 
 
-local function CanSlotAttack()
+---@param slot Entity
+---@param attackInterval integer
+---@param maxIntervalOffset integer
+---@return boolean
+local function CanSlotAttack(slot, attackInterval, maxIntervalOffset)
     if not TSIL.Players.DoesAnyPlayerHasItem(GeboItem) then
         return false
     end
@@ -210,7 +225,15 @@ local function CanSlotAttack()
         return false
     end
 
-    return true
+    local initRNG = TSIL.RNG.NewRNG(slot.InitSeed)
+    local frameOffset = initRNG:RandomInt(attackInterval)
+    local intervalOffset = initRNG:RandomInt(maxIntervalOffset)
+    print((slot.FrameCount + frameOffset), (attackInterval + intervalOffset))
+    if (slot.FrameCount + frameOffset) % (attackInterval + intervalOffset) ~= 0 then
+        return false
+    end
+
+    return CanUseSlot(slot)
 end
 
 
@@ -238,10 +261,7 @@ end
 
 ---@param slot Entity
 function GeboEssence:OnBeggarUpdate(slot)
-    if not CanSlotAttack() then return end
-
-    local frameOffset = TSIL.Random.GetRandomInt(0, BEGGAR_ATTACK.Interval, slot.InitSeed)
-    if (slot.FrameCount + frameOffset) % BEGGAR_ATTACK.Interval ~= 0 then return end
+    if not CanSlotAttack(slot, BEGGAR_ATTACK.Interval, BEGGAR_ATTACK.IntervalOffset) then return end
 
     local target = GetClosestEnemy(slot.Position)
     if not target then return end
@@ -263,6 +283,8 @@ function GeboEssence:OnBeggarUpdate(slot)
     tear.FallingAcceleration = BEGGAR_ATTACK.FallingAccel
     tear.CollisionDamage = BEGGAR_ATTACK.Damage
     tear.Scale = BEGGAR_ATTACK.Scale
+
+    SFXManager():Play(SoundEffect.SOUND_SHELLGAME)
 end
 for _, beggarVariant in ipairs(BEGGARS) do
     RuneRooms:AddCallback(
@@ -271,3 +293,36 @@ for _, beggarVariant in ipairs(BEGGARS) do
         beggarVariant
     )
 end
+
+
+---@param slot Entity
+function GeboEssence:OnSlotMachineUpdate(slot)
+    if not CanSlotAttack(slot, SLOT_ATTACK.Interval, SLOT_ATTACK.IntervalOffset) then return end
+
+    local rng = slot:GetDropRNG()
+    local attackDir = Vector.FromAngle(rng:RandomInt(360))
+
+    local target = GetClosestEnemy(slot.Position)
+    if target then
+        attackDir = (target.Position - slot.Position):Normalized()
+    end
+
+    local speed = TSIL.Random.GetRandomFloat(SLOT_ATTACK.MinSpeed, SLOT_ATTACK.MaxSpeed, rng)
+    local spawningVel = attackDir:Resized(speed)
+
+    local tear = TSIL.EntitySpecific.SpawnTear(
+        TearVariant.COIN,
+        0,
+        slot.Position,
+        spawningVel,
+        slot
+    )
+
+    tear.CollisionDamage = SLOT_ATTACK.Damage
+    tear.FallingAcceleration = SLOT_ATTACK.FallingAccel
+end
+RuneRooms:AddCallback(
+    TSIL.Enums.CustomCallback.POST_SLOT_UPDATE,
+    GeboEssence.OnSlotMachineUpdate,
+    TSIL.Enums.SlotVariant.SLOT_MACHINE
+)
