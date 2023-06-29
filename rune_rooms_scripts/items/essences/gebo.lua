@@ -65,6 +65,10 @@ local BLOOD_DONATION_ATTACK = {
     MinScale = 0.8,
     MaxScale = 1.2
 }
+local FORTUNE_MACHINE_ATTACK = {
+    Interval = 10,
+    IntervalOffset = 4,
+}
 local GeboItem = RuneRooms.Enums.Item.GEBO_ESSENCE
 
 TSIL.SaveManager.AddPersistentVariable(
@@ -375,4 +379,37 @@ RuneRooms:AddCallback(
     TSIL.Enums.CustomCallback.POST_SLOT_UPDATE,
     GeboEssence.OnBloodDonationMachineUpdate,
     TSIL.Enums.SlotVariant.BLOOD_DONATION_MACHINE
+)
+
+
+---@param slot Entity
+function GeboEssence:OnFortuneTellingMachineUpdate(slot)
+    if not CanSlotAttack(slot, FORTUNE_MACHINE_ATTACK.Interval, FORTUNE_MACHINE_ATTACK.IntervalOffset) then return end
+
+    local rng = slot:GetDropRNG()
+    local room = Game():GetRoom()
+
+    local gridIndexes = TSIL.GridIndexes.GetAllGridIndexes(true)
+    local emptyGridIndexes = TSIL.Utils.Tables.Filter(gridIndexes, function (_, gridIndex)
+        return room:GetGridCollision(gridIndex) == GridCollisionClass.COLLISION_NONE
+    end)
+    local gridIndex = TSIL.Random.GetRandomElementsFromTable(emptyGridIndexes, 1, rng)[1]
+
+    local basePos = room:GetGridPosition(gridIndex)
+    local xOffset = TSIL.Random.GetRandomFloat(-20, 20, rng)
+    local yOffset = TSIL.Random.GetRandomFloat(-20, 20, rng)
+    local spawnPos = Vector(basePos.X + xOffset, basePos.Y + yOffset)
+
+    TSIL.EntitySpecific.SpawnEffect(
+        EffectVariant.CRACK_THE_SKY,
+        0,
+        spawnPos,
+        Vector.Zero,
+        Isaac.GetPlayer()   --IDK if this makes it scale with the player's damage or does some constant damage
+    )
+end
+RuneRooms:AddCallback(
+    TSIL.Enums.CustomCallback.POST_SLOT_UPDATE,
+    GeboEssence.OnFortuneTellingMachineUpdate,
+    TSIL.Enums.SlotVariant.FORTUNE_TELLING_MACHINE
 )
