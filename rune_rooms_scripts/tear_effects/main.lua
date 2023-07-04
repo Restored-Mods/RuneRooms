@@ -89,8 +89,6 @@ function RuneRooms:HasCustomTearFlag(tear, tearFlag)
         "CustomTearFlags"
     )
 
-    print(currentFlags)
-
     if not currentFlags then return false end
 
     return TSIL.Utils.Flags.HasFlags(currentFlags, tearFlag)
