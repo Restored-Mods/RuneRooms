@@ -31,6 +31,18 @@ local MAX_MEGA_CHEST_KEYS = 7
 
 
 ---@param chest EntityPickup
+function RuneRooms:WillChestClose(chest)
+    local chestTimer = TSIL.Entities.GetEntityData(
+        RuneRooms,
+        chest,
+        "ToCloseTimer"
+    )
+
+    return chestTimer ~= nil
+end
+
+
+---@param chest EntityPickup
 local function WaitForClosingAnimation(chest)
     local toCloseTimer = TSIL.Entities.GetEntityData(
         RuneRooms,
@@ -157,7 +169,8 @@ function EhwazPositive:OnChestOpened(chest)
         TO_CLOSE_DURATION
     )
 end
-RuneRooms:AddCallback(
+RuneRooms:AddPriorityCallback(
     RuneRooms.Enums.CustomCallback.POST_CHEST_OPENED,
+    CallbackPriority.EARLY,
     EhwazPositive.OnChestOpened
 )

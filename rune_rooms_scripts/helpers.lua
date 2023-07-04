@@ -102,3 +102,30 @@ function RuneRooms.Helpers:AddTears(fireDelay, value)
     
     return math.max((30 / newTears) - 1, -0.99)
 end
+
+
+---Helper function to get a random position in a room.
+---@param allowPits boolean
+---@param doOffset boolean Whether to randomly offset the position or be grid aligned
+---@param rng RNG
+function RuneRooms.Helpers:GetRandomPositionInRoom(allowPits, doOffset, rng)
+    local room = Game():GetRoom()
+
+    local gridIndexes = TSIL.GridIndexes.GetAllGridIndexes(true)
+    local emptyGridIndexes = TSIL.Utils.Tables.Filter(gridIndexes, function (_, gridIndex)
+        local coll = room:GetGridCollision(gridIndex)
+        return coll == GridCollisionClass.COLLISION_NONE
+        or (coll == GridCollisionClass.COLLISION_PIT and allowPits)
+    end)
+    local gridIndex = TSIL.Random.GetRandomElementsFromTable(emptyGridIndexes, 1, rng)[1]
+
+    local basePos = room:GetGridPosition(gridIndex)
+
+    if doOffset then
+        local xOffset = TSIL.Random.GetRandomFloat(-20, 20, rng)
+        local yOffset = TSIL.Random.GetRandomFloat(-20, 20, rng)
+        return Vector(basePos.X + xOffset, basePos.Y + yOffset)
+    else
+        return basePos
+    end
+end
