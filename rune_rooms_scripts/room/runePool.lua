@@ -4,7 +4,7 @@ local RunePool = {}
 function RunePool:PreGetCollectible(pool, decrease, seed)
     if not RuneRooms.Helpers:IsRuneRoom() then return end
 
-    if ItemPoolType.POOL_TREASURE then
+    if pool == ItemPoolType.POOL_TREASURE then
         local newItem = TSIL.CustomItemPools.GetCollectible(
             RuneRooms.Enums.ItemPool.RUNE_ROOM_POOL,
             decrease,
