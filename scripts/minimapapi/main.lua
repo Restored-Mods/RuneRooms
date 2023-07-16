@@ -1,8 +1,8 @@
-local MinimapAPI = require("rune_rooms_scripts.lib.minimapapi.minimapapi")
-local cache = require("rune_rooms_scripts.lib.minimapapi.cache")
-local constants = require("rune_rooms_scripts.lib.minimapapi.constants")
+local MinimapAPI = require("scripts.minimapapi.minimapapi")
+local cache = require("scripts.minimapapi.cache")
+local constants = require("scripts.minimapapi.constants")
 local CALLBACK_PRIORITY = constants.CALLBACK_PRIORITY
-require("rune_rooms_scripts.lib.minimapapi.apioverride")
+require("scripts.minimapapi.apioverride")
 
 local json = require("json")
 

@@ -1,5 +1,5 @@
-local MinimapAPI = require("rune_rooms_scripts.lib.minimapapi.minimapapi")
-local constants = require("rune_rooms_scripts.lib.minimapapi.constants")
+local MinimapAPI = require("scripts.minimapapi.minimapapi")
+local constants = require("scripts.minimapapi.constants")
 local CALLBACK_PRIORITY = constants.CALLBACK_PRIORITY
 
 -- match main.lua

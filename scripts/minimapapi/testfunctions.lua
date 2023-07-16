@@ -1,4 +1,4 @@
-local MinimapAPI = require("rune_rooms_scripts.lib.minimapapi.minimapapi")
+local MinimapAPI = require("scripts.minimapapi.minimapapi")
 
 MinimapAPI.Debug = {}
 

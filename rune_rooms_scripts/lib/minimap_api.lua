@@ -1,6 +1,6 @@
 local MinimapAPILocal = {}
 
-include("rune_rooms_scripts.lib.minimapapi.init")
+require("scripts.minimapapi.init")
 
 
 TSIL.SaveManager.AddPersistentVariable(
@@ -12,7 +12,7 @@ TSIL.SaveManager.AddPersistentVariable(
 
 
 local function IsRuneRoomsMinimapiLoaded()
-    return MinimapAPI.Version == RuneRooms.Constants.MINIMAPI_VERSION
+    return MinimapAPI.BranchVersion == RuneRooms.Constants.MINIMAPI_VERSION
 end
 
 
@@ -28,7 +28,9 @@ function MinimapAPILocal:OnGameStart(isContinue)
             RuneRooms.Enums.SaveKey.MINIMAPI_DATA
         )
 
-        MinimapAPI:LoadSaveTable(minimapiData, isContinue)
+        if minimapiData.Config then
+            MinimapAPI:LoadSaveTable(minimapiData, isContinue)
+        end
     end
 end
 RuneRooms:AddCallback(

@@ -3,6 +3,32 @@ local LevelGen = {}
 --Chance of rune room to replace a vault
 local RUNE_ROOM_SPAWN_CHANCE = 1
 
+local hasLoadedRuneRooms = false
+
+
+local function GetRuneRoomData(roomID)
+    Isaac.ExecuteCommand("goto s.chest." .. roomID)
+
+    return TSIL.Rooms.GetRoomData(GridRooms.ROOM_DEBUG_IDX)
+end
+
+
+local function LoadRuneRooms()
+    local level = Game():GetLevel()
+    local currentRoomIdx = level:GetCurrentRoomIndex()
+
+    for _, roomID in ipairs(RuneRooms.Constants.RUNE_ROOMS_IDS) do
+        local data = GetRuneRoomData(roomID)
+        RuneRooms.Constants.RUNE_ROOMS_DATAS[#RuneRooms.Constants.RUNE_ROOMS_DATAS+1] = data
+    end
+
+    Game():StartRoomTransition(currentRoomIdx, Direction.NO_DIRECTION, RoomTransitionAnim.FADE)
+
+    hasLoadedRuneRooms = true
+
+    Isaac.ExecuteCommand("restart")
+end
+
 
 ---@return integer?
 local function GetVaultRoom()
@@ -22,16 +48,7 @@ end
 
 ---@param rng RNG
 local function GetRandomRuneRoomData(rng)
-    local chosenRoomID = TSIL.Random.GetRandomElementsFromTable(RuneRooms.Constants.RUNE_ROOMS_IDS, 1, rng)[1]
-
-    Isaac.ExecuteCommand("goto s.chest." .. chosenRoomID)
-
-    local level = Game():GetLevel()
-    local currentRoomIdx = level:GetCurrentRoomIndex()
-
-    local newData = TSIL.Rooms.GetRoomData(GridRooms.ROOM_DEBUG_IDX)
-
-    Game():StartRoomTransition(currentRoomIdx, Direction.NO_DIRECTION, RoomTransitionAnim.FADE)
+    local newData = TSIL.Random.GetRandomElementsFromTable(RuneRooms.Constants.RUNE_ROOMS_DATAS, 1, rng)[1]
 
     return newData
 end
@@ -48,6 +65,11 @@ end
 
 
 function LevelGen:OnNewLevel()
+    if not hasLoadedRuneRooms then
+        LoadRuneRooms()
+        return
+    end
+
     local rng = RuneRooms.Helpers:GetStageRNG()
 
     if rng:RandomFloat() >= RUNE_ROOM_SPAWN_CHANCE then return end

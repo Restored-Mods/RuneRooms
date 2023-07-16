@@ -1,6 +1,6 @@
-local MinimapAPI = require("rune_rooms_scripts.lib.minimapapi.minimapapi")
+local MinimapAPI = require("scripts.minimapapi.minimapapi")
 local json = require("json")
-local configPresetSettings = require("rune_rooms_scripts.lib.minimapapi.config_presets")
+local configPresetSettings = require("scripts.minimapapi.config_presets")
 
 -- Do not add DSS on our side (wouldn't really make sense to support MCM
 -- otherwise) but add a way for dependent mods to add MinimapAPI config to DSS

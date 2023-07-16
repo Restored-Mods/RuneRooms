@@ -1,4 +1,4 @@
-local MinimapAPI = require("rune_rooms_scripts.lib.minimapapi.minimapapi")
+local MinimapAPI = require("scripts.minimapapi.minimapapi")
 
 MinimapAPI.CustomIcons = Sprite()
 MinimapAPI.CustomIcons:Load("gfx/ui/minimapapi/custom_icons.anm2",true)

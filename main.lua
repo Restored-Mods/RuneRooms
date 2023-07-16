@@ -8,6 +8,10 @@ include("rune_rooms_scripts.enums")
 include("rune_rooms_scripts.constants")
 include("rune_rooms_scripts.helpers")
 
+if StageAPI then
+    StageAPI.UnregisterCallbacks(RuneRooms.Constants.MOD_ID)
+end
+
 RuneRooms.Libs = {}
 include("rune_rooms_scripts.lib.achievement_checker")
 include("rune_rooms_scripts.lib.hidden_item_manager")

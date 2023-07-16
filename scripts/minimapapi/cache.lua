@@ -1,6 +1,6 @@
 -- copied from Music Mod Callback with some stuff removed
 
-local constants = require("rune_rooms_scripts.lib.minimapapi.constants")
+local constants = require("scripts.minimapapi.constants")
 local CALLBACK_PRIORITY = constants.CALLBACK_PRIORITY
 
 local cache = {}

@@ -1,4 +1,4 @@
-local MinimapAPI = require("rune_rooms_scripts.lib.minimapapi.minimapapi")
+local MinimapAPI = require("scripts.minimapapi.minimapapi")
 
 MinimapAPI.BranchVersion = RuneRooms.Constants.MINIMAPI_VERSION --branch
 MinimapAPI.MajorVersion = 2

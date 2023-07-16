@@ -1,6 +1,6 @@
-local MinimapAPI = require("rune_rooms_scripts.lib.minimapapi.minimapapi")
+local MinimapAPI = require("scripts.minimapapi.minimapapi")
 local modconfigexists, MCM = pcall(require, "rune_rooms_scripts.lib.modconfig")
-local configPresetSettings = require("rune_rooms_scripts.lib.minimapapi.config_presets")
+local configPresetSettings = require("scripts.minimapapi.config_presets")
 
 if modconfigexists then
 	local configPresets = {
