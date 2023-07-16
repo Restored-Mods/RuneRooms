@@ -48,3 +48,20 @@ RuneRooms.Constants.TRINKET_PER_ACHIEVEMENT = {
 RuneRooms.Constants.MINIMAPI_VERSION = "RuneRooms"
 
 RuneRooms.Constants.RUNE_ROOM_ICON = "RuneRoomIcon"
+
+RuneRooms.Constants.RUNE_EFFECT_ICON_FRAME = {
+    [RuneRooms.Enums.RuneEffect.ALGIZ]      = 7,
+    [RuneRooms.Enums.RuneEffect.ANSUZ]      = 4,
+    [RuneRooms.Enums.RuneEffect.BERKANO]    = 6,
+    [RuneRooms.Enums.RuneEffect.DAGAZ]      = 3,
+    [RuneRooms.Enums.RuneEffect.EHWAZ]      = 2,
+    [RuneRooms.Enums.RuneEffect.FEHU]       = 10,
+    [RuneRooms.Enums.RuneEffect.GEBO]       = 8,
+    [RuneRooms.Enums.RuneEffect.HAGALAZ]    = 0,
+    [RuneRooms.Enums.RuneEffect.INGWAZ]     = 12,
+    [RuneRooms.Enums.RuneEffect.JERA]       = 1,
+    [RuneRooms.Enums.RuneEffect.KENAZ]      = 9,
+    [RuneRooms.Enums.RuneEffect.OTHALA]     = 11,
+    [RuneRooms.Enums.RuneEffect.PERTHRO]    = 5,
+    [RuneRooms.Enums.RuneEffect.SOWILO]     = 13,
+}
