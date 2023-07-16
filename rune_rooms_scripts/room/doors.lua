@@ -1,6 +1,8 @@
 local RuneDoors = {}
 
-local RUNE_DOOR_SPRITE = "gfx/grid/door_runeRoom.png"
+local RUNE_DOOR_SPRITE = "gfx/grid/door_rune_room.png"
+local RUNE_DOOR_GLACIER_SPRITE = "gfx/grid/door_rune_room_glacier.png"
+local RUNE_DOOR_TOMB_SPRITE = "gfx/grid/door_rune_room_glacier.png"
 
 
 ---@param roomType RoomType
@@ -34,8 +36,20 @@ end
 local function ReplaceDoorSprite(door)
     local sprite = door:GetSprite()
 
+    local spriteSheet = RUNE_DOOR_SPRITE
+
+    if REVEL then
+        local currentStageName = StageAPI.GetCurrentStage().Name
+
+        if currentStageName == "Glacier" then
+            spriteSheet = RUNE_DOOR_GLACIER_SPRITE
+        elseif currentStageName == "Tomb" then
+            spriteSheet = RUNE_DOOR_TOMB_SPRITE
+        end
+    end
+
     for i = 0, sprite:GetLayerCount()-1, 1 do
-        sprite:ReplaceSpritesheet(i, RUNE_DOOR_SPRITE)
+        sprite:ReplaceSpritesheet(i, spriteSheet)
     end
 
     sprite:LoadGraphics()
