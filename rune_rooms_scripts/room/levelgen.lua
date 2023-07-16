@@ -1,7 +1,7 @@
 local LevelGen = {}
 
 --Chance of rune room to replace a vault
-local RUNE_ROOM_SPAWN_CHANCE = 1
+local RUNE_ROOM_SPAWN_CHANCE = 0.2
 
 local hasLoadedRuneRooms = false
 
@@ -37,7 +37,7 @@ local function GetVaultRoom()
 
     for i = 0, rooms.Size-1, 1 do
         local room = rooms:Get(i)
-        if room.Data.Type == RoomType.ROOM_TREASURE then
+        if room.Data.Type == RoomType.ROOM_CHEST then
             return room.GridIndex
         end
     end
