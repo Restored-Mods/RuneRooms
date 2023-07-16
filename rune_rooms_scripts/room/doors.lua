@@ -1,8 +1,6 @@
 local RuneDoors = {}
 
 local RUNE_DOOR_SPRITE = "gfx/grid/door_rune_room.png"
-local RUNE_DOOR_GLACIER_SPRITE = "gfx/grid/door_rune_room_glacier.png"
-local RUNE_DOOR_TOMB_SPRITE = "gfx/grid/door_rune_room_glacier.png"
 
 
 ---@param roomType RoomType
@@ -38,14 +36,13 @@ local function ReplaceDoorSprite(door)
 
     local spriteSheet = RUNE_DOOR_SPRITE
 
-    if REVEL then
-        local currentStageName = StageAPI.GetCurrentStage().Name
+    local newSpriteSheet = Isaac.RunCallback(
+        RuneRooms.Enums.CustomCallback.PRE_GET_RUNE_DOOR_SPRITE,
+        door
+    )
 
-        if currentStageName == "Glacier" then
-            spriteSheet = RUNE_DOOR_GLACIER_SPRITE
-        elseif currentStageName == "Tomb" then
-            spriteSheet = RUNE_DOOR_TOMB_SPRITE
-        end
+    if type(newSpriteSheet) == "string" then
+        spriteSheet = newSpriteSheet
     end
 
     for i = 0, sprite:GetLayerCount()-1, 1 do

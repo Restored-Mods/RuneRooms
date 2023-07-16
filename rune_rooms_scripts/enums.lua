@@ -179,7 +179,27 @@ RuneRooms.Enums.CustomCallback = {
     --Optional args:
     --
     -- * tearFlag - CustomTearFlag
-    POST_CUSTOM_TEAR_FLAG_REMOVED = {}
+    POST_CUSTOM_TEAR_FLAG_REMOVED = {},
+
+    ---Called before the rune door sprite is replaced. Return a spritesheet
+    ---to replace the regular one.
+    --
+    --Params:
+    --
+    -- * door - GridEntityDoor
+    PRE_GET_RUNE_DOOR_SPRITE = {},
+
+    ---Called before the rune room pits sprite is replaced. Return a spritesheet
+    ---to replace the regular one.
+    PRE_GET_RUNE_PIT_SPRITE = {},
+
+    ---Called before the rune room grids sprite are replaced. Return a spritesheet
+    ---to replace the regular one.
+    --
+    --Params:
+    --
+    -- * gridType - GridEntityType
+    PRE_GET_RUNE_GRID_SPRITE = {},
 }
 
 

@@ -4,9 +4,7 @@ local FLOOR_ANM2 = "gfx/backdrop/rune_floor.anm2"
 local WALLS_ANM2 = "gfx/backdrop/rune_walls.anm2"
 
 local PIT_SPRITE = "gfx/grid/grid_pit_mausoleum.png"
-local PIT_SPRITE_FF = "gfx/grid/grid_pit_rune.png"
 local GRIDS_SPRITE = "gfx/grid/rocks_rune.png"
-local GRIDS_SPRITE_FF = "gfx/grid/rocks_rune.png"
 local GRID_TYPES_SPRITE_REPLACE = {
     [GridEntityType.GRID_PILLAR] = true,
     [GridEntityType.GRID_ROCK] = true,
@@ -368,20 +366,45 @@ local function SpawnCrystalOverlays(rng)
 end
 
 
-local function ReplaceStageAPIGfx()
-    local gridSpriteSheet = GRIDS_SPRITE
-    if FiendFolio then
-        gridSpriteSheet = GRIDS_SPRITE_FF
+---@param gridEntityType GridEntityType
+---@return string
+local function GetGridSpriteSheet(gridEntityType)
+    local defaultSpriteSheet = GRIDS_SPRITE
+
+    local newSpriteSheet = Isaac.RunCallback(
+        RuneRooms.Enums.CustomCallback.PRE_GET_RUNE_GRID_SPRITE,
+        gridEntityType
+    )
+
+    if type(newSpriteSheet) == "string" then
+        return newSpriteSheet
     end
 
+    return defaultSpriteSheet
+end
+
+
+---@return string
+local function GetPitSpriteSheet()
+    local defaultSpriteSheet = PIT_SPRITE
+
+    local newSpriteSheet = Isaac.RunCallback(RuneRooms.Enums.CustomCallback.PRE_GET_RUNE_PIT_SPRITE)
+
+    if type(newSpriteSheet) == "string" then
+        return newSpriteSheet
+    end
+
+    return defaultSpriteSheet
+end
+
+
+local function ReplaceStageAPIGfx()
     for gridType, _ in pairs(GRID_TYPES_SPRITE_REPLACE) do
+        local gridSpriteSheet = GetGridSpriteSheet(gridType)
         StageAPI.GridGfx:SetGrid(gridSpriteSheet, gridType)
     end
 
-    local pitSpriteSheet = PIT_SPRITE
-    if FiendFolio then
-        pitSpriteSheet = PIT_SPRITE_FF
-    end
+    local pitSpriteSheet = GetPitSpriteSheet()
 
     StageAPI.GridGfx:SetPits(pitSpriteSheet)
 
@@ -420,7 +443,7 @@ RuneRooms:AddCallback(
 local function ReplacePitSprite(pit)
     if StageAPI then return end
 
-    local spriteSheet = PIT_SPRITE
+    local spriteSheet = GetPitSpriteSheet()
 
     local sprite = pit:GetSprite()
     sprite:ReplaceSpritesheet(0, spriteSheet)
@@ -434,7 +457,7 @@ local function TryReplaceGridEntitySprite(gridEntity)
 
     if not GRID_TYPES_SPRITE_REPLACE[gridEntity:GetType()] then return end
 
-    local spriteSheet = GRIDS_SPRITE
+    local spriteSheet = GetGridSpriteSheet(gridEntity:GetType())
 
     local sprite = gridEntity:GetSprite()
     sprite:ReplaceSpritesheet(0, spriteSheet)
