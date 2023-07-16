@@ -38,7 +38,7 @@ RuneRooms.Constants.ESSENCE_ITEM_PER_RUNE = {
 }
 
 RuneRooms.Constants.RUNE_ROOMS_IDS = {
-    3670
+    3670, 3671, 3672, 3673, 3674, 3675, 3676, 3677, 3678, 3680, 3681, 3682, 3683, 3684, 3685, 3686, 3687, 3688, 3689, 3690
 }
 ---@type RoomConfig_Room[]
 RuneRooms.Constants.RUNE_ROOMS_DATAS = {}
