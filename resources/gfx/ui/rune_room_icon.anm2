@@ -1,8 +1,8 @@
 <AnimatedActor>
-	<Info CreatedBy="Unknown" CreatedOn="20/06/2023 17:41:14" Version="9" Fps="30"/>
+	<Info CreatedBy="Unknown" CreatedOn="16/07/2023 19:54:02" Version="14" Fps="30"/>
 	<Content>
 		<Spritesheets>
-			<Spritesheet Path="runeRoomIcon.png" Id="0"/>
+			<Spritesheet Path="rune_room_icon.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
 			<Layer Name="Icon" Id="0" SpritesheetId="0"/>
@@ -17,7 +17,7 @@
 			</RootAnimation>
 			<LayerAnimations>
 				<LayerAnimation LayerId="0" Visible="true">
-					<Frame XPosition="1" YPosition="1" XPivot="0" YPivot="0" XCrop="143" YCrop="48" Width="17" Height="13" XScale="60" YScale="60" Delay="1" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
+					<Frame XPosition="0" YPosition="1" XPivot="0" YPivot="0" XCrop="0" YCrop="0" Width="17" Height="13" XScale="100" YScale="100" Delay="1" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
 				</LayerAnimation>
 			</LayerAnimations>
 			<NullAnimations/>
