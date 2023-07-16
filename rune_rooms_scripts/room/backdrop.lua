@@ -4,9 +4,9 @@ local FLOOR_ANM2 = "gfx/backdrop/rune_floor.anm2"
 local WALLS_ANM2 = "gfx/backdrop/rune_walls.anm2"
 
 local PIT_SPRITE = "gfx/grid/grid_pit_mausoleum.png"
-local PIT_SPRITE_FF = "gfx/grid/grid_pit_rune_ff.png"
+local PIT_SPRITE_FF = "gfx/grid/grid_pit_rune.png"
 local GRIDS_SPRITE = "gfx/grid/rocks_rune.png"
-local GRIDS_SPRITE_FF = "gfx/grid/rocks_rune_ff.png"
+local GRIDS_SPRITE_FF = "gfx/grid/rocks_rune.png"
 local GRID_TYPES_SPRITE_REPLACE = {
     [GridEntityType.GRID_PILLAR] = true,
     [GridEntityType.GRID_ROCK] = true,
@@ -368,6 +368,28 @@ local function SpawnCrystalOverlays(rng)
 end
 
 
+local function ReplaceStageAPIGfx()
+    local gridSpriteSheet = GRIDS_SPRITE
+    if FiendFolio then
+        gridSpriteSheet = GRIDS_SPRITE_FF
+    end
+
+    for gridType, _ in pairs(GRID_TYPES_SPRITE_REPLACE) do
+        StageAPI.GridGfx:SetGrid(gridSpriteSheet, gridType)
+    end
+
+    local pitSpriteSheet = PIT_SPRITE
+    if FiendFolio then
+        pitSpriteSheet = PIT_SPRITE_FF
+    end
+
+    StageAPI.GridGfx:SetPits(pitSpriteSheet)
+
+    local roomGfx = StageAPI.RoomGfx(StageAPI.RoomGfx.Backdrops, StageAPI.GridGfx)
+    StageAPI.ChangeRoomGfx(roomGfx)
+end
+
+
 function Backdrop:OnNewRoom()
     if not RuneRooms.Helpers:IsRuneRoom() then return end
 
@@ -383,6 +405,10 @@ function Backdrop:OnNewRoom()
     SpawnWallDetails(rng)
 
     SpawnCrystalOverlays(rng)
+
+    if StageAPI then
+        ReplaceStageAPIGfx()
+    end
 end
 RuneRooms:AddCallback(
     ModCallbacks.MC_POST_NEW_ROOM,
@@ -392,10 +418,9 @@ RuneRooms:AddCallback(
 
 ---@param pit GridEntityPit
 local function ReplacePitSprite(pit)
+    if StageAPI then return end
+
     local spriteSheet = PIT_SPRITE
-    if FiendFolio then
-        spriteSheet = PIT_SPRITE_FF
-    end
 
     local sprite = pit:GetSprite()
     sprite:ReplaceSpritesheet(0, spriteSheet)
@@ -405,12 +430,11 @@ end
 
 ---@param gridEntity GridEntity
 local function TryReplaceGridEntitySprite(gridEntity)
+    if StageAPI then return end
+
     if not GRID_TYPES_SPRITE_REPLACE[gridEntity:GetType()] then return end
 
     local spriteSheet = GRIDS_SPRITE
-    if FiendFolio then
-        spriteSheet = GRIDS_SPRITE_FF
-    end
 
     local sprite = gridEntity:GetSprite()
     sprite:ReplaceSpritesheet(0, spriteSheet)

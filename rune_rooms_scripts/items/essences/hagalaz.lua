@@ -58,7 +58,12 @@ function HagalazEssence:OnHagalazEssencePickup()
 end
 RuneRooms:AddCallback(
     TSIL.Enums.CustomCallback.POST_PLAYER_COLLECTIBLE_ADDED,
-    HagalazEssence.OnHagalazEssencePickup
+    HagalazEssence.OnHagalazEssencePickup,
+    {
+        nil,
+        nil,
+        RuneRooms.Enums.Item.HAGALAZ_ESSENCE
+    }
 )
 
 
