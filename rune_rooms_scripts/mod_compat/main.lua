@@ -18,6 +18,7 @@ function RuneRooms:AddModCompat(mod, funct)
     }
 end
 
+include("rune_rooms_scripts.mod_compat.eid")
 include("rune_rooms_scripts.mod_compat.fiend_folio")
 include("rune_rooms_scripts.mod_compat.revelations")
 
