@@ -38,9 +38,29 @@ RuneRooms.Constants.ESSENCE_ITEM_PER_RUNE = {
 }
 
 RuneRooms.Constants.RUNE_ROOMS_IDS = {
-    3670, 3671, 3672, 3673, 3674, 3675, 3676, 3677, 3678, 3680, 3681, 3682, 3683, 3684, 3685, 3686, 3687, 3688, 3689, 3690
+    [3670] = 1,
+    [3671] = 1,
+    [3672] = 1,
+    [3673] = 1,
+    [3674] = 1,
+    [3675] = 1,
+    [3676] = 1,
+    [3677] = 1,
+    [3678] = 0.75,
+    [3679] = 0.75,
+    [3680] = 1,
+    [3681] = 0.1,
+    [3682] = 0.1,
+    [3683] = 1,
+    [3684] = 0.75,
+    [3685] = 1,
+    [3686] = 1,
+    [3687] = 1,
+    [3688] = 1,
+    [3689] = 1,
+    [3690] = 1,
 }
----@type RoomConfig_Room[]
+---@type {chance: number, value: RoomConfig_Room}[]
 RuneRooms.Constants.RUNE_ROOMS_DATAS = {}
 
 RuneRooms.Constants.TRINKET_PER_ACHIEVEMENT = {
@@ -53,18 +73,18 @@ RuneRooms.Constants.TRINKET_PER_ACHIEVEMENT = {
 RuneRooms.Constants.RUNE_ROOM_ICON = "RuneRoomIcon"
 
 RuneRooms.Constants.RUNE_EFFECT_ICON_FRAME = {
-    [RuneRooms.Enums.RuneEffect.ALGIZ]      = 7,
-    [RuneRooms.Enums.RuneEffect.ANSUZ]      = 4,
-    [RuneRooms.Enums.RuneEffect.BERKANO]    = 6,
-    [RuneRooms.Enums.RuneEffect.DAGAZ]      = 3,
-    [RuneRooms.Enums.RuneEffect.EHWAZ]      = 2,
-    [RuneRooms.Enums.RuneEffect.FEHU]       = 10,
-    [RuneRooms.Enums.RuneEffect.GEBO]       = 8,
     [RuneRooms.Enums.RuneEffect.HAGALAZ]    = 0,
-    [RuneRooms.Enums.RuneEffect.INGWAZ]     = 12,
     [RuneRooms.Enums.RuneEffect.JERA]       = 1,
-    [RuneRooms.Enums.RuneEffect.KENAZ]      = 9,
-    [RuneRooms.Enums.RuneEffect.OTHALA]     = 11,
+    [RuneRooms.Enums.RuneEffect.EHWAZ]      = 2,
+    [RuneRooms.Enums.RuneEffect.DAGAZ]      = 3,
+    [RuneRooms.Enums.RuneEffect.ANSUZ]      = 4,
     [RuneRooms.Enums.RuneEffect.PERTHRO]    = 5,
+    [RuneRooms.Enums.RuneEffect.BERKANO]    = 6,
+    [RuneRooms.Enums.RuneEffect.ALGIZ]      = 7,
+    [RuneRooms.Enums.RuneEffect.GEBO]       = 8,
+    [RuneRooms.Enums.RuneEffect.KENAZ]      = 9,
+    [RuneRooms.Enums.RuneEffect.FEHU]       = 10,
+    [RuneRooms.Enums.RuneEffect.OTHALA]     = 11,
+    [RuneRooms.Enums.RuneEffect.INGWAZ]     = 12,
     [RuneRooms.Enums.RuneEffect.SOWILO]     = 13,
 }

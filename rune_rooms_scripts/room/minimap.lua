@@ -21,7 +21,7 @@ function Minimap:OnNewLevel()
             local roomDesc = room.Descriptor
             if roomDesc then
                 local roomData = roomDesc.Data
-                local isRuneRoomID = TSIL.Utils.Tables.IsIn(RuneRooms.Constants.RUNE_ROOMS_IDS, roomData.Variant)
+                local isRuneRoomID = RuneRooms.Constants.RUNE_ROOMS_IDS[roomData.Variant] ~= nil
 
                 if roomData.Type == RoomType.ROOM_CHEST and isRuneRoomID then
                     room.PermanentIcons = {RuneRooms.Constants.RUNE_ROOM_ICON}

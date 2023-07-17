@@ -10,7 +10,7 @@ function RuneRooms.Helpers:IsRuneRoom(gridIndex)
     if not roomData then return false end
 
     if roomData.Type ~= RoomType.ROOM_CHEST then return false end
-    return TSIL.Utils.Tables.IsIn(RuneRooms.Constants.RUNE_ROOMS_IDS, roomData.Variant)
+    return RuneRooms.Constants.RUNE_ROOMS_IDS[roomData.Variant] ~= nil
 end
 
 

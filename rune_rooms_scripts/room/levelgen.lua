@@ -17,9 +17,12 @@ local function LoadRuneRooms()
     local level = Game():GetLevel()
     local currentRoomIdx = level:GetCurrentRoomIndex()
 
-    for _, roomID in ipairs(RuneRooms.Constants.RUNE_ROOMS_IDS) do
+    for roomID, weight in pairs(RuneRooms.Constants.RUNE_ROOMS_IDS) do
         local data = GetRuneRoomData(roomID)
-        RuneRooms.Constants.RUNE_ROOMS_DATAS[#RuneRooms.Constants.RUNE_ROOMS_DATAS+1] = data
+        RuneRooms.Constants.RUNE_ROOMS_DATAS[#RuneRooms.Constants.RUNE_ROOMS_DATAS+1] = {
+            chance = weight,
+            value = data
+        }
     end
 
     Game():StartRoomTransition(currentRoomIdx, Direction.NO_DIRECTION, RoomTransitionAnim.FADE)
@@ -48,7 +51,7 @@ end
 
 ---@param rng RNG
 local function GetRandomRuneRoomData(rng)
-    local newData = TSIL.Random.GetRandomElementsFromTable(RuneRooms.Constants.RUNE_ROOMS_DATAS, 1, rng)[1]
+    local newData = TSIL.Random.GetRandomElementFromWeightedList(rng, RuneRooms.Constants.RUNE_ROOMS_DATAS)
 
     return newData
 end
