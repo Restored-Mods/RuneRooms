@@ -7,6 +7,7 @@ LOCAL_TSIL.Init(myFolder)
 include("rune_rooms_scripts.enums")
 include("rune_rooms_scripts.constants")
 include("rune_rooms_scripts.helpers")
+RuneRooms.API = {}
 
 if StageAPI then
     StageAPI.UnregisterCallbacks(RuneRooms.Constants.MOD_ID)
@@ -56,6 +57,7 @@ end)
 
 RuneRooms:AddCallback(RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD, function ()
     print("rune help - Shows this message.")
+    print("rune seteffect [rune_effect] - Changes the rune effect for the current floor.")
     print("rune good [rune_effect] - Activates the good effect of a rune for the current level.")
     print("rune bad [rune_effect] - Activates the good effect of a rune for the current level.")
     print("rune ehwazmode [mode] - Changes how the positive effect of ehwaz works")

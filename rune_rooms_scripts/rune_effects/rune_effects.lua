@@ -14,10 +14,25 @@ TSIL.SaveManager.AddPersistentVariable(
     TSIL.Enums.VariablePersistenceMode.RESET_LEVEL
 )
 
+TSIL.SaveManager.AddPersistentVariable(
+    RuneRooms,
+    RuneRooms.Enums.SaveKey.FORCED_RUNE_EFFECT,
+    -1,
+    TSIL.Enums.VariablePersistenceMode.RESET_LEVEL
+)
 
 ---Returns the rune effect for the current floor
 ---@return RuneEffect
 function RuneRooms:GetRuneEffectForFloor()
+    local forcedEffect = TSIL.SaveManager.GetPersistentVariable(
+        RuneRooms,
+        RuneRooms.Enums.SaveKey.FORCED_RUNE_EFFECT
+    )
+
+    if forcedEffect >= 0 then
+        return forcedEffect
+    end
+
     local rng = RuneRooms.Helpers:GetStageRNG()
 
     return TSIL.Random.GetRandomElementsFromTable(RuneRooms.Enums.RuneEffect, 1, rng)[1]
@@ -155,4 +170,47 @@ RuneRooms:AddCallback(
     RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD,
     RuneEffects.OnActivateBadCommand,
     "bad"
+)
+
+
+function RuneEffects:OnForceRuneEffect(_, runeName)
+    if not runeName then
+        print("You need to provide a rune name as argument #1.")
+        return true
+    end
+
+    local effect
+    for runeEffect, name in pairs(RuneRooms.Constants.RUNE_NAMES) do
+        if runeName == name then
+            effect = runeEffect
+        end
+    end
+
+    if runeName == "none" then
+        effect = -1
+    end
+
+    if not effect then
+        print("Failed to find " .. runeName .. " rune.")
+        return true
+    end
+
+    if effect == -1 then
+        print("Succesfully set rune effect for the floor to default")
+    else
+        print("Succesfully set rune effect for the floor to " .. runeName)
+    end
+
+    TSIL.SaveManager.SetPersistentVariable(
+        RuneRooms,
+        RuneRooms.Enums.SaveKey.FORCED_RUNE_EFFECT,
+        effect
+    )
+
+    return true
+end
+RuneRooms:AddCallback(
+    RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD,
+    RuneEffects.OnForceRuneEffect,
+    "seteffect"
 )
