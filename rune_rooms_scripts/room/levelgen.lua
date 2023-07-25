@@ -6,6 +6,16 @@ local RUNE_ROOM_SPAWN_CHANCE = 0.2
 local hasLoadedRuneRooms = false
 
 
+---Adds a new rune room. The room id must be unique and it has to be a chest.
+---
+---This function must be called before the first MC_NEW_LEVEL callback fires, otherwise the room won't be loaded.
+---@param id integer
+---@param weight number
+function RuneRooms.API:AddRuneRoom(id, weight)
+    RuneRooms.Constants.RUNE_ROOMS_IDS[id] = weight
+end
+
+
 local function GetRuneRoomData(roomID)
     Isaac.ExecuteCommand("goto s.chest." .. roomID)
 

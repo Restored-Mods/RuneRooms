@@ -1,6 +1,19 @@
 local BerkanoNegative = {}
 
 
+---Forbids an enemy from spawning enemy flies and spiders on death with the
+---negative Berkano rune room effect.
+---@param entity any
+function RuneRooms.API:ForbidEnemyFromSpawningBugsOnDeath(entity)
+    TSIL.Entities.SetEntityData(
+        RuneRooms,
+        entity,
+        "CantSpawnBerkanoEnemies",
+        true
+    )
+end
+
+
 ---@param npc EntityNPC
 function BerkanoNegative:OnNPCDeath(npc)
     if not RuneRooms:IsNegativeEffectActive(RuneRooms.Enums.RuneEffect.BERKANO) then return end

@@ -13,6 +13,22 @@ local POSSIBLE_COINS = {
 }
 local FehuItem = RuneRooms.Enums.Item.FEHU_ESSENCE
 
+
+---Adds a coin subtype Essence of Fehu might reroll other coins into.
+---
+---For reference, these are the vanilla coins:
+---```lua
+---{chance = 50, value = CoinSubType.COIN_DOUBLEPACK},
+---{chance = 30, value = CoinSubType.COIN_NICKEL},
+---{chance = 10, value = CoinSubType.COIN_DIME},
+---{chance = 5,  value = CoinSubType.COIN_LUCKYPENNY}
+---```
+---@param chance number
+---@param coinSubType CoinSubType | integer
+function RuneRooms.API:AddCoinSubtypeToReroll(chance, coinSubType)
+    POSSIBLE_COINS[#POSSIBLE_COINS+1] = {chance = chance, value = coinSubType}
+end
+
 ---@param player EntityPlayer
 function FehuEssence:OnLuckCache(player)
     local numItems = player:GetCollectibleNum(FehuItem)

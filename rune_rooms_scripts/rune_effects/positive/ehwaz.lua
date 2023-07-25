@@ -1,6 +1,6 @@
 local EhwazPositive = {}
 
-local crawlspaceMode = "temporary"
+local crawlspaceMode = "replace"
 
 
 local function SpawnDyingGideon(position)

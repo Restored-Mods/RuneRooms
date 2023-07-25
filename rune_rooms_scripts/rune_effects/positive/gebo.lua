@@ -26,6 +26,17 @@ local ACHIEVEMENT_PER_SLOT = {
 	[TSIL.Enums.SlotVariant.CONFESSIONAL] = RuneRooms.Enums.Achievement.CONFESSIONAL,
 	[TSIL.Enums.SlotVariant.ROTTEN_BEGGAR] = RuneRooms.Enums.Achievement.ROTTEN_BEGGAR,
 }
+---@type table<SlotVariant, fun(): boolean>
+local CAN_SPAWN_PER_SLOT = {}
+
+
+---Adds a slot that may spawn with the positive Gebo rune room effect
+---@param slotVariant any
+---@param canSpawn fun(): boolean @ Default: Can always spawn
+function RuneRooms.API:AddPossibleSlotToSpawn(slotVariant, canSpawn)
+    POSSIBLE_SLOTS[#POSSIBLE_SLOTS+1] = slotVariant
+    CAN_SPAWN_PER_SLOT[slotVariant] = canSpawn
+end
 
 
 TSIL.SaveManager.AddPersistentVariable(
@@ -59,7 +70,14 @@ function GeboPositive:OnNewRoom()
 
     local slotsToSpawn = TSIL.Utils.Tables.Filter(POSSIBLE_SLOTS, function (_, slotVariant)
         local achievement = ACHIEVEMENT_PER_SLOT[slotVariant]
-        if not achievement then return true end
+        if not achievement then
+            local canSpawn = CAN_SPAWN_PER_SLOT[slotVariant]
+            if not canSpawn then
+                return true
+            end
+
+            return canSpawn()
+        end
 
         return RuneRooms.Libs.AchievementChecker:IsAchievementUnlocked(achievement)
     end)

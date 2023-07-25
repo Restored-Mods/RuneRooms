@@ -18,6 +18,15 @@ local RUNE_RUNE_POOL_ITEMS = {
 
 RuneRooms.Enums.ItemPool.RUNE_ROOM_POOL = TSIL.CustomItemPools.RegisterCustomItemPool(RUNE_RUNE_POOL_ITEMS)
 
+---Adds any number of collectibles to the rune item pool.
+---@param collectibles CustomItemPoolCollectible[]
+function RuneRooms.API:AddCollectiblesToRuneItemPool(collectibles)
+    TSIL.CustomItemPools.AddCollectiblesToRegisteredPool(
+        RuneRooms.Enums.ItemPool.RUNE_ROOM_POOL,
+        collectibles
+    )
+end
+
 
 function RuneRoomPool:OnGameStart()
     local collectibles = TSIL.CustomItemPools.GetCollectibleEntriesInItemPool(RuneRooms.Enums.ItemPool.RUNE_ROOM_POOL)

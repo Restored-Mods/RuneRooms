@@ -18,6 +18,13 @@ local NO_RESPAWN_PICKUPS = {
 
 local JeraItem = RuneRooms.Enums.Item.JERA_ESSENCE
 
+
+---Forbids a pickup from respawning with the Essence of Jera effect.
+---@param pickupVariant PickupVariant | integer
+function RuneRooms.API:ForbidPickupFromRespawning(pickupVariant)
+    NO_RESPAWN_PICKUPS[pickupVariant] = true
+end
+
 ---@param player EntityPlayer
 function JeraEssence:OnSpeedCache(player)
     local numItems = player:GetCollectibleNum(JeraItem)
