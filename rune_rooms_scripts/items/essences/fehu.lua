@@ -23,9 +23,9 @@ local FehuItem = RuneRooms.Enums.Item.FEHU_ESSENCE
 ---{chance = 10, value = CoinSubType.COIN_DIME},
 ---{chance = 5,  value = CoinSubType.COIN_LUCKYPENNY}
 ---```
----@param chance number
 ---@param coinSubType CoinSubType | integer
-function RuneRooms.API:AddCoinSubtypeToReroll(chance, coinSubType)
+---@param chance number
+function RuneRooms.API:AddCoinSubtypeToReroll(coinSubType, chance)
     POSSIBLE_COINS[#POSSIBLE_COINS+1] = {chance = chance, value = coinSubType}
 end
 

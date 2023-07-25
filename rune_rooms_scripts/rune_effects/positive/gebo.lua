@@ -31,7 +31,7 @@ local CAN_SPAWN_PER_SLOT = {}
 
 
 ---Adds a slot that may spawn with the positive Gebo rune room effect
----@param slotVariant any
+---@param slotVariant SlotVariant | integer
 ---@param canSpawn fun(): boolean @ Default: Can always spawn
 function RuneRooms.API:AddPossibleSlotToSpawn(slotVariant, canSpawn)
     POSSIBLE_SLOTS[#POSSIBLE_SLOTS+1] = slotVariant
