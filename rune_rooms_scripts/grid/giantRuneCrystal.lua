@@ -11,6 +11,12 @@ local RUNE_PARTICLES = {
     MaxSpeed = 7,
     Color = Color(1, 1, 1, 0.7, 0.1, 0, 0.2)
 }
+local RUNE_SHARDS = {
+    MinNum = 1,
+    MaxNum = 2,
+    MinSpeed = 6,
+    MaxSpeed = 8
+}
 local CRYSTAL_EXPLOSION_DARKEN = {
     Intensity = 0.8,
     Duration = 8 * 30,
@@ -79,6 +85,35 @@ end
 
 
 ---@param giantCrystal Entity
+local function SpawnRuneShards(giantCrystal)
+    local rng = giantCrystal:GetDropRNG()
+
+    local numShards = TSIL.Random.GetRandomInt(
+        RUNE_SHARDS.MinNum,
+        RUNE_SHARDS.MaxNum,
+        rng
+    )
+
+    for _ = 1, numShards, 1 do
+        local angle = rng:RandomInt(360)
+        local speed = TSIL.Random.GetRandomFloat(
+            RUNE_SHARDS.MinSpeed,
+            RUNE_SHARDS.MaxSpeed,
+            rng
+        )
+        local velocity = Vector.FromAngle(angle):Resized(speed)
+
+        TSIL.EntitySpecific.SpawnPickup(
+            PickupVariant.PICKUP_TAROTCARD,
+            Card.RUNE_SHARD,
+            giantCrystal.Position,
+            velocity
+        )
+    end
+end
+
+
+---@param giantCrystal Entity
 function RuneRooms:DealDamageToGiantCrystal(giantCrystal)
     local data = GetGiantCrystalData(giantCrystal)
     if data.activated then return end
@@ -95,6 +130,8 @@ function RuneRooms:DealDamageToGiantCrystal(giantCrystal)
         SFXManager():Play(RuneRooms.Enums.SoundEffect.RUNE_CRYSTAL_EXPLOSION)
 
         SpawnRuneParticles(giantCrystal.Position, 1)
+
+        SpawnRuneShards(giantCrystal)
     else
         sprite:Play("State5", true)
         giantCrystal.SortingLayer = SortingLayer.SORTING_BACKGROUND
