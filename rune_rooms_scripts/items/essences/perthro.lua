@@ -44,6 +44,11 @@ local function TryRerollIntoHigherQuality(collectible, collectibleInfo)
     local currentItem = collectible.SubType
     local previousItem = collectibleInfo.PreviousItem
 
+    if currentItem == CollectibleType.COLLECTIBLE_NULL
+    or previousItem == CollectibleType.COLLECTIBLE_NULL then
+        return
+    end
+
     local currentQuality = GetItemQuality(currentItem)
     local previousQuality = GetItemQuality(previousItem)
 
