@@ -57,6 +57,10 @@ RuneRooms.Enums.GenericPropVariant = {
 RuneRooms.Enums.SaveKey = {
     HIDDEN_ITEM_MANAGER_DATA        = "HIDDEN_ITEM_MANAGER_DATA",
     MINIMAPI_DATA                   = "MINIMAPI_DATA",
+    DSS_MENU_OPTIONS                = "DSS_MENU_OPTIONS",
+
+    ROCKS_SPRITE_MODE               = "ROCKS_SPRITE_MODE",
+    PITS_SPRITE_MODE                = "PITS_SPRITE_MODE",
 
     GIANT_CRYSTAL_DATA              = "GIANT_CRYSTAL_DATA",
     RUNE_PAD_DATA                   = "RUNE_PAD_DATA",
@@ -228,4 +232,12 @@ RuneRooms.Enums.TearFlag = {
 
     --Leaves blood creep on impact
     BLOOD_CREEP = 1 << 1,
+}
+
+
+---@enum GridSpriteMode
+RuneRooms.Enums.GridSpriteMode = {
+    DEFAULT = 1,
+    FORCE_VANILLA = 2,
+    FORCE_FF = 3
 }

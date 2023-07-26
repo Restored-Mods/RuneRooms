@@ -4,7 +4,9 @@ local FLOOR_ANM2 = "gfx/backdrop/rune_floor.anm2"
 local WALLS_ANM2 = "gfx/backdrop/rune_walls.anm2"
 
 local PIT_SPRITE = "gfx/grid/grid_pit_mausoleum.png"
-local GRIDS_SPRITE = "gfx/grid/rocks_rune.png"
+local PIT_SPRITE_FF = "gfx/grid/grid_pit_rune.png"
+local GRIDS_SPRITE = "gfx/grid/rocks_mausoleum.png"
+local GRIDS_SPRITE_FF = "gfx/grid/rocks_rune.png"
 local GRID_TYPES_SPRITE_REPLACE = {
     [GridEntityType.GRID_PILLAR] = true,
     [GridEntityType.GRID_ROCK] = true,
@@ -19,24 +21,24 @@ local GRID_TYPES_SPRITE_REPLACE = {
 
 local CRYSTAL_PILLARS_ANM2 = "gfx/backdrop/crystal_pillar.anm2"
 local CRYSTAL_PILLARS_ORIENTATION_PER_GRID_INDEX = {
-    [0] = {flipX = false, flipY = false},
-    [14] = {flipX = true, flipY = false},
-    [120] = {flipX = false, flipY = true},
-    [134] = {flipX = true, flipY = true}
+    [0] = { flipX = false, flipY = false },
+    [14] = { flipX = true, flipY = false },
+    [120] = { flipX = false, flipY = true },
+    [134] = { flipX = true, flipY = true }
 }
 
 local WALL_DETAILS_ANM2 = "gfx/backdrop/wall_details.anm2"
 local WALL_DETAILS2_ANM2 = "gfx/backdrop/wall_details_2.anm2"
 local NUM_HORIZONTAL_DETAIL_ANIMS = 7
 local NUM_VERTICAL_DETAIL_ANIMS = 4
-local HORIZONTAL_DETAIL_GRID_INDEXES = {2, 3, 4, 5, 6, 8, 9, 10, 11, 12}
-local VERTICAL_DETAIL_GRID_INDEXES = {30, 45, 75, 90}
+local HORIZONTAL_DETAIL_GRID_INDEXES = { 2, 3, 4, 5, 6, 8, 9, 10, 11, 12 }
+local VERTICAL_DETAIL_GRID_INDEXES = { 30, 45, 75, 90 }
 
 local CRYSTAL_OVERLAY_ANM2 = "gfx/backdrop/crystal_overlay.anm2"
 local NUM_HORIZONTAL_OVERLAY_ANIMS = 3
 local NUM_VERTICAL_OVERLAY_ANIMS = 2
-local HORIZONTAL_OVERLAY_GRID_INDEXES = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
-local VERTICAL_OVERLAY_GRID_INDEXES = {30, 45, 60, 75, 90}
+local HORIZONTAL_OVERLAY_GRID_INDEXES = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }
+local VERTICAL_OVERLAY_GRID_INDEXES = { 30, 45, 60, 75, 90 }
 
 local CRYSTAL_SHINE_ANM2 = "gfx/backdrop/crystal_shine.anm2"
 
@@ -85,8 +87,9 @@ local function SpawnGenericWallDetail(pos, anm2, anim, flipX, flipY, rng)
         0,
         pos
     )
-    detail:AddEntityFlags(EntityFlag.FLAG_RENDER_WALL | EntityFlag.FLAG_RENDER_FLOOR | EntityFlag.FLAG_NO_REMOVE_ON_TEX_RENDER)
-    detail.DepthOffset = detail.DepthOffset-10000
+    detail:AddEntityFlags(EntityFlag.FLAG_RENDER_WALL | EntityFlag.FLAG_RENDER_FLOOR |
+    EntityFlag.FLAG_NO_REMOVE_ON_TEX_RENDER)
+    detail.DepthOffset = detail.DepthOffset - 10000
 
     local sprite = detail:GetSprite()
     sprite:Load(anm2, true)
@@ -108,7 +111,7 @@ local function SpawnCrystalPillars(rng)
     local room = Game():GetRoom()
     local runeEffect = RuneRooms:GetRuneEffectForFloor()
 
-    TSIL.Utils.Tables.ForEach(CRYSTAL_PILLARS_ORIENTATION_PER_GRID_INDEX, function (gridIndex, orientation)
+    TSIL.Utils.Tables.ForEach(CRYSTAL_PILLARS_ORIENTATION_PER_GRID_INDEX, function(gridIndex, orientation)
         --I know that they're integers, you know that they're integers, but the lua server doesn't
         if type(gridIndex) == "string" then return end
 
@@ -131,7 +134,7 @@ local function SpawnHorizontalWallDetails(anm2, rng)
     local room = Game():GetRoom()
     local center = room:GetCenterPos()
 
-    TSIL.Utils.Tables.ForEach(HORIZONTAL_DETAIL_GRID_INDEXES, function (_, gridIndex)
+    TSIL.Utils.Tables.ForEach(HORIZONTAL_DETAIL_GRID_INDEXES, function(_, gridIndex)
         if rng:RandomFloat() >= 0.5 then return end
 
         local spawnPos = room:GetGridPosition(gridIndex)
@@ -152,10 +155,10 @@ local function SpawnHorizontalWallDetails(anm2, rng)
         )
     end)
 
-    local flippedGridIndexes = TSIL.Utils.Tables.Map(HORIZONTAL_DETAIL_GRID_INDEXES, function (_, gridIndex)
+    local flippedGridIndexes = TSIL.Utils.Tables.Map(HORIZONTAL_DETAIL_GRID_INDEXES, function(_, gridIndex)
         return gridIndex + 120
     end)
-    TSIL.Utils.Tables.ForEach(flippedGridIndexes, function (_, gridIndex)
+    TSIL.Utils.Tables.ForEach(flippedGridIndexes, function(_, gridIndex)
         if rng:RandomFloat() >= 0.5 then return end
 
         local spawnPos = room:GetGridPosition(gridIndex)
@@ -184,7 +187,7 @@ local function SpawnVerticalWallDetails(anm2, rng)
     local room = Game():GetRoom()
     local center = room:GetCenterPos()
 
-    TSIL.Utils.Tables.ForEach(VERTICAL_DETAIL_GRID_INDEXES, function (_, gridIndex)
+    TSIL.Utils.Tables.ForEach(VERTICAL_DETAIL_GRID_INDEXES, function(_, gridIndex)
         if rng:RandomFloat() >= 0.5 then return end
 
         local spawnPos = room:GetGridPosition(gridIndex)
@@ -205,10 +208,10 @@ local function SpawnVerticalWallDetails(anm2, rng)
         )
     end)
 
-    local flippedGridIndexes = TSIL.Utils.Tables.Map(VERTICAL_DETAIL_GRID_INDEXES, function (_, gridIndex)
+    local flippedGridIndexes = TSIL.Utils.Tables.Map(VERTICAL_DETAIL_GRID_INDEXES, function(_, gridIndex)
         return gridIndex + 14
     end)
-    TSIL.Utils.Tables.ForEach(flippedGridIndexes, function (_, gridIndex)
+    TSIL.Utils.Tables.ForEach(flippedGridIndexes, function(_, gridIndex)
         if rng:RandomFloat() >= 0.5 then return end
 
         local spawnPos = room:GetGridPosition(gridIndex)
@@ -245,7 +248,7 @@ end
 local function SpawnHorizontalOverlays(rng)
     local room = Game():GetRoom()
 
-    TSIL.Utils.Tables.ForEach(HORIZONTAL_OVERLAY_GRID_INDEXES, function (_, gridIndex)
+    TSIL.Utils.Tables.ForEach(HORIZONTAL_OVERLAY_GRID_INDEXES, function(_, gridIndex)
         if rng:RandomFloat() >= 0.1 then return end
 
         local spawnPos = room:GetGridPosition(gridIndex)
@@ -255,7 +258,7 @@ local function SpawnHorizontalOverlays(rng)
             0,
             spawnPos
         )
-        overlay.DepthOffset = overlay.DepthOffset+10000
+        overlay.DepthOffset = overlay.DepthOffset + 10000
 
         local sprite = overlay:GetSprite()
         sprite:Load(CRYSTAL_OVERLAY_ANM2, true)
@@ -270,10 +273,10 @@ local function SpawnHorizontalOverlays(rng)
         sprite.FlipY = false
     end)
 
-    local flippedGridIndexes = TSIL.Utils.Tables.Map(HORIZONTAL_OVERLAY_GRID_INDEXES, function (_, gridIndex)
+    local flippedGridIndexes = TSIL.Utils.Tables.Map(HORIZONTAL_OVERLAY_GRID_INDEXES, function(_, gridIndex)
         return gridIndex + 120
     end)
-    TSIL.Utils.Tables.ForEach(flippedGridIndexes, function (_, gridIndex)
+    TSIL.Utils.Tables.ForEach(flippedGridIndexes, function(_, gridIndex)
         if rng:RandomFloat() >= 0.1 then return end
 
         local spawnPos = room:GetGridPosition(gridIndex)
@@ -283,7 +286,7 @@ local function SpawnHorizontalOverlays(rng)
             0,
             spawnPos
         )
-        overlay.DepthOffset = overlay.DepthOffset+10000
+        overlay.DepthOffset = overlay.DepthOffset + 10000
 
         local sprite = overlay:GetSprite()
         sprite:Load(CRYSTAL_OVERLAY_ANM2, true)
@@ -304,7 +307,7 @@ end
 local function SpawnVerticalOverlays(rng)
     local room = Game():GetRoom()
 
-    TSIL.Utils.Tables.ForEach(VERTICAL_OVERLAY_GRID_INDEXES, function (_, gridIndex)
+    TSIL.Utils.Tables.ForEach(VERTICAL_OVERLAY_GRID_INDEXES, function(_, gridIndex)
         if rng:RandomFloat() >= 0.1 then return end
 
         local spawnPos = room:GetGridPosition(gridIndex)
@@ -314,7 +317,7 @@ local function SpawnVerticalOverlays(rng)
             0,
             spawnPos
         )
-        overlay.DepthOffset = overlay.DepthOffset+10000
+        overlay.DepthOffset = overlay.DepthOffset + 10000
 
         local sprite = overlay:GetSprite()
         sprite:Load(CRYSTAL_OVERLAY_ANM2, true)
@@ -329,10 +332,10 @@ local function SpawnVerticalOverlays(rng)
         sprite.FlipY = rng:RandomFloat() > 0.5
     end)
 
-    local flippedGridIndexes = TSIL.Utils.Tables.Map(VERTICAL_OVERLAY_GRID_INDEXES, function (_, gridIndex)
+    local flippedGridIndexes = TSIL.Utils.Tables.Map(VERTICAL_OVERLAY_GRID_INDEXES, function(_, gridIndex)
         return gridIndex + 14
     end)
-    TSIL.Utils.Tables.ForEach(flippedGridIndexes, function (_, gridIndex)
+    TSIL.Utils.Tables.ForEach(flippedGridIndexes, function(_, gridIndex)
         if rng:RandomFloat() >= 0.1 then return end
 
         local spawnPos = room:GetGridPosition(gridIndex)
@@ -342,7 +345,7 @@ local function SpawnVerticalOverlays(rng)
             0,
             spawnPos
         )
-        overlay.DepthOffset = overlay.DepthOffset+10000
+        overlay.DepthOffset = overlay.DepthOffset + 10000
 
         local sprite = overlay:GetSprite()
         sprite:Load(CRYSTAL_OVERLAY_ANM2, true)
@@ -369,32 +372,48 @@ end
 ---@param gridEntityType GridEntityType
 ---@return string
 local function GetGridSpriteSheet(gridEntityType)
-    local defaultSpriteSheet = GRIDS_SPRITE
+    local pitsSpriteMode = RuneRooms:GetRocksSpriteMode()
 
-    local newSpriteSheet = Isaac.RunCallback(
-        RuneRooms.Enums.CustomCallback.PRE_GET_RUNE_GRID_SPRITE,
-        gridEntityType
-    )
+    if pitsSpriteMode == RuneRooms.Enums.GridSpriteMode.FORCE_FF then
+        return GRIDS_SPRITE_FF
+    elseif pitsSpriteMode == RuneRooms.Enums.GridSpriteMode.FORCE_VANILLA then
+        return GRIDS_SPRITE
+    else
+        local defaultSpriteSheet = GRIDS_SPRITE
 
-    if type(newSpriteSheet) == "string" then
-        return newSpriteSheet
+        local newSpriteSheet = Isaac.RunCallback(
+            RuneRooms.Enums.CustomCallback.PRE_GET_RUNE_GRID_SPRITE,
+            gridEntityType
+        )
+
+        if type(newSpriteSheet) == "string" then
+            return newSpriteSheet
+        end
+
+        return defaultSpriteSheet
     end
-
-    return defaultSpriteSheet
 end
 
 
 ---@return string
 local function GetPitSpriteSheet()
-    local defaultSpriteSheet = PIT_SPRITE
+    local pitsSpriteMode = RuneRooms:GetPitsSpriteMode()
 
-    local newSpriteSheet = Isaac.RunCallback(RuneRooms.Enums.CustomCallback.PRE_GET_RUNE_PIT_SPRITE)
+    if pitsSpriteMode == RuneRooms.Enums.GridSpriteMode.FORCE_FF then
+        return PIT_SPRITE_FF
+    elseif pitsSpriteMode == RuneRooms.Enums.GridSpriteMode.FORCE_VANILLA then
+        return PIT_SPRITE
+    else
+        local defaultSpriteSheet = PIT_SPRITE
 
-    if type(newSpriteSheet) == "string" then
-        return newSpriteSheet
+        local newSpriteSheet = Isaac.RunCallback(RuneRooms.Enums.CustomCallback.PRE_GET_RUNE_PIT_SPRITE)
+
+        if type(newSpriteSheet) == "string" then
+            return newSpriteSheet
+        end
+
+        return defaultSpriteSheet
     end
-
-    return defaultSpriteSheet
 end
 
 
@@ -433,6 +452,7 @@ function Backdrop:OnNewRoom()
         ReplaceStageAPIGfx()
     end
 end
+
 RuneRooms:AddCallback(
     ModCallbacks.MC_POST_NEW_ROOM,
     Backdrop.OnNewRoom
@@ -477,6 +497,7 @@ function Backdrop:OnGridEntityInit(gridEntity)
         TryReplaceGridEntitySprite(gridEntity)
     end
 end
+
 RuneRooms:AddCallback(
     TSIL.Enums.CustomCallback.POST_GRID_ENTITY_INIT,
     Backdrop.OnGridEntityInit
@@ -518,6 +539,7 @@ function Backdrop:OnWallDetailUpdate(effect)
     shineSprite.Rotation = TSIL.Random.GetRandomInt(0, 360, rng)
     shineSprite.Color = Color(1, 1, 1, TSIL.Random.GetRandomFloat(0.3, 0.7, rng))
 end
+
 RuneRooms:AddCallback(
     ModCallbacks.MC_POST_EFFECT_UPDATE,
     Backdrop.OnWallDetailUpdate,

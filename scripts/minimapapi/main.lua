@@ -2373,6 +2373,7 @@ function MinimapAPI:LoadSaveTable(saved,is_save)
 					if v.DescriptorListIndex then
 						desc, _ = GetRoomDescAndDimFromListIndex(v.DescriptorListIndex)
 					end
+					---@diagnostic disable-next-line: missing-fields
 					MinimapAPI:AddRoom{
 						Position = Vector(v.PositionX, v.PositionY),
 						DisplayPosition = (v.DisplayPositionX and v.DisplayPositionY) and Vector(v.DisplayPositionX, v.DisplayPositionY),
