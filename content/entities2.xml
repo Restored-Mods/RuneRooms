@@ -9,11 +9,8 @@
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
     </entity>
 
-    <entity anm2path="runeFloor.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="1" collisionRadius="0" friction="1" id="1000" name="Rune Room Floor" numGridCollisionPoints="0" shadowSize="0" stageHP="0" variant="650" subtype="0">
-        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
-    </entity>
 
-    <entity anm2path="algizShield.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="1" collisionRadius="0" friction="1" id="1000" name="Algiz Shield" numGridCollisionPoints="0" shadowSize="0" stageHP="0" variant="651">
+    <entity anm2path="runeFloor.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="1" collisionRadius="0" friction="1" id="1000" name="Rune Room Floor" numGridCollisionPoints="0" shadowSize="0" stageHP="0" variant="650" subtype="0">
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
 
@@ -41,5 +38,9 @@
 
     <entity anm2path="1000.141_smoke cloud.anm2" baseHP="0" boss="0" champion="0" collisionDamage="3.5" collisionMass="0" collisionRadius="0" friction="1" id="1000" name="Rune Rooms Smoke Screen" numGridCollisionPoints="0" shadowSize="0" stageHP="0">
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+
+    <entity anm2path="" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="1" collisionRadius="0" friction="1" id="1000" name="EID Description Holder" numGridCollisionPoints="0" shadowSize="0" stageHP="0" variant="">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
 </entities>

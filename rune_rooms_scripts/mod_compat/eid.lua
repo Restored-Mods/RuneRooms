@@ -251,180 +251,343 @@ Descriptions.Collectibles = {
 }
 
 
-Descriptions.RuneEffect = {
+Descriptions.PositiveRuneEffect = {
     [RuneEffect.ALGIZ] = {
         en_us = {
             name = "Algiz",
             description = "{{ArrowUp}} Grants a 7 sec shield in each room"
-                .. "# {{ArrowDown}} Enemies are invincible for 3 seconds in each room",
         },
         spa = {
             name = "Algiz",
             description = "{{ArrowUp}} Otorga un escudo durante 7 segundos en cada habitación"
-                .. "# {{ArrowDown}} Los enemigos son invencibles durante 3 segundos en cada habitación"
         },
     },
     [RuneEffect.ANSUZ] = {
         en_us = {
             name = "Ansuz",
             description = "{{ArrowUp}} Grants the {{Collectible590}} Mercurius effect"
-                .. "# {{ArrowDown}} Grants the Amnesia effect",
         },
         spa = {
             name = "Ansuz",
             description = "{{ArrowUp}} Otorga el efecto de {{Collectible590}} Mercurius"
-                .. "# {{ArrowDown}} Otorga el efecto de Amnesia"
         },
     },
     [RuneEffect.BERKANO] = {
         en_us = {
             name = "Berkano",
             description = "{{ArrowUp}} Killing enemies spawns blue flies and spiders"
-                .. "# {{ArrowDown}} Killing enemies spawns enemy flies and spiders",
         },
         spa = {
             name = "Berkano",
             description = "{{ArrowUp}} Matar enemigos genera moscas y arañas azules"
-                .. "# {{ArrowDown}} Matar enemigos genera moscas y arañas enemigas"
         },
     },
     [RuneEffect.DAGAZ] = {
         en_us = {
             name = "Dagaz",
             description = "{{ArrowUp}} Prevents champion enemies from spawning"
-                .. "# {{ArrowDown}} Increases the amount of champion enemies",
         },
         spa = {
             name = "Dagaz",
             description = "{{ArrowUp}} Previene que se generen campeones"
-                .. "{{ArrowDown}} Aumenta el número de campeones"
         },
     },
     [RuneEffect.EHWAZ] = {
         en_us = {
             name = "Ehwaz",
             description = "{{ArrowUp}} Spawns a trapdoor to the Great Gideon special crawlspace"
-                .. "# {{ArrowDown}} Replaces some rocks with trapdoors",
         },
         spa = {
             name = "Ehwaz",
             description = "{{ArrowUp}} Genera una trampilla al crawlspace special de Gran Gideon"
-                .. "# {{ArrowDown}} Reemplaza algunas piedras con trampillas"
         },
     },
     [RuneEffect.FEHU] = {
         en_us = {
             name = "Fehu",
             description = "{{ArrowUp}} Grants midas tears that turn enemies golden"
-                .. "# {{ArrowDown}} Isaac loses money when taking damage",
         },
         spa = {
             name = "Fehu",
             description = "{{ArrowUp}} Otorga lágrimas de Midas que convierten a los enemigos en oro"
-                .. "# {{ArrowDown}} Isaac pierde dinero al recibir daño"
         },
     },
     [RuneEffect.GEBO] = {
         en_us = {
             name = "Gebo",
             description = "{{ArrowUp}} Has a chance of spawning a slot in each room"
-                .. "# {{ArrowDown}} Destroys all machines without spawning any rewards",
         },
         spa = {
             name = "Gebo",
             description = "{{ArrowUp}} Pequeña posibilidad de generar una máquina en cada habitación"
-                .. "# {{ArrowDown}} Destruye todas las máquinas sin generar objetos",
         },
     },
     [RuneEffect.HAGALAZ] = {
         en_us = {
             name = "Hagalaz",
             description = "{{ArrowUp}} Destroys all rocks in each room"
-                .. "# {{ArrowDown}} Chance of replacing regular rocks with their spiked variant",
         },
         spa = {
             name = "Hagalaz",
             description = "{{ArrowUp}} Destruye todas las rocas en cada habitación"
-                .. "# {{ArrowDown}} Posibilidad de reemplazar rocas con su versión con pinchos",
         },
     },
     [RuneEffect.INGWAZ] = {
         en_us = {
             name = "Ingwaz",
             description = "{{ArrowUp}} Most chests work like eternal chests"
-                .. "# {{ArrowDown}} Regular and red chests get replaced with spiked chests. Locked and bomb chests take 2 keys and bombs to open respectively",
         },
         spa = {
             name = "Ingwaz",
             description = "{{ArrowUp}} La mayoría de cofres funcionan como cofres eternos"
-                .. "# {{ArrowDown}} Los cofres normales y rojos son reemplazados con cofres de pinchos. Los cofres dorados y de piedra necesitan 2 llaves y bombas para abrir respectivamente",
         },
     },
     [RuneEffect.JERA] = {
         en_us = {
             name = "Jera",
             description = "{{ArrowUp}} Grants the {{Collectible241}} Contract from Below effect"
-                .. "# {{ArrowDown}} All pickups have despawn after a certain time",
         },
         spa = {
             name = "Jera",
             description = "{{ArrowUp}} Otorga el efecto del {{Collectible241}} Contrato de Abajo"
-                .. "# {{ArrowDown}} Todos los objectos desaparecen tras un tiempo",
         },
     },
     [RuneEffect.KENAZ] = {
         en_us = {
             name = "Kenaz",
             description = "{{ArrowUp}} When entering an uncleared room, poisons all enemies"
-                .. "# {{ArrowDown}} Enemies spawn poisonous clouds when they die",
         },
         spa = {
             name = "Kenaz",
             description = "{{ArrowUp}} Al entrar en una habitación con enemigos, los envenena"
-                .. "# {{ArrowDown}} Los enemigos generan nubes venenosas al morir",
         },
     },
     [RuneEffect.OTHALA] = {
         en_us = {
             name = "Othala",
             description = "{{ArrowUp}} Grants a temporary copy of a random item for each room"
-                .. "# {{ArrowDown}} Rerolls the highest quality item Isaac has into a lower quality one",
         },
         spa = {
             name = "Othala",
             description = "{{ArrowUp}} Otorga una copia temporal de un item en cada habitación"
-                .. "# {{ArrowDown}} Rerrolea el objeto de mayor calidad que tiene Isaac en uno con menor calidad",
         },
     },
     [RuneEffect.PERTHRO] = {
         en_us = {
             name = "Perthro",
             description = "{{ArrowUp}} Items switch between two possibilities"
-                .. "# {{ArrowDown}} Replaces items with trinkets",
         },
         spa = {
             name = "Perthro",
             description = "{{ArrowUp}} Todos los items cambian entre dos posibilidades"
-                .. "# {{ArrowDown}} Reemplaza los items con baratijas",
         },
     },
     [RuneEffect.SOWILO] = {
         en_us = {
             name = "Sowilo",
             description = "{{ArrowUp}} Spawns a friendly version of the lowest hp enemy when clearing a room"
-                .. "# {{ArrowDown}} Clearing a room respawns all the enemies",
         },
         spa = {
             name = "Sowilo",
             description = "{{ArrowUp}} Genera una versión amistosa del enemigo con menos salud al limpiar una habitación"
-                .. "# {{ArrowDown}} Al limpiar una habitación, todos los enemigos reaparecen",
         },
     },
 }
 
 
+Descriptions.NegativeRuneEffect = {
+    [RuneEffect.ALGIZ] = {
+        en_us = {
+            name = "Algiz",
+            description = "{{ArrowDown}} Enemies are invincible for 3 seconds in each room",
+        },
+        spa = {
+            name = "Algiz",
+            description = "{{ArrowDown}} Los enemigos son invencibles durante 3 segundos en cada habitación"
+        },
+    },
+    [RuneEffect.ANSUZ] = {
+        en_us = {
+            name = "Ansuz",
+            description = "{{ArrowDown}} Grants the Amnesia effect",
+        },
+        spa = {
+            name = "Ansuz",
+            description = "{{ArrowDown}} Otorga el efecto de Amnesia"
+        },
+    },
+    [RuneEffect.BERKANO] = {
+        en_us = {
+            name = "Berkano",
+            description = "{{ArrowDown}} Killing enemies spawns enemy flies and spiders",
+        },
+        spa = {
+            name = "Berkano",
+            description = "{{ArrowDown}} Matar enemigos genera moscas y arañas enemigas"
+        },
+    },
+    [RuneEffect.DAGAZ] = {
+        en_us = {
+            name = "Dagaz",
+            description = "{{ArrowDown}} Increases the amount of champion enemies",
+        },
+        spa = {
+            name = "Dagaz",
+            description = "{{ArrowDown}} Aumenta el número de campeones"
+        },
+    },
+    [RuneEffect.EHWAZ] = {
+        en_us = {
+            name = "Ehwaz",
+            description = "{{ArrowDown}} Replaces some rocks with trapdoors",
+        },
+        spa = {
+            name = "Ehwaz",
+            description = "{{ArrowDown}} Reemplaza algunas piedras con trampillas"
+        },
+    },
+    [RuneEffect.FEHU] = {
+        en_us = {
+            name = "Fehu",
+            description = "{{ArrowDown}} Isaac loses money when taking damage",
+        },
+        spa = {
+            name = "Fehu",
+            description = "{{ArrowDown}} Isaac pierde dinero al recibir daño"
+        },
+    },
+    [RuneEffect.GEBO] = {
+        en_us = {
+            name = "Gebo",
+            description = "{{ArrowDown}} Destroys all machines without spawning any rewards",
+        },
+        spa = {
+            name = "Gebo",
+            description = "{{ArrowDown}} Destruye todas las máquinas sin generar objetos",
+        },
+    },
+    [RuneEffect.HAGALAZ] = {
+        en_us = {
+            name = "Hagalaz",
+            description = "{{ArrowDown}} Chance of replacing regular rocks with their spiked variant",
+        },
+        spa = {
+            name = "Hagalaz",
+            description = "{{ArrowDown}} Posibilidad de reemplazar rocas con su versión con pinchos",
+        },
+    },
+    [RuneEffect.INGWAZ] = {
+        en_us = {
+            name = "Ingwaz",
+            description = "{{ArrowDown}} Regular and red chests get replaced with spiked chests. Locked and bomb chests take 2 keys and bombs to open respectively",
+        },
+        spa = {
+            name = "Ingwaz",
+            description = "{{ArrowDown}} Los cofres normales y rojos son reemplazados con cofres de pinchos. Los cofres dorados y de piedra necesitan 2 llaves y bombas para abrir respectivamente",
+        },
+    },
+    [RuneEffect.JERA] = {
+        en_us = {
+            name = "Jera",
+            description = "{{ArrowDown}} All pickups have despawn after a certain time",
+        },
+        spa = {
+            name = "Jera",
+            description = "{{ArrowDown}} Todos los objectos desaparecen tras un tiempo",
+        },
+    },
+    [RuneEffect.KENAZ] = {
+        en_us = {
+            name = "Kenaz",
+            description = "{{ArrowDown}} Enemies spawn poisonous clouds when they die",
+        },
+        spa = {
+            name = "Kenaz",
+            description = "{{ArrowDown}} Los enemigos generan nubes venenosas al morir",
+        },
+    },
+    [RuneEffect.OTHALA] = {
+        en_us = {
+            name = "Othala",
+            description = "{{ArrowDown}} Rerolls the highest quality item Isaac has into a lower quality one",
+        },
+        spa = {
+            name = "Othala",
+            description = "{{ArrowDown}} Rerrolea el objeto de mayor calidad que tiene Isaac en uno con menor calidad",
+        },
+    },
+    [RuneEffect.PERTHRO] = {
+        en_us = {
+            name = "Perthro",
+            description = "{{ArrowDown}} Replaces items with trinkets",
+        },
+        spa = {
+            name = "Perthro",
+            description = "{{ArrowDown}} Reemplaza los items con baratijas",
+        },
+    },
+    [RuneEffect.SOWILO] = {
+        en_us = {
+            name = "Sowilo",
+            description = "{{ArrowDown}} Clearing a room respawns all the enemies",
+        },
+        spa = {
+            name = "Sowilo",
+            description = "{{ArrowDown}} Al limpiar una habitación, todos los enemigos reaparecen",
+        },
+    },
+}
+
+
+---@param runeEffect RuneEffect
+local function GetPositiveRuneEffectDescription(runeEffect)
+    local language = EID:getLanguage()
+    local runeEffectDesc = Descriptions.PositiveRuneEffect[runeEffect][language]
+
+    if not runeEffectDesc then
+        runeEffectDesc = Descriptions.PositiveRuneEffect[runeEffect].en_us
+    end
+
+    return runeEffectDesc
+end
+
+
+---@param runeEffect RuneEffect
+local function GetNegativeRuneEffectDescription(runeEffect)
+    local language = EID:getLanguage()
+    local runeEffectDesc = Descriptions.NegativeRuneEffect[runeEffect][language]
+
+    if not runeEffectDesc then
+        runeEffectDesc = Descriptions.NegativeRuneEffect[runeEffect].en_us
+    end
+
+    return runeEffectDesc
+end
+
+
+---@param giantCrystal Entity
+local function SpawnNegativeEffectDescriptionHolder(giantCrystal)
+    local runeEffect = RuneRooms:GetRuneEffectForFloor()
+
+    local runeEffectDesc = GetNegativeRuneEffectDescription(runeEffect)
+    if not runeEffectDesc then return end
+
+    local eidHolder = TSIL.EntitySpecific.SpawnEffect(
+        RuneRooms.Enums.EffectVariant.EID_DESCRIPTION_HOLDER,
+        0,
+        giantCrystal.Position
+    )
+
+    eidHolder:GetData().EID_Description = {
+        Name = runeEffectDesc.name,
+        Description = runeEffectDesc.description
+    }
+end
+
 
 RuneRooms:AddModCompat("EID", function ()
+    EID.effectList[tostring(RuneRooms.Enums.EffectVariant.EID_DESCRIPTION_HOLDER)] = true
+
     -- Collectibles
     for collectible, translations in pairs(Descriptions.Collectibles) do
         for language, description in pairs(translations) do
@@ -435,16 +598,27 @@ RuneRooms:AddModCompat("EID", function ()
     RuneRooms:AddCallback(
         RuneRooms.Enums.CustomCallback.POST_GENERIC_PROP_INIT,
         function (_, giantCrystal)
-            local runeEffect = RuneRooms:GetRuneEffectForFloor()
-            local language = EID:getLanguage()
+            if RuneRooms:IsGiantRuneCrystalBroken(giantCrystal) then
+                SpawnNegativeEffectDescriptionHolder(giantCrystal)
+            else
+                local runeEffect = RuneRooms:GetRuneEffectForFloor()
 
-            local runeEffectDesc = Descriptions.RuneEffect[runeEffect][language]
+                local runeEffectDesc = GetPositiveRuneEffectDescription(runeEffect)
+                if not runeEffectDesc then return end
 
-            giantCrystal:GetData().EID_Description = {
-                Name = runeEffectDesc.name,
-                Description = runeEffectDesc.description
-            }
+                giantCrystal:GetData().EID_Description = {
+                    Name = runeEffectDesc.name,
+                    Description = runeEffectDesc.description
+                }
+            end
         end,
         RuneRooms.Enums.GenericPropVariant.GIANT_RUNE_CRYSTAL
+    )
+
+    RuneRooms:AddCallback(
+        RuneRooms.Enums.CustomCallback.POST_GIANT_RUNE_CRYSTAL_DESTROYED,
+        function (_, giantCrystal)
+            SpawnNegativeEffectDescriptionHolder(giantCrystal)
+        end
     )
 end)

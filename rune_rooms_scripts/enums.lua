@@ -44,7 +44,8 @@ RuneRooms.Enums.PickupVariant = {
 
 
 RuneRooms.Enums.EffectVariant = {
-    SMOKE_CLOUD = Isaac.GetEntityVariantByName("Rune Rooms Smoke Screen")
+    SMOKE_CLOUD             = Isaac.GetEntityVariantByName("Rune Rooms Smoke Screen"),
+    EID_DESCRIPTION_HOLDER  = Isaac.GetEntityVariantByName("EID Description Holder")
 }
 
 
@@ -205,6 +206,13 @@ RuneRooms.Enums.CustomCallback = {
     --
     -- * gridType - GridEntityType
     PRE_GET_RUNE_GRID_SPRITE = {},
+
+    ---Called after a giant rune crystal is destroyed.
+    --
+    --Params:
+    --
+    -- * giantRuneCrystal - Entity
+    POST_GIANT_RUNE_CRYSTAL_DESTROYED = {},
 }
 
 

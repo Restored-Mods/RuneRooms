@@ -1,6 +1,6 @@
 local FehuEssence = {}
 
-local MIDAS_TEAR_CHANCE = 0.2
+local MIDAS_TEAR_CHANCE = 0.1
 local MIDAS_TEAR_CHANCE_PER_LUCK = 0.05
 local MAX_MIDAS_TEAR_CHANCE = 0.5
 local PENNY_REPLACE_CHANCE = 0.25

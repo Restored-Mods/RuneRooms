@@ -55,6 +55,14 @@ local function GetGiantCrystalData(giantCrystal)
 end
 
 
+---@param giantCrystal Entity
+---@return boolean
+function RuneRooms:IsGiantRuneCrystalBroken(giantCrystal)
+    local data = GetGiantCrystalData(giantCrystal)
+    return data.breakState >= 5
+end
+
+
 ---@param position Vector
 ---@param multiplier number
 local function SpawnRuneParticles(position, multiplier)
@@ -159,6 +167,11 @@ function RuneRooms:DealDamageToGiantCrystal(giantCrystal)
             PickupVariant.PICKUP_COLLECTIBLE,
             essence,
             giantCrystal.Position
+        )
+
+        Isaac.RunCallback(
+            RuneRooms.Enums.CustomCallback.POST_GIANT_RUNE_CRYSTAL_DESTROYED,
+            giantCrystal
         )
     end
 end
