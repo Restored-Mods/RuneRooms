@@ -21,6 +21,8 @@ TSIL.SaveManager.AddPersistentVariable(
     TSIL.Enums.VariablePersistenceMode.RESET_LEVEL
 )
 
+local SortedEffects
+
 ---Returns the rune effect for the current floor
 ---@return RuneEffect
 function RuneRooms:GetRuneEffectForFloor()
@@ -33,9 +35,19 @@ function RuneRooms:GetRuneEffectForFloor()
         return forcedEffect
     end
 
+    if not SortedEffects then
+        SortedEffects = {}
+
+        for _, value in pairs(RuneRooms.Enums.RuneEffect) do
+            SortedEffects[#SortedEffects+1] = value
+        end
+
+        table.sort(SortedEffects)
+    end
+
     local rng = RuneRooms.Helpers:GetStageRNG()
 
-    return TSIL.Random.GetRandomElementsFromTable(RuneRooms.Enums.RuneEffect, 1, rng)[1]
+    return TSIL.Random.GetRandomElementsFromTable(SortedEffects, 1, rng)[1]
 end
 
 
