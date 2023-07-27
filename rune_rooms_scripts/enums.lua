@@ -217,7 +217,13 @@ RuneRooms.Enums.CustomCallback = {
 
 
 RuneRooms.Enums.SoundEffect = {
-    RUNE_CRYSTAL_EXPLOSION = Isaac.GetSoundIdByName("Rune Crystal Explosion")
+    RUNE_CRYSTAL_EXPLOSION = Isaac.GetSoundIdByName("Rune Crystal Explosion"),
+    RUNE_PAD_ACTIVATION = Isaac.GetSoundIdByName("Rune Pad Activation")
+}
+
+
+RuneRooms.Enums.Music = {
+    RUNE_ROOM = Isaac.GetMusicIdByName("Rune Room")
 }
 
 

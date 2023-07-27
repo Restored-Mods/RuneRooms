@@ -156,6 +156,7 @@ function RuneRooms:DealDamageToGiantCrystal(giantCrystal)
             CRYSTAL_EXPLOSION_SHOCKWAVE.Speed,
             CRYSTAL_EXPLOSION_SHOCKWAVE.Duration
         )
+        Game():ShakeScreen(20)
 
         SpawnRuneParticles(giantCrystal.Position, 4)
 
@@ -187,6 +188,7 @@ function RuneRooms:ActivateGiantCrystal(giantCrystal)
     data.activated = true
     local sprite = giantCrystal:GetSprite()
     sprite:Play("ActivateStart", true)
+
 end
 
 
@@ -226,6 +228,7 @@ function GiantRuneCrystal:OnGiantCrystalUpdate(giantCrystal)
 
         local runeEffect = RuneRooms:GetRuneEffectForFloor()
         RuneRooms:ActivatePositiveEffect(runeEffect)
+        Game():ShakeScreen(20)
     end
 end
 RuneRooms:AddCallback(

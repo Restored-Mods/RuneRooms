@@ -1,0 +1,4 @@
+<music root="music/">
+	<!--Normal music-->
+	<track name="Rune Room" path="rune_room.ogg" loop="true" />
+</music>

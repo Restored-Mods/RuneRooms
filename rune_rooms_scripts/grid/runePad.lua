@@ -99,6 +99,7 @@ function RunePad:OnRunePadUpdate(runePad)
     end
 
     if sprite:IsFinished("TurnOn") then
+        SFXManager():Play(RuneRooms.Enums.SoundEffect.RUNE_PAD_ACTIVATION)
         data.activated = true
         sprite:Play("IdleOn", true)
 

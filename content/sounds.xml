@@ -3,6 +3,11 @@
         <sample weight="1" path="rune_crystal_explosion.wav"/>
     </sound>
 
+    <sound name="Rune Pad Activation">
+        <sample weight="1" path="rune_pad_activation_1.wav" />
+        <sample weight="1" path="rune_pad_activation_2.wav" />
+    </sound>
+
     <sound name="deadseascrolls_pop">
         <sample weight="1" path="deadseascrolls/pop.wav" />
     </sound>
