@@ -1,19 +1,36 @@
 local AchievementChecker = {}
 
+local trinketPerAchievement = {}
+for _, id in pairs(RuneRooms.Constants.TRINKET_PER_ACHIEVEMENT) do
+    trinketPerAchievement[id] = true
+end
 
-RuneRooms:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function ()
+local function RemoveAchievementTrinkets()
     local itemPool = Game():GetItemPool()
 
-    for trinket, _ in pairs(RuneRooms.Constants.TRINKET_PER_ACHIEVEMENT) do
+    for trinket, _ in pairs(trinketPerAchievement) do
         itemPool:RemoveTrinket(trinket)
     end
+end
+
+RuneRooms:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function ()
+    RemoveAchievementTrinkets()
 end)
 
+local antiRecursion
 
 RuneRooms:AddCallback(ModCallbacks.MC_GET_TRINKET, function (_, trinket)
-    if RuneRooms.Constants.TRINKET_PER_ACHIEVEMENT[trinket] then
+    if trinketPerAchievement[trinket] and not antiRecursion then
+        antiRecursion = true
+
+        RemoveAchievementTrinkets()
+
         local itemPool = Game():GetItemPool()
-        return itemPool:GetTrinket()
+        local new = itemPool:GetTrinket()
+
+        antiRecursion = false
+
+        return new
     end
 end)
 
