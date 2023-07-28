@@ -60,7 +60,7 @@ RuneRooms:AddCallback(RuneRooms.Enums.CustomCallback.ON_CUSTOM_CMD, function ()
     print("rune help - Shows this message.")
     print("rune seteffect [rune_effect] - Changes the rune effect for the current floor.")
     print("rune good [rune_effect] - Activates the good effect of a rune for the current level.")
-    print("rune bad [rune_effect] - Activates the good effect of a rune for the current level.")
+    print("rune bad [rune_effect] - Activates the bad effect of a rune for the current level.")
     print("rune ehwazmode [mode] - Changes how the positive effect of ehwaz works")
 
     return true
