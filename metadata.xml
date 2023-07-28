@@ -1,8 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <name>Rune Rooms</name>
-  <directory>Rune Rooms</directory>
-  <description>Rune Rooms is currently a work in progress mod.</description>
-  <version>1.0</version>
-  <visibility/>
+    <name>Rune Rooms [Release]</name>
+    <directory>rune rooms</directory>
+    <id>3010945909</id>
+    <description>Enter the Rune Room, a cut room type planned for Antibirth, and claim your rewards!
+
+[img]https://i.imgur.com/EzZvNJq.png[/img]
+[img]https://i.imgur.com/9mCoZKo.png[/img]
+[u][b]Rune Rooms[/b][/u]
+
+A new room type that has a [b]20%[/b] chance to replace vaults. To activate the room's unique floor-wide effect, step on the [b]4 pads[/b] located throughout the room.
+
+[u][b]Table of Effects[/b][/u]
+
+[table]
+  [tr]
+    [th][img]https://i.imgur.com/BiC5r4s.png[/img][/th]
+    [th][b]Rune Type[/b][/th]
+    [th][b]Positive Effect[/b][/th]
+    [th][b]Negative Effect[/b][/th]
+  [/tr]
+[/table]
+
+[table]
+  [tr]
+    [th][img]https://i.imgur.com/nbfbrC1.png[/img][/th]
+    [th]Hagalaz[/th]
+    [th]Destroys all rocks in each room[/th]
+    [th]Chance of replacing regular rocks with their spiked variant[/th]
+  [/tr]
+  [tr]
+    [th][img]https://i.imgur.com/aT1tusz.png[/img][/th]
+    [th]Perthro[/th]
+    [th]Items switch between two possibilities[/th]
+    [th]Replaces items with trinkets[/th]
+  [/tr]
+  [tr]
+    [th][img]https://i.imgur.com/PMRF3E1.png[/img][/th]
+    [th]Berkano[/th]
+    [th]Killing enemies spawns blue flies and spiders[/th]
+    [th]Killing enemies spawns enemy flies and spiders[/th]
+  [/tr]
+  [tr]
+    [th][img]https://i.imgur.com/Uj4nsV4.png[/img][/th]
+    [th]Ehwaz[/th]
+    [th]Spawns a trapdoor to the Great Gideon special crawlspace[/th]
+    [th]Replaces some rocks with trapdoors[/th]
+  [/tr]
+  [tr]
+    [th][img]https://i.imgur.com/T0lfKYk.png[/img][/th]
+    [th]Dagaz[/th]
+    [th]Prevents champion enemies from spawning[/th]
+    [th]Increases the amount of champion enemies[/th]
+  [/tr]
+  [tr]
+    [th][img]https://i.imgur.com/m6lj9Q3.png[/img][/th]
+    [th]Ansuz[/th]
+    [th]Grants the Mercurius effect[/th]
+    [th]Grants the Amnesia effect[/th]
+  [/tr]
+ [tr]
+    [th][img]https://i.imgur.com/iVDdam0.png[/img][/th]
+    [th]Jera[/th]
+    [th]Grants the Contract from Below effect[/th]
+    [th]All pickups have despawn after a certain time[/th]
+  [/tr]
+ [tr]
+    [th][img]https://i.imgur.com/LqMy2E3.png[/img][/th]
+    [th]Algiz[/th]
+    [th]Grants a 7 sec shield in each room[/th]
+    [th]Enemies are invincible for 3 seconds in each room[/th]
+  [/tr]
+ [tr]
+    [th][img]https://i.imgur.com/ZjabR6a.png[/img][/th]
+    [th]Ingwaz[/th]
+    [th]Regular and red chests get replaced with spiked chests. Locked and bomb chests take 2 keys and bombs to open respectively[/th]
+    [th]Most chests work like eternal chests[/th]
+  [/tr]
+[tr]
+    [th][img]https://i.imgur.com/78XixIy.png[/img][/th]
+    [th]Fehu[/th]
+    [th]Grants midas tears that turn enemies golden[/th]
+    [th]Isaac loses money when taking damage[/th]
+  [/tr]
+[tr]
+    [th][img]https://i.imgur.com/Oc24YC1.png[/img][/th]
+    [th]Gebo[/th]
+    [th]Has a chance of spawning a slot in each room[/th]
+    [th]Destroys all machines without spawning any rewards[/th]
+  [/tr]
+[tr]
+    [th][img]https://i.imgur.com/OWEEagP.png[/img][/th]
+    [th]Kenaz[/th]
+    [th]When entering an uncleared room, poisons all enemies[/th]
+    [th]Enemies spawn poisonous clouds when they die[/th]
+  [/tr]
+[tr]
+    [th][img]https://i.imgur.com/lX1ny4L.png[/img][/th]
+    [th]Othala[/th]
+    [th]Grants a temporary copy of a random item for each room[/th]
+    [th]Rerolls the highest quality item Isaac has into a lower quality one[/th]
+  [/tr]
+[tr]
+    [th][img]https://i.imgur.com/HEzPK7u.png[/img][/th]
+    [th]Sowilo[/th]
+    [th]Spawns a friendly version of the lowest hp enemy when clearing a room[/th]
+    [th]Clearing a room respawns all the enemies[/th]
+  [/tr]
+[/table]
+
+
+[img]https://i.imgur.com/56DdjaH.png[/img]
+[list]
+[*][u]𝐃𝐢𝐫𝐞𝐜𝐭𝐨𝐫[/u] = [url=https://steamcommunity.com/id/soaring__sky]Soaring_Sky[/url]
+[*][u]𝐂𝐨𝐝𝐞𝐫𝐬[/u] = [url=https://steamcommunity.com/profiles/76561198330371330]Thicco Catto[/url],  [url=https://steamcommunity.com/id/brakedude]BrakeDude[/url]
+[*][u]𝐀𝐫𝐭𝐢𝐬𝐭𝐬[/u] = [url=https://steamcommunity.com/id/goganidze]Goganidze[/url], [url=https://steamcommunity.com/id/funnynotename]The Demisemihemidemisemiquaver[/url]
+[*][u]𝐀𝐮𝐝𝐢𝐨[/u] = Ridiculon, [url=https://steamcommunity.com/profiles/76561198374458982/]Sillst[/url]
+[*][u]𝐏𝐥𝐚𝐲𝐭𝐞𝐬𝐭𝐞𝐫𝐬[/u]= Gabriel, [url=https://steamcommunity.com/id/funnynotename]The Demisemihemidemisemiquaver[/url], [url=https://steamcommunity.com/profiles/76561198374458982/]Sillst[/url]
+[/list]
+
+[img]https://i.imgur.com/3en8OyU.png[/img]
+[code]Aether, Akad, Amy, Andre Doruk, Bajongo, BrakeDude, BroskiPlays, Firework, fly_6, Gabriel, im_tem, J64, KitsuneMedia, kittenchilly, Kotry, lambchop_is_ok, Luigi124, Michael¿?, MillieAmp, Mr. Cross Stoney, RatRatRat, RedStinger665, Sillst, sinbiscuit, Soaring__Sky, The Demisemihemidemisemiquaver, Thicco Catto, watchmeojo[/code]
+
+[img]https://i.imgur.com/SlXbHql.png[/img] [img]https://i.imgur.com/xd2eafr.png[/img]
+[code][u]_Kilburn[/u] - For the original Rune Rooms concept
+[u]NotYourSaggitarius[/u] - For the original Rune Room sprites 
+[u]All of you[/u] - For checking us out and supporting us :)[/code]
+
+[img]https://i.imgur.com/l7jgLpl.png[/img]
+
+[img]https://i.imgur.com/OZNWMCq.png[/img] [url=https://github.com/Team-Compliance/RuneRooms]Rune Rooms Repository[/url] [img]https://i.imgur.com/OZNWMCq.png[/img]
+[img]https://i.imgur.com/xK4Mor0.png[/img] [url=https://discord.gg/GdVnkV4Gwj]TBOI: Compliance Discord Server[/url] [img]https://i.imgur.com/xK4Mor0.png[/img]
+[img]https://i.imgur.com/69jZFo8.png[/img] [url=https://www.reddit.com/r/TBOICompliance/]TBOI: Compliance Subreddit[/url] [img]https://i.imgur.com/69jZFo8.png[/img]
+[img]https://i.imgur.com/GmVPmG0.png[/img] [url=https://www.youtube.com/channel/UCEdAioGltx_hOsyDW57nvSw/featured]TBOI: Compliance YouTube[/url] [img]https://i.imgur.com/GmVPmG0.png[/img]
+[img]https://i.imgur.com/jBFg02x.png[/img] [url=https://twitter.com/ComplianceMods]TBOI: Compliance Twitter[/url] [img]https://i.imgur.com/jBFg02x.png[/img]
+[img]https://i.imgur.com/MTKQKCX.png[/img]</description>
+    <version>1.1</version>
+    <visibility>Public</visibility>
+    <tag id="Lua"/>
+    <tag id="Items"/>
+    <tag id="Rooms"/>
+    <tag id="Graphics"/>
+    <tag id="Shaders"/>
+    <tag id="Sound Effects"/>
+    <tag id="Music"/>
 </metadata>
