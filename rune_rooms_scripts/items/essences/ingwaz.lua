@@ -181,6 +181,8 @@ end
 
 ---@param chest EntityPickup
 function IngwazEssence:OnChestOpened(chest)
+    if not TSIL.Players.DoesAnyPlayerHasItem(IngwazItem) then return end
+
     local rng = chest:GetDropRNG()
 
     --Rusted key effect
@@ -199,6 +201,8 @@ RuneRooms:AddCallback(
 
 ---@param gridEntity GridEntity
 function IngwazEssence:OnTintedRockBreak(gridEntity)
+    if not TSIL.Players.DoesAnyPlayerHasItem(IngwazItem) then return end
+
     local rng = gridEntity:GetRNG()
 
     SpawnExtraKey(rng, gridEntity.Position)
@@ -212,6 +216,8 @@ RuneRooms:AddCallback(
 
 ---@param gridEntity GridEntity
 function IngwazEssence:OnSuperTintedRockBreak(gridEntity)
+    if not TSIL.Players.DoesAnyPlayerHasItem(IngwazItem) then return end
+
     local rng = gridEntity:GetRNG()
 
     SpawnExtraKey(rng, gridEntity.Position)
@@ -227,6 +233,8 @@ RuneRooms:AddCallback(
 
 ---@param slot Entity
 function IngwazEssence:OnSlotBreak(slot)
+    if not TSIL.Players.DoesAnyPlayerHasItem(IngwazItem) then return end
+
     local rng = slot:GetDropRNG()
 
     SpawnExtraKey(rng, slot.Position)
