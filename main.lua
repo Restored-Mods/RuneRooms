@@ -8,6 +8,7 @@ include("rune_rooms_scripts.enums")
 include("rune_rooms_scripts.constants")
 include("rune_rooms_scripts.helpers")
 RuneRooms.API = {}
+RuneRooms.Version = "v1.2"
 
 if StageAPI then
     StageAPI.UnregisterCallbacks(RuneRooms.Constants.MOD_ID)
@@ -32,7 +33,7 @@ include("rune_rooms_scripts.room.main")
 include("rune_rooms_scripts.rune_effects.main")
 include("rune_rooms_scripts.tear_effects.main")
 
-print("Rune Rooms loaded. Use \"rune help\" to get information about commands.")
+print("Rune Rooms "..RuneRooms.Version.." loaded. Use \"rune help\" to get information about commands.")
 
 RuneRooms:AddCallback(ModCallbacks.MC_EXECUTE_CMD, function (_, cmd, params)
     if cmd == "rune" then
