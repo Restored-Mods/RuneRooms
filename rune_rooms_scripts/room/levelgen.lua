@@ -23,26 +23,6 @@ local function GetRuneRoomData(roomID)
 end
 
 
-local function LoadRuneRooms()
-    local level = Game():GetLevel()
-    local currentRoomIdx = level:GetCurrentRoomIndex()
-
-    for roomID, weight in pairs(RuneRooms.Constants.RUNE_ROOMS_IDS) do
-        local data = GetRuneRoomData(roomID)
-        RuneRooms.Constants.RUNE_ROOMS_DATAS[#RuneRooms.Constants.RUNE_ROOMS_DATAS+1] = {
-            chance = weight,
-            value = data
-        }
-    end
-
-    Game():StartRoomTransition(currentRoomIdx, Direction.NO_DIRECTION, RoomTransitionAnim.FADE)
-
-    hasLoadedRuneRooms = true
-
-    Isaac.ExecuteCommand("restart")
-end
-
-
 ---@return integer?
 local function GetVaultRoom()
     local level = Game():GetLevel()
@@ -78,11 +58,6 @@ end
 
 
 function LevelGen:OnNewLevel()
-    if not hasLoadedRuneRooms then
-        LoadRuneRooms()
-        return
-    end
-
     local rng = RuneRooms.Helpers:GetStageRNG()
 
     if rng:RandomFloat() >= RUNE_ROOM_SPAWN_CHANCE then return end
@@ -101,4 +76,19 @@ end
 RuneRooms:AddCallback(
     TSIL.Enums.CustomCallback.POST_NEW_LEVEL_REORDERED,
     LevelGen.OnNewLevel
+)
+
+
+function LevelGen:OnRoomLoad()
+    for roomID, weight in pairs(RuneRooms.Constants.RUNE_ROOMS_IDS) do
+        local data = GetRuneRoomData(roomID)
+        RuneRooms.Constants.RUNE_ROOMS_DATAS[#RuneRooms.Constants.RUNE_ROOMS_DATAS+1] = {
+            chance = weight,
+            value = data
+        }
+    end
+end
+RuneRooms:AddCallback(
+    RuneRooms.Enums.CustomCallback.ROOM_LOAD,
+    LevelGen.OnRoomLoad
 )

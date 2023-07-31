@@ -105,21 +105,15 @@ RuneRooms:AddCallback(
 
 
 local gideonDungeonRoomData
-function EhwazPositive:OnNewLevel()
-    if gideonDungeonRoomData then return end
-
+function EhwazPositive:OnRoomLoad()
+    print("Loading gideon room data")
     Isaac.ExecuteCommand("goto s.itemdungeon.1000")
 
-    local level = Game():GetLevel()
-    local currentRoomIdx = level:GetCurrentRoomIndex()
-
     gideonDungeonRoomData = TSIL.Rooms.GetRoomData(GridRooms.ROOM_DEBUG_IDX)
-
-    Game():StartRoomTransition(currentRoomIdx, Direction.NO_DIRECTION, RoomTransitionAnim.FADE)
 end
 RuneRooms:AddCallback(
-    ModCallbacks.MC_POST_NEW_LEVEL,
-    EhwazPositive.OnNewLevel
+    RuneRooms.Enums.CustomCallback.ROOM_LOAD,
+    EhwazPositive.OnRoomLoad
 )
 
 

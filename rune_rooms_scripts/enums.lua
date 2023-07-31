@@ -213,6 +213,12 @@ RuneRooms.Enums.CustomCallback = {
     --
     -- * giantRuneCrystal - Entity
     POST_GIANT_RUNE_CRYSTAL_DESTROYED = {},
+
+    ---Called only once the first time a run is started. After the callback runs, the
+    ---game will restart.
+    ---
+    ---Use it to load any neccesary rooms
+    ROOM_LOAD = {}
 }
 
 
