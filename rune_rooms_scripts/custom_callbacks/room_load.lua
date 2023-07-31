@@ -3,7 +3,8 @@ local RoomLoad = {}
 local HasLoadedRooms = false
 local NeedsToRestart = false
 
-function RoomLoad:OnGameStart()
+---@param isContinue boolean
+function RoomLoad:OnGameStart(isContinue)
     if HasLoadedRooms then return end
     HasLoadedRooms = true
 
@@ -12,7 +13,7 @@ function RoomLoad:OnGameStart()
 
     Isaac.RunCallback(RuneRooms.Enums.CustomCallback.ROOM_LOAD)
 
-    NeedsToRestart = true
+    NeedsToRestart = not isContinue
     Game():StartRoomTransition(currentRoomIdx, Direction.NO_DIRECTION, RoomTransitionAnim.FADE)
 end
 RuneRooms:AddPriorityCallback(
