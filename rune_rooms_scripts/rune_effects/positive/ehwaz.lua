@@ -106,7 +106,6 @@ RuneRooms:AddCallback(
 
 local gideonDungeonRoomData
 function EhwazPositive:OnRoomLoad()
-    print("Loading gideon room data")
     Isaac.ExecuteCommand("goto s.itemdungeon.1000")
 
     gideonDungeonRoomData = TSIL.Rooms.GetRoomData(GridRooms.ROOM_DEBUG_IDX)
