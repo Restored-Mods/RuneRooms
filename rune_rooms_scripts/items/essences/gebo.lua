@@ -182,12 +182,18 @@ local function CanUseSlot(slot)
         return true
     end
 
-    local lastFrame = TSIL.Sprites.GetLastFrameOfAnimation(sprite)
+    local isFinished
+    if slot.Variant == TSIL.Enums.SlotVariant.DONATION_MACHINE
+    or slot.Variant == TSIL.Enums.SlotVariant.GREED_DONATION_MACHINE then
+        isFinished = sprite:IsOverlayFinished()
+    else
+        isFinished = sprite:IsFinished()
+    end
 
     if (
         sprite:GetAnimation() == "Prize"
         or sprite:GetAnimation() == "PayNothing"
-    ) and sprite:GetFrame() == lastFrame then
+    ) and isFinished then
         return true
     end
 

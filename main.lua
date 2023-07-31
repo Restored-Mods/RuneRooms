@@ -34,7 +34,6 @@ include("rune_rooms_scripts.tear_effects.main")
 
 print("Rune Rooms loaded. Use \"rune help\" to get information about commands.")
 
-
 RuneRooms:AddCallback(ModCallbacks.MC_EXECUTE_CMD, function (_, cmd, params)
     if cmd == "rune" then
         local tokens = TSIL.Utils.String.Split(params, " ")
