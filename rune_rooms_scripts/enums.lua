@@ -62,6 +62,7 @@ RuneRooms.Enums.SaveKey = {
 
     ROCKS_SPRITE_MODE               = "ROCKS_SPRITE_MODE",
     PITS_SPRITE_MODE                = "PITS_SPRITE_MODE",
+    RUNE_ROOM_SPAWN_CHANCE          = "RUNE_ROOM_SPAWN_CHANCE",
 
     GIANT_CRYSTAL_DATA              = "GIANT_CRYSTAL_DATA",
     RUNE_PAD_DATA                   = "RUNE_PAD_DATA",

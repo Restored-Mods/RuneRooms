@@ -1,10 +1,5 @@
 local LevelGen = {}
 
---Chance of rune room to replace a vault
-local RUNE_ROOM_SPAWN_CHANCE = 0.2
-
-local hasLoadedRuneRooms = false
-
 
 ---Adds a new rune room. The room id must be unique and it has to be a chest.
 ---
@@ -60,7 +55,7 @@ end
 function LevelGen:OnNewLevel()
     local rng = RuneRooms.Helpers:GetStageRNG()
 
-    if rng:RandomFloat() >= RUNE_ROOM_SPAWN_CHANCE then return end
+    if rng:RandomFloat() >= RuneRooms:GetRuneRoomSpawnChance() then return end
 
     local vaultRoomIndex = GetVaultRoom()
     if not vaultRoomIndex then return end
