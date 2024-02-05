@@ -237,7 +237,7 @@ RuneRooms:AddCallback(
     RuneRooms.Enums.GenericPropVariant.GIANT_RUNE_CRYSTAL
 )
 
-
+--[[
 ---@param bomb EntityBomb
 function GiantRuneCrystal:OnBombExplode(bomb)
     local radius = TSIL.Bombs.GetBombRadiusFromDamage(bomb.ExplosionDamage)
@@ -258,4 +258,24 @@ end
 RuneRooms:AddCallback(
     TSIL.Enums.CustomCallback.POST_BOMB_EXPLODED,
     GiantRuneCrystal.OnBombExplode
+)]]
+---comment
+---@param entity Entity
+---@param damage number
+---@param flags DamageFlag | number
+---@param source EntityRef
+---@param cd number
+---@return boolean | nil?
+function GiantRuneCrystal:OnExplosionDamage(entity, damage, flags, source, cd)
+    if entity.Variant == RuneRooms.Enums.GenericPropVariant.GIANT_RUNE_CRYSTAL then
+        if (flags & DamageFlag.DAMAGE_EXPLOSION > 0 or flags & DamageFlag.DAMAGE_CRUSH > 0) then
+            RuneRooms:DealDamageToGiantCrystal(entity)
+        end
+        return false
+    end
+end
+RuneRooms:AddCallback(
+    ModCallbacks.MC_ENTITY_TAKE_DMG,
+    GiantRuneCrystal.OnExplosionDamage,
+    EntityType.ENTITY_GENERIC_PROP
 )
