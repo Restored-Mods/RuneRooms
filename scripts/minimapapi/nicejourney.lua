@@ -53,14 +53,12 @@ local _telHandlerTemplate = {}
 ---@param room MinimapAPI.Room
 ---@return boolean success
 function _telHandlerTemplate:Teleport(room)
----@diagnostic disable-next-line: missing-return
 end
 
 ---@param room MinimapAPI.Room
 ---@param cheatMode boolean # If cheat mode (unclear room teleport) is enabled
 ---@return boolean
 function _telHandlerTemplate:CanTeleport(room, cheatMode)
-    ---@diagnostic disable-next-line: missing-return
 end
 
 ---@param room MinimapAPI.Room # target room
@@ -325,11 +323,14 @@ MinimapAPI:AddCallbackFunc(
     CALLBACK_PRIORITY,
     function(_, _)
         if addRenderCall then
-            if StageAPI and StageAPI.Loaded then
-                StageAPI.AddCallback("MinimapAPI", "POST_HUD_RENDER", constants.STAGEAPI_CALLBACK_PRIORITY, niceJourney_PostRender)
-            else
-                MinimapAPI:AddCallbackFunc(ModCallbacks.MC_POST_RENDER, CALLBACK_PRIORITY, niceJourney_PostRender)
-            end
+			if REPENTOGON then
+				MinimapAPI:AddCallbackFunc(ModCallbacks.MC_POST_HUD_RENDER, CALLBACK_PRIORITY, niceJourney_PostRender)
+			elseif StageAPI and StageAPI.Loaded then
+				StageAPI.AddCallback("MinimapAPI", "POST_HUD_RENDER", constants.STAGEAPI_CALLBACK_PRIORITY, niceJourney_PostRender)
+				MinimapAPI.UsingStageAPIPostHUDRender = true -- only for stage api
+			else
+				MinimapAPI:AddCallbackFunc(ModCallbacks.MC_POST_RENDER, CALLBACK_PRIORITY, niceJourney_PostRender)
+			end
             addRenderCall = false
         end
     end

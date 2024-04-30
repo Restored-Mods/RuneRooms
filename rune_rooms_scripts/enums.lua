@@ -48,6 +48,14 @@ RuneRooms.Enums.EffectVariant = {
     EID_DESCRIPTION_HOLDER  = Isaac.GetEntityVariantByName("EID Description Holder")
 }
 
+RuneRooms.Enums.Runes = {
+    GEBO = Isaac.GetCardIdByName("Gebo"),
+    KENAZ = Isaac.GetCardIdByName("Kenaz"),
+    FEHU = Isaac.GetCardIdByName("Fehu"),
+    OTHALA = Isaac.GetCardIdByName("Othala"),
+    SOWILO = Isaac.GetCardIdByName("Sowilo"),
+    INGWAZ = Isaac.GetCardIdByName("Ingwaz"),
+}
 
 RuneRooms.Enums.GenericPropVariant = {
     GIANT_RUNE_CRYSTAL  = Isaac.GetEntityVariantByName("Giant Rune Crystal"),
@@ -88,6 +96,8 @@ RuneRooms.Enums.SaveKey = {
     PLAYERS_CLOSE_TO_POISON_CLOUD   = "PLAYERS_CLOSE_TO_POISON_CLOUD",
     COLLECTIBLE_INFOS_PERTHRO       = "COLLECTIBLE_INFOS_PERTHRO",
     ACTIVATED_4_PIP_DICE_ROOM       = "ACTIVATED_4_PIP_DICE_ROOM",
+
+    VANILLA_GIANTBOOK_CUSTOM_API_OPTION       = "VANILLA_GIANTBOOK_CUSTOM_API_OPTION",
 }
 
 
@@ -225,7 +235,13 @@ RuneRooms.Enums.CustomCallback = {
 
 RuneRooms.Enums.SoundEffect = {
     RUNE_CRYSTAL_EXPLOSION = Isaac.GetSoundIdByName("Rune Crystal Explosion"),
-    RUNE_PAD_ACTIVATION = Isaac.GetSoundIdByName("Rune Pad Activation")
+    RUNE_PAD_ACTIVATION = Isaac.GetSoundIdByName("Rune Pad Activation"),
+    RUNE_GEBO = Isaac.GetSoundIdByName("Gebo"),
+    RUNE_KENAZ = Isaac.GetSoundIdByName("Kenaz"),
+    RUNE_FEHU = Isaac.GetSoundIdByName("Fehu"),
+    RUNE_OTHALA = Isaac.GetSoundIdByName("Othala"),
+    RUNE_SOWILO = Isaac.GetSoundIdByName("Sowilo"),
+    RUNE_INGWAZ = Isaac.GetSoundIdByName("Ingwaz"),
 }
 
 

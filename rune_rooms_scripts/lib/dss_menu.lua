@@ -28,6 +28,13 @@ TSIL.SaveManager.AddPersistentVariable(
     TSIL.Enums.VariablePersistenceMode.NONE
 )
 
+TSIL.SaveManager.AddPersistentVariable(
+    RuneRooms,
+    RuneRooms.Enums.SaveKey.VANILLA_GIANTBOOK_CUSTOM_API_OPTION,
+    1,
+    TSIL.Enums.VariablePersistenceMode.NONE
+)
+
 ---@return GridSpriteMode
 function RuneRooms:GetRocksSpriteMode()
     return TSIL.SaveManager.GetPersistentVariable(
@@ -48,6 +55,13 @@ function RuneRooms:GetRuneRoomSpawnChance()
     return TSIL.SaveManager.GetPersistentVariable(
         RuneRooms,
         RuneRooms.Enums.SaveKey.RUNE_ROOM_SPAWN_CHANCE
+    )
+end
+
+function RuneRooms:GetCustomVanillaGiantbookAPI()
+    return TSIL.SaveManager.GetPersistentVariable(
+        RuneRooms,
+        RuneRooms.Enums.SaveKey.VANILLA_GIANTBOOK_CUSTOM_API_OPTION
     )
 end
 
@@ -279,6 +293,30 @@ local exampledirectory = {
                     )
                 end,
                 tooltip = { strset = { "how often", "rune rooms", "replace vaults" } },
+            },
+
+            {
+                str = 'giantbook api',
+
+                choices = { 'giantbook api', 'screen api', 'none' },
+
+                setting = 1,
+
+                variable = 'GiantbookAPI',
+
+                load = function()
+                    return RuneRooms:GetCustomVanillaGiantbookAPI()
+                end,
+
+                store = function(var)
+                    TSIL.SaveManager.SetPersistentVariable(
+                        RuneRooms,
+                        RuneRooms.Enums.SaveKey.VANILLA_GIANTBOOK_CUSTOM_API_OPTION,
+                        var
+                    )
+                end,
+
+                tooltip = { strset = { 'what giantbook', 'api to use', '(without repentogon)' } }
             },
         }
     }
