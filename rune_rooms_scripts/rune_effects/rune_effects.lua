@@ -4,21 +4,21 @@ TSIL.SaveManager.AddPersistentVariable(
     RuneRooms,
     RuneRooms.Enums.SaveKey.ACTIVE_POSITIVE_EFFECTS,
     0,
-    TSIL.Enums.VariablePersistenceMode.RESET_LEVEL
+    TSIL.Enums.VariablePersistenceMode.RESET_RUN
 )
 
 TSIL.SaveManager.AddPersistentVariable(
     RuneRooms,
     RuneRooms.Enums.SaveKey.ACTIVE_NEGATIVE_EFFECTS,
     0,
-    TSIL.Enums.VariablePersistenceMode.RESET_LEVEL
+    TSIL.Enums.VariablePersistenceMode.RESET_RUN
 )
 
 TSIL.SaveManager.AddPersistentVariable(
     RuneRooms,
     RuneRooms.Enums.SaveKey.FORCED_RUNE_EFFECT,
     -1,
-    TSIL.Enums.VariablePersistenceMode.RESET_LEVEL
+    TSIL.Enums.VariablePersistenceMode.RESET_RUN
 )
 
 local SortedEffects
