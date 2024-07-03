@@ -104,8 +104,10 @@ RuneRooms:AddCallback(
 )
 
 
+---@type RoomConfigRoom
 local gideonDungeonRoomData
 function EhwazPositive:OnRoomLoad()
+    Isaac.DebugString("[RuneRooms] Setting debug room to gideon")
     Isaac.ExecuteCommand("goto s.itemdungeon.1000")
 
     gideonDungeonRoomData = TSIL.Rooms.GetRoomData(GridRooms.ROOM_DEBUG_IDX)
@@ -118,18 +120,26 @@ RuneRooms:AddCallback(
 
 function EhwazPositive:OnEhwazPositiveActivation()
     if crawlspaceMode == "temporary" then
+        Isaac.DebugString("[RuneRooms] Crawlspace mode: temporary")
         Isaac.ExecuteCommand("goto s.itemdungeon.1000")
         Game():StartRoomTransition(GridRooms.ROOM_DEBUG_IDX, Direction.NO_DIRECTION, RoomTransitionAnim.PIXELATION)
     elseif crawlspaceMode == "gideon" then
+        Isaac.DebugString("[RuneRooms] Crawlspace mode: gideon")
         local room = Game():GetRoom()
         local centerPos = room:GetCenterPos()
         local spawnPos = centerPos + Vector(0, 80)
 
         SpawnDyingGideon(spawnPos)
     elseif crawlspaceMode == "replace" then
+        Isaac.DebugString("[RuneRooms] Crawlspace mode: replace")
         local level = Game():GetLevel()
 
         local writeableRoom = level:GetRoomByIdx(GridRooms.ROOM_DUNGEON_IDX, -1)
+
+        if REPENTOGON then
+            gideonDungeonRoomData = RoomConfigHolder.GetRandomRoom(writeableRoom.AwardSeed, false, StbType.SPECIAL_ROOMS, RoomType.ROOM_DUNGEON, RoomShape.NUM_ROOMSHAPES, 0, -1, 0, 0, 0, 1)
+        end
+        Isaac.DebugString("[RuneRooms] gideon dungeon room data: " .. tostring(gideonDungeonRoomData))
         writeableRoom.Data = gideonDungeonRoomData
 
         local room = Game():GetRoom()

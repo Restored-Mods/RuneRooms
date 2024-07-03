@@ -76,6 +76,7 @@ end
 ---Helper function to check if a rune's positive effect is active
 ---@param runeEffect RuneEffect
 function RuneRooms:ActivatePositiveEffect(runeEffect)
+    Isaac.DebugString("[RuneRooms] Succesfully activated positive " .. runeEffect .. " effect")
     local hadEffectPreviously = RuneRooms:IsPositiveEffectActive(runeEffect)
 
     local positiveEffects = TSIL.SaveManager.GetPersistentVariable(
