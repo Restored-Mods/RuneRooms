@@ -58,3 +58,19 @@ RuneRooms:AddCallback(
     OthalaNegative.OnOthalaNegativeActivation,
     RuneRooms.Enums.RuneEffect.OTHALA
 )
+
+function OthalaNegative.OnNewFloor()
+    local negativeEffects = TSIL.SaveManager.GetPersistentVariable(
+        RuneRooms,
+        RuneRooms.Enums.SaveKey.ACTIVE_NEGATIVE_EFFECTS
+    )
+
+    if TSIL.Utils.Flags.HasFlags(negativeEffects, RuneRooms.Enums.RuneEffect.OTHALA) then
+        OthalaNegative:OnOthalaNegativeActivation()
+    end
+end
+
+RuneRooms:AddCallback(
+    ModCallbacks.MC_POST_NEW_LEVEL,
+    OthalaNegative.OnNewFloor
+)
