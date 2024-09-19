@@ -336,6 +336,21 @@ local exampledirectorykey = {
     Path = {},
 }
 
+local function DeleteParticles()
+    for _, ember in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.FALLING_EMBER, -1)) do
+        if ember:Exists() then
+            ember:Remove()
+        end
+    end
+    if REPENTANCE then
+        for _, rain in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.RAIN_DROP, -1)) do
+            if rain:Exists() then
+                rain:Remove()
+            end
+        end
+    end
+end
+
 --#region AgentCucco pause manager for DSS
 
 local OldTimer
@@ -354,18 +369,7 @@ local function OverridePause(self, player, hook, action)
 
 	if action == ButtonAction.ACTION_SHOOTRIGHT then
 		OverwrittenPause = true
-		for _, ember in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.FALLING_EMBER, -1)) do
-			if ember:Exists() then
-				ember:Remove()
-			end
-		end
-		if REPENTANCE then
-			for _, rain in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.RAIN_DROP, -1)) do
-				if rain:Exists() then
-					rain:Remove()
-				end
-			end
-		end
+		DeleteParticles()
 		return true
 	end
 end
@@ -395,6 +399,7 @@ local function FreezeGame(unfreeze)
 		Game().TimeCounter = OldTimer
 		Game().BossRushParTime = OldTimerBossRush
 		Game().BlueWombParTime = OldTimerHush
+        DeleteParticles()
 	end
 end
 
