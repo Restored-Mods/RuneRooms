@@ -1,6 +1,7 @@
 local MinimapAPI = require("scripts.minimapapi.minimapapi")
 local cache = require("scripts.minimapapi.cache")
 local constants = require("scripts.minimapapi.constants")
+local Callbacks = require("scripts.minimapapi.callbacks")
 local CALLBACK_PRIORITY = constants.CALLBACK_PRIORITY
 require("scripts.minimapapi.apioverride")
 
@@ -537,13 +538,23 @@ function MinimapAPI:GetCurrentRoomGridIDs()
 end
 
 function MinimapAPI:RunPlayerPosCallbacks()
+	local currentRoom = MinimapAPI:GetCurrentRoom()
+	if REPENTANCE then
+		local returnVal = Isaac.RunCallback(Callbacks.PLAYER_POS_CHANGED, currentRoom, playerMapPos)
+		if returnVal then
+			playerMapPos = returnVal
+			return returnVal
+		end
+	end
+
+	-- still run old callbacks for backwards compatibility
 	for _, v in ipairs(callbacks_playerpos) do
 		local s, ret
 		-- backwards compatibility mode, pass mod reference
 		if v.modReference then
-			s, ret = pcall(v.call, v.modReference, MinimapAPI:GetCurrentRoom(), playerMapPos)
+			s, ret = pcall(v.call, v.modReference, currentRoom, playerMapPos)
 		else
-			s, ret = pcall(v.call, MinimapAPI:GetCurrentRoom(), playerMapPos)
+			s, ret = pcall(v.call, currentRoom, playerMapPos)
 		end
 		if s then
 			if ret then
@@ -557,6 +568,14 @@ function MinimapAPI:RunPlayerPosCallbacks()
 end
 
 function MinimapAPI:RunDisplayFlagsCallbacks(room, df)
+	if REPENTANCE then
+		local returnVal = Isaac.RunCallback(Callbacks.GET_DISPLAY_FLAGS, room, df)
+		if returnVal then
+			return returnVal
+		end
+	end
+
+	-- still run old callbacks for backwards compatibility
 	for _, v in ipairs(callbacks_displayflags) do
 		local s, ret
 		-- backwards compatibility mode, pass mod reference
@@ -578,6 +597,15 @@ function MinimapAPI:RunDisplayFlagsCallbacks(room, df)
 end
 
 function MinimapAPI:RunDimensionCallbacks()
+	if REPENTANCE then
+		local returnVal = Isaac.RunCallback(Callbacks.GET_DIMENSION, MinimapAPI.CurrentDimension)
+		if returnVal then
+			MinimapAPI.CurrentDimension = returnVal
+			return returnVal
+		end
+	end
+
+	-- still run old callbacks for backwards compatibility
 	for _, v in ipairs(callbacks_dimension) do
 		local s, ret
 		-- backwards compatibility mode, pass mod reference
@@ -681,7 +709,6 @@ function MinimapAPI:LoadDefaultMap(dimension)
 				end
 
 				if roomDescriptor.Data.Type == RoomType.ROOM_DEFAULT then
-					local currentStage = StageAPI and StageAPI.Loaded and StageAPI.GetCurrentStage()
 					if IsAltPath() then
 						local isCurseLabyrinth = level:GetCurses() & LevelCurse.CURSE_OF_LABYRINTH == LevelCurse.CURSE_OF_LABYRINTH
 						if ((level:GetAbsoluteStage() == LevelStage.STAGE1_2 and not isCurseLabyrinth or level:GetAbsoluteStage() == LevelStage.STAGE1_1 and isCurseLabyrinth) or (StageAPI and StageAPI.Loaded and StageAPI.GetCurrentStage() and StageAPI.GetCurrentStage():HasMirrorDimension())) and roomDescriptor.Data.Subtype == 34 then
@@ -763,8 +790,10 @@ function MinimapAPI:LoadDefaultMap(dimension)
 end
 
 function MinimapAPI:IsHUDVisible()
-	if MinimapAPI.isRepentance then
-		return game:GetHUD():IsVisible()
+	if MinimapAPI:GetConfig("DisplayOnNoHUD") then
+		return true
+	elseif MinimapAPI.isRepentance then
+		return game:GetHUD():IsVisible() and not game:GetSeeds():HasSeedEffect(SeedEffect.SEED_NO_HUD)
 	end
 	return not game:GetSeeds():HasSeedEffect(SeedEffect.SEED_NO_HUD)
 end
@@ -876,7 +905,7 @@ end
 ---@field ItemIcons string[]
 ---@field VisitedIcons string[]
 ---@field Descriptor RoomDescriptor | nil # may be nil for custom rooms
----@field TeleportHandler TeleportHandler # may be nil, used to handle minimapAPI map teleport for custom rooms
+---@field TeleportHandler TeleportHandler | nil # may be nil, used to handle minimapAPI map teleport for custom rooms
 ---@field Color Color | nil
 ---@field RenderOffset Vector
 ---@field DisplayFlags integer
@@ -1121,8 +1150,8 @@ function MinimapAPI:AddRoom(room)
 		Hidden = room.Hidden or nil,
 		NoUpdate = room.NoUpdate or nil,
 		Dimension = room.Dimension or MinimapAPI.CurrentDimension,
-		IgnoreDescriptorFlags = room.IgnoreDescriptorFlags,
-		TeleportHandler = room.TeleportHandler,
+		IgnoreDescriptorFlags = room.IgnoreDescriptorFlags or false,
+		TeleportHandler = room.TeleportHandler or nil,
 	}
 	setmetatable(newRoom, maproommeta)
 
@@ -1287,11 +1316,13 @@ function MinimapAPI:IsModTable(modtable)
 end
 
 -- Callbacks
+-- it's recommended to use the vanilla callback system, old functions are kept as follows for backwards compatibility
 -- try to handle both using a mod table as key
 -- for backwards compatibility, and using a string
 
 -- Use of a string as key or something else that doesn't change between
 -- mod reloads is recommended
+---@deprecated Use vanilla callbacks as defined in callbacks.lua
 function MinimapAPI:AddPlayerPositionCallback(modkey, func)
 	local modtable
 
@@ -1309,6 +1340,7 @@ end
 
 -- Use of a string as key or something else that doesn't change between
 -- mod reloads is recommended
+---@deprecated Use vanilla callbacks as defined in callbacks.lua
 function MinimapAPI:AddDisplayFlagsCallback(modkey, func)
 	local modtable
 
@@ -1326,6 +1358,7 @@ end
 
 -- Use of a string as key or something else that doesn't change between
 -- mod reloads is recommended
+---@deprecated Use vanilla callbacks as defined in callbacks.lua
 function MinimapAPI:AddDimensionCallback(modkey, func)
 	local modtable
 
@@ -1341,6 +1374,7 @@ function MinimapAPI:AddDimensionCallback(modkey, func)
 	}
 end
 
+---@deprecated Use vanilla callbacks as defined in callbacks.lua
 function MinimapAPI:RemoveAllCallbacks(modkey)
 	MinimapAPI:RemovePlayerPositionCallbacks(modkey)
 	MinimapAPI:RemoveDisplayFlagsCallbacks(modkey)
@@ -1364,19 +1398,22 @@ local function RemoveFromCallbackTable(tbl, modkey)
 	end
 end
 
+---@deprecated Use vanilla callbacks as defined in callbacks.lua
 function MinimapAPI:RemovePlayerPositionCallbacks(modkey)
 	RemoveFromCallbackTable(callbacks_playerpos, modkey)
 end
 
----@deprecated
+---@deprecated Use vanilla callbacks as defined in callbacks.lua
 function MinimapAPI:RemovePlayerPositionCallback(modkey)
 	MinimapAPI:RemovePlayerPositionCallbacks(modkey)
 end
 
+---@deprecated Use vanilla callbacks as defined in callbacks.lua
 function MinimapAPI:RemoveDisplayFlagsCallbacks(modkey)
 	RemoveFromCallbackTable(callbacks_displayflags, modkey)
 end
 
+---@deprecated Use vanilla callbacks as defined in callbacks.lua
 function MinimapAPI:RemoveDimensionCallbacks(modkey)
 	RemoveFromCallbackTable(callbacks_dimension, modkey)
 end
@@ -2188,7 +2225,7 @@ local function renderCallbackFunction(_)
 	end
 	MinimapAPI.GlobalScaleX = MinimapAPI.ValueGlobalScaleX
 
-	if MinimapAPI:GetConfig("DisplayOnNoHUD") or MinimapAPI:IsHUDVisible() or MinimapAPI.ForceMapRender then
+	if MinimapAPI:IsHUDVisible() or MinimapAPI.ForceMapRender then
 		MinimapAPI.ForceMapRender = false
 		local currentroomdata = MinimapAPI:GetCurrentRoom()
 		local gamelevel = game:GetLevel()
@@ -2375,15 +2412,16 @@ function MinimapAPI:LoadSaveTable(saved,is_save)
 		end
 
 		if is_save and saved.LevelData and saved.Seed == game:GetSeeds():GetStartSeed() then
-			MinimapAPI:ClearMap()
+			MinimapAPI:ClearLevels()
 			for dim, level in pairs(saved.LevelData) do
 				dim = tonumber(dim)
+				MinimapAPI.Levels[dim or 0] = {}
 				for _, v in ipairs(level) do
 					local desc
 					if v.DescriptorListIndex then
 						desc, _ = GetRoomDescAndDimFromListIndex(v.DescriptorListIndex)
 					end
-					MinimapAPI:AddRoom{
+					MinimapAPI:AddRoom({
 						Position = Vector(v.PositionX, v.PositionY),
 						DisplayPosition = (v.DisplayPositionX and v.DisplayPositionY) and Vector(v.DisplayPositionX, v.DisplayPositionY),
 						ID = v.ID,
@@ -2403,7 +2441,7 @@ function MinimapAPI:LoadSaveTable(saved,is_save)
 						Hidden = v.Hidden,
 						NoUpdate = v.NoUpdate,
 						Dimension = dim,
-					}
+					})
 				end
 			end
 			if saved.playerMapPosX and saved.playerMapPosY then
@@ -2460,39 +2498,37 @@ end
 -- LOADING SAVED GAME
 local isFirstGame = true
 local addRenderCall = true
-MinimapAPI:AddCallbackFunc(
-	ModCallbacks.MC_POST_GAME_STARTED,
-	CALLBACK_PRIORITY,
-	function(_, is_save)
-		badload = MinimapAPI:IsBadLoad()
-		if addRenderCall then
-			if REPENTOGON then
-				MinimapAPI:AddCallbackFunc(ModCallbacks.MC_POST_HUD_RENDER, CALLBACK_PRIORITY, renderCallbackFunction)
-			elseif StageAPI and StageAPI.Loaded then
-				StageAPI.AddCallback("MinimapAPI", "POST_HUD_RENDER", constants.STAGEAPI_CALLBACK_PRIORITY, renderCallbackFunction)
-				MinimapAPI.UsingStageAPIPostHUDRender = true -- only for stage api
-			else
-				MinimapAPI:AddCallbackFunc(ModCallbacks.MC_POST_RENDER, CALLBACK_PRIORITY, renderCallbackFunction)
-			end
-			addRenderCall = false
+function MinimapAPI:OnGameLoad(_, is_save)
+	badload = MinimapAPI:IsBadLoad()
+	if addRenderCall then
+		if REPENTOGON then
+			MinimapAPI:AddCallbackFunc(ModCallbacks.MC_POST_HUD_RENDER, CALLBACK_PRIORITY, renderCallbackFunction)
+		elseif StageAPI and StageAPI.Loaded then
+			StageAPI.AddCallback("MinimapAPI", "POST_HUD_RENDER", constants.STAGEAPI_CALLBACK_PRIORITY, renderCallbackFunction)
+			MinimapAPI.UsingStageAPIPostHUDRender = true -- only for stage api
+		else
+			MinimapAPI:AddCallbackFunc(ModCallbacks.MC_POST_RENDER, CALLBACK_PRIORITY, renderCallbackFunction)
 		end
-		if MinimapAPI:HasData() then
-			if not MinimapAPI.DisableSaving then
-				local saved = json.decode(Isaac.LoadModData(MinimapAPI))
-				MinimapAPI:LoadSaveTable(saved, is_save)
-			else
-				MinimapAPI:LoadDefaultMap()
-			end
-			MinimapAPI:UpdateExternalMap()
+		addRenderCall = false
+	end
+	if MinimapAPI:HasData() then
+		if not MinimapAPI.DisableSaving then
+			local saved = json.decode(Isaac.LoadModData(MinimapAPI))
+			MinimapAPI:LoadSaveTable(saved, is_save)
 		else
 			MinimapAPI:LoadDefaultMap()
 		end
-		if isFirstGame then
-			MinimapAPI:FirstMapDisplayMode()
-			isFirstGame = false
-		end
+		MinimapAPI:UpdateExternalMap()
+	else
+		MinimapAPI:LoadDefaultMap()
 	end
-)
+	if isFirstGame then
+		MinimapAPI:FirstMapDisplayMode()
+		isFirstGame = false
+	end
+end
+
+MinimapAPI:AddCallbackFunc(ModCallbacks.MC_POST_GAME_STARTED, CALLBACK_PRIORITY, MinimapAPI.OnGameLoad)
 
 -- SAVING GAME
 MinimapAPI:AddCallbackFunc(
