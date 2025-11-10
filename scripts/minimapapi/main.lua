@@ -173,6 +173,7 @@ MinimapAPI.CurrentDimension = 0
 MinimapAPI.OverrideVoid = false
 MinimapAPI.changedRoomsWithShowMap = {}
 MinimapAPI.DisableSpelunkerHat = false
+MinimapAPI.Cache = cache
 
 MinimapAPI.TargetGlobalScaleX = 1 --when in mirror dimension this goes to -1
 MinimapAPI.ValueGlobalScaleX = 1
@@ -1426,6 +1427,10 @@ function MinimapAPI:updatePlayerPos()
 	local currentroom = cache.RoomDescriptor
 	if currentroom.GridIndex < 0 then
 		playerMapPos = Vector(-32768,-32768)
+	elseif Isaac.GetChallenge() == Challenge.CHALLENGE_APRILS_FOOL then
+		local level = game:GetLevel()
+		local randomRoom = level:GetRooms():Get(level:GetRoomByIdx(level:GetRandomRoomIndex(false, cache.RoomDescriptor.DecorationSeed), MinimapAPI.CurrentDimension).ListIndex)
+		playerMapPos = MinimapAPI:GridIndexToVector(randomRoom.GridIndex) + MinimapAPI.RoomShapeGridPivots[randomRoom.Data.Shape]
 	else
 		playerMapPos = MinimapAPI:GridIndexToVector(currentroom.GridIndex) + MinimapAPI.RoomShapeGridPivots[currentroom.Data.Shape]
 	end
@@ -1908,8 +1913,11 @@ local function renderUnboundedMinimap(size,hide)
 
 		if MinimapAPI:GetConfig("HighlightStartRoom") then
 			local startRoom = MinimapAPI:GetRoomByIdx(game:GetLevel():GetStartingRoomIndex())
-			if startRoom then
-				startRoom.Color = Color(0, 1, 0, MinimapAPI:GetConfig("MinimapTransparency"), 0, 0, 0)
+			if startRoom and startRoom.Visited then
+				local r = MinimapAPI:GetConfig("HighlightStartRoomColorR")
+				local g = MinimapAPI:GetConfig("HighlightStartRoomColorG")
+				local b = MinimapAPI:GetConfig("HighlightStartRoomColorB")
+				startRoom.Color = Color(r, g, b, MinimapAPI:GetConfig("MinimapTransparency"), 0, 0, 0)
 			end
 		end
 

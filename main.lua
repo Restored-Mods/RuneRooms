@@ -8,7 +8,7 @@ include("rune_rooms_scripts.enums")
 include("rune_rooms_scripts.constants")
 include("rune_rooms_scripts.helpers")
 RuneRooms.API = {}
-RuneRooms.Version = "v1.2"
+RuneRooms.Version = "v1.4"
 
 if StageAPI then
     StageAPI.UnregisterCallbacks(RuneRooms.Constants.MOD_ID)
