@@ -315,7 +315,7 @@ local exampledirectory = {
                         var
                     )
                 end,
-
+                displayif = function() return not REPENTOGON end,
                 tooltip = { strset = { 'what giantbook', 'api to use', '(without repentogon)' } }
             },
         }
@@ -395,7 +395,10 @@ local function FreezeGame(unfreeze)
 		end
 		
         Isaac.GetPlayer(0):UseActiveItem(CollectibleType.COLLECTIBLE_PAUSE, UseFlag.USE_NOANIM)
-		
+		if REPENTANCE_PLUS then
+            SFXManager():Stop(SoundEffect.SOUND_PAUSE_FREEZE)
+        end
+
 		Game().TimeCounter = OldTimer
 		Game().BossRushParTime = OldTimerBossRush
 		Game().BlueWombParTime = OldTimerHush

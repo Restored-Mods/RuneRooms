@@ -14,9 +14,8 @@ local function SpawnPrize(type, variant, subtype, pos, rng)
     if type == EntityType.ENTITY_PICKUP and variant == PickupVariant.PICKUP_TRINKET then
         subtype = Game():GetItemPool():GetTrinket()
     end
-    local x,y = TSIL.Random.GetRandomInt(-4, 4, rng), TSIL.Random.GetRandomInt(2,4, rng)
-    if x < 0 then x = math.min(x,-1) elseif x > 0 then x = math.max(x,1) end
-    Isaac.Spawn(type, variant, subtype, pos, Vector(x,y), nil)
+    local vel = Gebo.GetSpawnPickupVelocity(pos, rng, 1)
+    Isaac.Spawn(type, variant, subtype, pos, vel, nil)
 end
 
 local function Beggar(slot, player, uses, rng)

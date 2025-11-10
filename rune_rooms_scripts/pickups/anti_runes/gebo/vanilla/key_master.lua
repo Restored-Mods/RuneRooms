@@ -14,11 +14,11 @@ Gebo.AddSaveData("KeyMasterPrizeVariant",  {
 
 local function SpawnPrize(type, variant, subtype, pos, rng)
     local isTrinket = variant == PickupVariant.PICKUP_TRINKET
-    local xvel = isTrinket and 4 or 15
-    local yvel = isTrinket and 4 or 10
-    local x,y = TSIL.Random.GetRandomInt(-xvel , xvel, rng), TSIL.Random.GetRandomInt(1 * yvel, 1.5 * yvel, rng)
-    if x < 0 then x = math.min(x,-1) elseif x > 0 then x = math.max(x,1) end
-    Isaac.Spawn(type, variant, subtype, pos, Vector(x,y), nil)
+    local vel = Gebo.GetSpawnPickupVelocity(pos, rng, 1)
+    if not isTrinket then
+        vel:Resize(20 + rng:RandomInt(10) + rng:RandomFloat())
+    end
+    Isaac.Spawn(type, variant, subtype, pos, vel, nil)
 end
 
 local function Beggar(slot, player, uses, rng)
